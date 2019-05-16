@@ -1,0 +1,40 @@
+spring:
+  #数据库配置
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://localhost:3306/ocean?useUnicode=true&characterEncoding=utf8&characterSetResults=utf8
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: toor
+  
+  #jpa配置  
+  jpa:
+    hibernate:
+      dialect: org.hibernate.dialect.MySQLInnoDBDialect
+      new_generator_mappings: false
+      format_sql: true
+      ddl_auto: update
+      show_sql: true
+      naming:
+        #设置hibernate 建表时驼峰不变成下划线（为了方便mybatis混用时转译字段）
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+  
+  #资源配置
+  mvc:
+    static-path-pattern: /**
+  resources:
+    static-locations: classpath:/static/
+  thymeleaf:
+    mode: LEGACYHTML5 #此属性是避免thymeleaf对html的强校验
+    model: HTML5
+    encoding: UTF-8
+    prefix: classpath:/templates/web/
+    suffix: .html
+    content-tytpe: text/html
+    cache: false #关闭缓存
+    
+#mybatis配置(不在sprinng层级下面)      
+mybatis:
+  type-aliases-package: com.monster.model.entityVo
+  mapper-locations: classpath:mapper/*.xml
+  callSettersOnNulls:  trueee
