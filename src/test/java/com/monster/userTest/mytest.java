@@ -18,11 +18,11 @@ public class mytest {
            List list = new ArrayList();
            Map map = new HashMap();
            
-           System.out.println(map.getClass().toString());
+           System.out.println(list.getClass().toString());
            System.out.println(s.getClass().toString().contains("String"));
-           Calendar cal = Calendar.getInstance();
-           cal.setTime(new Date());
-           System.out.println(cal.get(Calendar.YEAR)+""+cal.get(Calendar.MONTH)+""+cal.get(Calendar.DATE)+"_");
+//           Calendar cal = Calendar.getInstance();
+//           cal.setTime(new Date());
+//           System.out.println(cal.get(Calendar.YEAR)+""+cal.get(Calendar.MONTH)+""+cal.get(Calendar.DATE)+"_");
 	}
 
 }
