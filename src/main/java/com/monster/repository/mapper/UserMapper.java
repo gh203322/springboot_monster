@@ -5,7 +5,7 @@ import java.util.Map;
 
 import org.springframework.stereotype.Component;
 
-import com.monster.model.entity.User;
+import com.monster.model.entity.car.CarUser;
 import com.monster.model.entityVo.UserVo;
 
 @Component
@@ -13,15 +13,15 @@ public interface UserMapper {
 
     int deleteByPrimaryKey(Integer id);
 
-    int insert(User record);
+    int insert(CarUser record);
 
-    int insertSelective(User record);
+    int insertSelective(CarUser record);
 
-    User selectByPrimaryKey(Integer id);
+    CarUser selectByPrimaryKey(Integer id);
 
-    int updateByPrimaryKeySelective(User record);
+    int updateByPrimaryKeySelective(CarUser record);
 
-    int updateByPrimaryKey(User record);
+    int updateByPrimaryKey(CarUser record);
 
     Map<String,Object> selectByPrimaryKeyToMap(Integer id);
 

@@ -1,0 +1,17 @@
+package com.monster.repository.system;
+
+import java.io.Serializable;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+
+import com.monster.model.entity.system.SysRole;
+
+public interface SysRoleRepository extends
+			Serializable,
+			JpaRepository<SysRole, Integer>,
+			JpaSpecificationExecutor<SysRole>{
+	
+	
+
+}
