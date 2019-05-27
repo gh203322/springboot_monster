@@ -37,4 +37,4 @@ spring:
 mybatis:
   type-aliases-package: com.monster.model.entityVo
   mapper-locations: classpath:mapper/*.xml
-  callSettersOnNulls:  trueee
+  callSettersOnNulls:  false #当查询的返回一行都是null的结果时，MyBatis会帮忙填充一个所有属性都是null的对象

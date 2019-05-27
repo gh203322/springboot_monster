@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 //扫描mybatis mapper类所在的包
-@MapperScan("com.monster.repository.mapper")
+@MapperScan("com.monster.mapper")
 public class ApplicationStarter {
 
 	public static void main(String[] args) {

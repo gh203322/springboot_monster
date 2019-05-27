@@ -2,7 +2,6 @@ package com.monster.model.entity.car;
 
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -16,6 +15,7 @@ import lombok.Data;
 @Entity
 @Data
 @Table(name = "car_user")
+@org.hibernate.annotations.Table(appliesTo = "car_user", comment = "车辆用户表")
 public class CarUser {
 
 	@GeneratedValue
@@ -31,7 +31,10 @@ public class CarUser {
     @Column(columnDefinition = "varchar(128) comment '密码'")
     private String pass;
     
-    @OneToMany(mappedBy = "carUser" ,fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(
+    		fetch = FetchType.LAZY,
+    		mappedBy = "carUser" 
+    )
     private List<Car> cars;
 	
 }
