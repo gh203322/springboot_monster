@@ -25,6 +25,6 @@ public class MenuController {
 	@GetMapping("/refreshMenu")
 	public String aaa() {
 	    return "404";
-	}
+	}	
 
 }
