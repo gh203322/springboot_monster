@@ -11,7 +11,7 @@ import io.swagger.annotations.ApiOperation;
 
 
 @Api(tags = "主页测试接口！")
-@Controller
+@Controller(value = "IndexController")
 @RequestMapping("/auth")
 public class IndexController {
 
@@ -28,6 +28,32 @@ public class IndexController {
     public String index(){
         return "index";
     }
+	
+    /**   
+     * @Title: initIndex   
+     * @Description: 打开空白页
+     * @param: @param map
+     * @param: @return      
+     * @return: String      
+     * @throws   
+     */
+	@RequestMapping("/blank")
+    public String blank(){
+        return "blank";
+    }
+	
+    /**   
+     * @Title: initIndex   
+     * @Description: 打开404页面
+     * @param: @param map
+     * @param: @return      
+     * @return: String      
+     * @throws   
+     */
+	@RequestMapping("/page404")
+    public String page404(){
+        return "404";
+    }	
 	
     /**   
      * @Title: initIndex   
