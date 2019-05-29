@@ -9,7 +9,7 @@ import com.monster.model.entity.car.CarUser;
 import com.monster.model.entityVo.UserVo;
 
 @Component
-public interface UserMapper {
+public interface CarLocationMapper {
 
     int deleteByPrimaryKey(Integer id);
 
