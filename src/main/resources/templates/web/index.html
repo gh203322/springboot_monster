@@ -643,8 +643,12 @@
       function createMenuNode(data){
         console.table(data);
         if(!data){
-              return "";
-          }
+          return "";
+        }
+        //如果是隐藏节点
+        if(data.isShow == 0){
+          return "";
+        }
 
           var tree_style ="treeview ";//默认为根节点
           var shell_class ="fa fa-th";//默认样式
@@ -698,6 +702,10 @@
 
            if(childs){
                for(var i=0; i<childs.length; i++){
+                 //如果是隐藏节点
+                 if(data.isShow == 0){
+                   continue;
+                 }
                  if(childs[i].childs){
                    //可展开节点(递归)
                    html += createMenuNode(childs[i]);
