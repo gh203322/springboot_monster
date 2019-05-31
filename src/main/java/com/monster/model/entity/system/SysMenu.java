@@ -36,16 +36,16 @@ public class SysMenu {
 	  @Column(nullable = true, columnDefinition = "int(1) default 0 comment '是否是叶子节点'")
 	  private Integer isLeaf;
 	  
-	  @Column(nullable = false, columnDefinition = "varchar(255) comment '菜单class样式'" )
+	  @Column(nullable = true, columnDefinition = "varchar(255) comment '菜单class样式'" )
 	  private String css;
       
-	  @Column(nullable = false, columnDefinition = "varchar(50) comment '对应的html页面'" )
+	  @Column(nullable = true, columnDefinition = "varchar(50) comment '对应的html页面'" )
 	  private String href;
 	  
 	  @Column(nullable = true, columnDefinition = "int(1) default 0 comment '是否默认展开'")
 	  private Integer isOpen;
 	  
-	  @Column(nullable = true, columnDefinition = "int(1) default 0 comment '是否默认显示'")
+	  @Column(nullable = true, columnDefinition = "int(1) default 1 comment '是否默认显示'")
 	  private Integer isShow;
 	  
 	  @Column(nullable = true, columnDefinition = "int(3) default 0 comment '自定义排序'")

@@ -331,7 +331,7 @@
       <ul class="sidebar-menu" data-widget="tree">
       
         <!-- class加上active menu-open默认展开菜单 -->
-        <li class="active treeview menu-open">
+        <!-- <li class="active treeview menu-open">
           <a href="#">
             <i class="fa fa-laptop"></i>
             <span>系统管理</span>
@@ -348,16 +348,14 @@
 	        <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>用户管理</span></a></li>
 	        <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>个性化设置</span></a></li>
 	        <li class="treeview"><a href="#"><i class="fa fa-circle-o text-aqua"></i> 
-			        <span>二级盒子</span>
+			        <span>二级盒子示例</span>
 		            <span class="pull-right-container">
 		              <i class="fa fa-angle-left pull-right"></i>
 		              <small class="label pull-right bg-red">3</small>
 		            </span>
 	              </a>
 	              <ul class="treeview-menu">
-		            <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>车辆信息</span></a></li>
-			        <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>车辆用户</span></a></li>
-			        <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>车辆轨迹</span></a></li>
+		            <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>示例菜单</span></a></li>
 		          </ul>
 	        </li>
           </ul>
@@ -393,7 +391,7 @@
 	        <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>系统运行报告</span></a></li>
 	        <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>系统操作记录</span></a></li>
           </ul>
-        </li>
+        </li> -->
         
       </ul>
     </section>
@@ -628,15 +626,15 @@
 
 <script type="text/javascript">
 
-      //刷新菜单
-      function refreshMenu(){
-
-         $('.content').load("/auth/refreshMenu");
-      }
-
-      //创建菜单
-      function createMenu(data){
-         $(".sidebar-menu").html(createMenuNode(data));
+      //创建菜单树
+      function createMenu(dataAry){
+          if(dataAry){
+              var menuTreeHtml = "";
+              for(var i=0; i < dataAry.length; i++){
+                  menuTreeHtml += createMenuNode(dataAry[i]);
+              }
+              $(".sidebar-menu").html(menuTreeHtml);
+          }
       }
 
       //创建菜单节点
@@ -670,7 +668,7 @@
           if(data.css){
             shell_class = data.css;
           }else{
-            //是否是根节点(根节点默认样式为：)
+            //是否是根节点(根节点默认样式为：fa fa-th)
             if(data.isBoot == 1){
               shell_class = "fa fa-th";
             }else{
@@ -732,94 +730,21 @@
       }
 
       $(function(){
-          createMenu(menudata);
+          $.ajax({
+                url: '/auth/getMenuTree',
+                type: 'post',
+                data: {},
+                dataType: 'json',
+                success: function(data){
+                    if(data.state){
+                        createMenu(data.data);
+                    }
+                },
+                fail: {
+                
+                }
+              
+          })
       });
-
-      var menudata = {
-          "name":"系统管理",
-          "isLeaf":0,
-          "css":"fa fa-laptop",
-          "href":"",
-          "isOpen":1,
-          "isShow":1,
-          "sort":1,
-          "childNum":1,
-          "isBoot":1,
-          "childs":[
-              {
-                "name":"数据字典",
-                "isLeaf":1,
-                "css":"",
-                "href":"dictionary.html",
-                "isOpen":0,
-                "isShow":1,
-                "sort":2,
-                "childNum":0,
-                "isBoot":0,
-                "childs":""
-              },
-            {
-              "name":"数据字典",
-              "isLeaf":1,
-              "css":"",
-              "href":"dictionary.html",
-              "isOpen":0,
-              "isShow":1,
-              "sort":2,
-              "childNum":0,
-              "isBoot":0,
-              "childs":""
-            },
-            {
-              "name":"数据字典",
-              "isLeaf":1,
-              "css":"",
-              "href":"dictionary.html",
-              "isOpen":0,
-              "isShow":1,
-              "sort":2,
-              "childNum":0,
-              "isBoot":0,
-              "childs":""
-            },
-            {
-              "name":"数据字典",
-              "isLeaf":1,
-              "css":"",
-              "href":"dictionary.html",
-              "isOpen":0,
-              "isShow":1,
-              "sort":2,
-              "childNum":0,
-              "isBoot":0,
-              "childs":""
-            },
-              {
-                "name":"二级盒子",
-                "isLeaf":0,
-                "css":"",
-                "href":"",
-                "isOpen":0,
-                "isShow":1,
-                "sort":3,
-                "childNum":1,
-                "isBoot":0,
-                "childs":[
-                  {
-                    "name":"系统测试",
-                    "isLeaf":1,
-                    "css":"",
-                    "href":"test.html",
-                    "isOpen":0,
-                    "isShow":1,
-                    "sort":4,
-                    "childNum":0,
-                    "isBoot":0,
-                    "childs":""
-                  }
-                ]
-              }
-          ]
-      }
 
 </script>

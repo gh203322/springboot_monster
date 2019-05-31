@@ -135,6 +135,14 @@
 			   <groupId>org.springframework.integration</groupId>
 			   <artifactId>spring-integration-mqtt</artifactId>
 			 </dependency>
+			 
+			 <!-- bean处理 依赖 -->
+			<dependency>
+			    <groupId>commons-beanutils</groupId>
+			    <artifactId>commons-beanutils</artifactId>
+			    <version>1.9.3</version>
+			</dependency>
+
 		    
 	</dependencies>
 
