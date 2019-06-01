@@ -704,7 +704,7 @@
                  if(data.isShow == 0){
                    continue;
                  }
-                 if(childs[i].childs){
+                 if(childs[i].childs&&childs[i].childs.length > 0){
                    //可展开节点(递归)
                    html += createMenuNode(childs[i]);
                  }else{
@@ -731,7 +731,7 @@
 
       $(function(){
           $.ajax({
-                url: '/auth/getMenuTree',
+                url: '/auth/getMenuTreeByStream',
                 type: 'post',
                 data: {},
                 dataType: 'json',

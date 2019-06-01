@@ -29,23 +29,23 @@ public class MenuController {
      * @return: String      
      * @throws   
      */
-	@ApiOperation(value = "查询系统菜单树！")
+	@ApiOperation(value = "获取菜单树方法1！")
 	@PostMapping("/getMenuTree")
 	@ResponseBody
 	public String getMenuTree() {
 	    
-		  return Result.to(
+		  return Result.ok(
 				  sysMenuService.getMenuTree()
 		  );
 	}	
 	
-	@ApiOperation(value = "查询系统菜单数据！")
-	@PostMapping("/getMenuTreeLists")
+	@ApiOperation(value = "获取菜单树方法2！")
+	@PostMapping("/getMenuTreeByStream")
 	@ResponseBody
-	public String getMenuTreeLists() {
+	public String getMenuTreeByStream() {
 	    
-		  return Result.to(
-				  sysMenuService.getMenuTreeLists()
+		  return Result.ok(
+				  sysMenuService.getMenuTreeByStream()
 		  );
 	}
 

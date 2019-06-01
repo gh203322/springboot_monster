@@ -55,4 +55,13 @@ public interface SysMenuRepository extends
 				value = "select count(*) from sys_menu where isShow = 1 AND parentId = :parentId"
 		  )
 		 Integer findChildNum(@Param("parentId") Long parentId);
+		 
+		  /**   
+		 * @Title: findBootNode   
+		 * @Description: 查询根节点   
+		 * @param: @param <SysMenu>      
+		 * @return: void      
+		 * @throws   
+		 */
+		  List<SysMenu> findBySysMenuIdIsNull();
 }
