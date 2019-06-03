@@ -23,4 +23,13 @@ public interface SysMenuService {
 	 * @throws   
 	 */
 	List<SysMenuDto> getMenuTreeByStream();
+	
+	/**   
+	 * @Title: getMenuTreeByQuery   
+	 * @Description: 获取菜单数据
+	 * @param: @return      
+	 * @return: List<SysMenuDto>      
+	 * @throws   
+	 */
+	List<SysMenuDto> getMenuTreeByQuery();
 }

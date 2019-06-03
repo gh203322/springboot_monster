@@ -39,7 +39,7 @@ public interface SysMenuRepository extends
 		 */
 		 @Query(
 				nativeQuery = true,
-				value = "select m.*,(select count(*) from sys_menu u where u.parentId = m.id) as childNum,'1' as isBoot from sys_menu m where m.isShow = 1 AND m.parentId = :parentId"
+				value = "select m.*,(select count(*) from sys_menu u where u.parentId = m.id) as childNum,'0' as isBoot from sys_menu m where m.isShow = 1 AND m.parentId = :parentId"
 		  )
 		 List<Map<String, Object>> findByParentId(@Param(value = "parentId") Long parentId);
 		 

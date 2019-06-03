@@ -163,4 +163,67 @@ public class SysMenuServiceImpl implements SysMenuService {
 		    
 		  return res;
 	    }
+
+		/**
+		 * @throws InvocationTargetException 
+		 * @throws IllegalAccessException    
+		 * @Title: getMenuTree   
+		 * @Description: 获取菜单树方法3
+		 * @param: @return      
+		 * @return: List<SysMenuDto>      
+		 * @throws   
+		 */
+		@Override
+		public List<SysMenuDto> getMenuTreeByQuery() {
+			 //查找根菜单
+    	    List<Map<String, Object>> list = repository.findBootNode();
+    	    
+    	    List<SysMenuDto> res = new ArrayList<SysMenuDto>();
+		    if(DataUtil.isNotEmptyObj(list)) { 
+				 for(Map<String, Object> sysMenu: list) {
+			           SysMenuDto sysMenuDto = new SysMenuDto(); 
+			           try {
+						   BeanUtils.copyProperties(sysMenuDto,sysMenu);
+						   sysMenuDto.setChilds(getChilds3(sysMenu));
+						   
+						   res.add(sysMenuDto); 
+					   } catch (IllegalAccessException | InvocationTargetException e) {}
+			     } 
+			}
+    	    
+    	    return res;
+		}
+		
+		 /**   
+	     * @Title: getChilds   
+	     * @Description: 找到子节点方法3
+	     * @param: @param sysMenu
+	     * @param: @return      
+	     * @return: List<SysMenuDto>      
+	     * @throws   
+	     */
+	    private List<SysMenuDto> getChilds3(Map<String, Object> map){
+	    	    if(DataUtil.isEmptyObj(map)) {
+	    	    	return null;
+	    	    }
+	    	    
+	    	    List<Map<String, Object>> list = repository.findByParentId(Long.parseLong(String.valueOf(map.get("id"))));
+	    	    
+			    if(DataUtil.isEmptyObj(list)) {
+			    	return null;
+			    }
+			    
+			    List<SysMenuDto> res = new ArrayList<SysMenuDto>();
+			    for(Map<String, Object> child: list) {
+			    	SysMenuDto sysMenuDto = new SysMenuDto();
+			    	try {
+			    		BeanUtils.copyProperties(sysMenuDto,child);
+			    		sysMenuDto.setChilds(getChilds(child));
+				    	
+				    	res.add(sysMenuDto);
+					} catch (IllegalAccessException | InvocationTargetException e) {}
+			    }
+			    
+			  return res;
+	     }
 }

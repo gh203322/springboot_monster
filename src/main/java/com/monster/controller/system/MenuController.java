@@ -48,5 +48,15 @@ public class MenuController {
 				  sysMenuService.getMenuTreeByStream()
 		  );
 	}
+	
+	@ApiOperation(value = "获取菜单树方法3！")
+	@PostMapping("/getMenuTreeByQuery")
+	@ResponseBody
+	public String getMenuTreeByQuery() {
+	    
+		  return Result.ok(
+				  sysMenuService.getMenuTreeByQuery()
+		  );
+	}
 
 }
