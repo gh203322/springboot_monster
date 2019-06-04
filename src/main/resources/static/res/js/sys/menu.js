@@ -1,4 +1,6 @@
-      //创建菜单树
+      /*
+       * 创建菜单树
+       * */
       function createMenu(dataAry){
           if(dataAry){
               var menuTreeHtml = "";
@@ -9,9 +11,11 @@
           }
       }
 
-      //创建菜单节点
+      /*
+       * 创建菜单节点
+       * */
       function createMenuNode(data){
-        console.table(data);
+        //console.table(data);
         if(!data){
           return "";
         }
@@ -61,7 +65,7 @@
           }
 
            html += '<li class="'+tree_style+'">';
-           html += '<a href="'+href+'"><i class="'+shell_class+'"></i>';
+           html += '<a href="#" href-data="'+href+'"><i class="'+shell_class+'"></i>';
            html += '<span>'+shell_name+'</span>';
            html += '<span class="pull-right-container">';
            html += '<i class="fa fa-angle-left pull-right"></i>';
@@ -89,7 +93,7 @@
                      else if((i+1)%4 == 3) leafCss = "fa fa-leaf text-aqua";
                      else if((i+1)%4 == 0) leafCss = "fa fa-leaf text-green";
                    }
-                   html += '<li><a href="'+childs[i].href+'"><i class="'+leafCss+'"></i>';
+                   html += '<li><a href="javascript:openContent(\''+childs[i].href+'\');"><i class="'+leafCss+'"></i>';
                    html += '<span>'+childs[i].name+'</span></a></li>';
                  }
                }
@@ -101,6 +105,9 @@
          return  html;
       }
 
+      /*
+       * 加载菜单数据
+       * */
       $(function(){
           $.ajax({
                 url: '/auth/menu/getMenuTreeByQuery',
@@ -117,3 +124,15 @@
                 }
           })
       });
+      
+      /*
+       * 打开菜单对应的页面
+       * */
+      function openContent(href){
+    	  if(href){
+    		  $('.content').load("/auth/menu/openContent",{"href":href});
+    	  }
+      }
+      
+      
+      

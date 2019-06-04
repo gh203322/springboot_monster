@@ -21,8 +21,21 @@ public class CarController {
 	@Autowired
 	private CarService service;
 	
-	@ApiOperation(value = "获取车辆列表")
+ 
+	/**   
+	 * @Title: list   
+	 * @Description: 车辆主页  
+	 * @param: @return      
+	 * @return: String      
+	 * @throws   
+	 */
 	@PostMapping("/list")
+    public String list(){
+        return "car/list";
+    }
+	
+	@ApiOperation(value = "获取车辆列表数据")
+	@PostMapping("/listData")
 	@ResponseBody
 	public String getMenuTreeByQuery() {
 	    

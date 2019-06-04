@@ -17,7 +17,7 @@ public class Result {
 	  private boolean state; //状态 true-成功 false-失败
 	  private String msg;  //返回消息
 	  private Object data;  //返回数据内容
-	  private String exeptionMsg;  //异常信息
+	  private String exceptionMsg;  //异常信息
 	  
 	  Result(){
 		  
@@ -59,7 +59,13 @@ public class Result {
       Result(Exception e){
     	  this.state = false;
     	  this.msg = "操作异常";
-		  this.exeptionMsg = "异常信息：" + JSON.toJSONString(e);
+		  this.exceptionMsg = "异常信息:[" + JSON.toJSONString(e)+"]";
+	  }
+      
+      Result(String error){
+    	  this.state = false;
+    	  this.msg = "操作异常";
+		  this.exceptionMsg = "异常信息:[" + error+"]";
 	  }
 	  
 	  /**   
@@ -96,6 +102,18 @@ public class Result {
 	 */
 	public static String error(Exception e) {
 		  return JSON.toJSONString(new Result(e));
+	  }
+	
+	  /**   
+	 * @Title: error   
+	 * @Description: 错误或者异常 
+	 * @param: @param e
+	 * @param: @return      
+	 * @return: String      
+	 * @throws   
+	 */
+	public static String error(String error) {
+		  return JSON.toJSONString(new Result(error));
 	  }
 	  
 
@@ -154,4 +172,10 @@ public class Result {
 
 		   return "forward:" + requestUrl;
 	  }
+
+	@Override
+	public String toString() {
+		return "Result [state=" + state + ", msg=" + msg + ", data=" + data + ", exeptionMsg=" + exceptionMsg + "]";
+	}
+	
 }

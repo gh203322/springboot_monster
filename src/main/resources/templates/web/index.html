@@ -25,6 +25,9 @@
 	  <link rel="stylesheet" href="/adminLte/dist/css/skins/_all-skins.min.css">
 	  <!-- Google Font -->
 	  <link rel="stylesheet" href="/lib/css/fonts.googleapis.css">
+	  
+	  <link rel="stylesheet" href="/adminLte/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
+	  
     
    <!-- 全局js文件引入 -->
       <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -55,6 +58,10 @@
 		<!-- <script src="/adminLte/dist/js/pages/dashboard2.js"></script> -->
 		<!-- AdminLTE for demo purposes -->
 		<script src="/adminLte/dist/js/demo.js"></script>
+		
+		<script src="/adminLte/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+		<script src="/adminLte/dist/js/app.min.js"></script>
+		<script src="/adminLte/dist/js/pages/dashboard.js"></script>
 		
 </head>
 
@@ -409,7 +416,7 @@
     </section>
 
     <!-- 页面体 -->
-    <section class="content" th:fragment="content">
+    <section class="content">
 		    <!-- <div th:include="404::html"></div> -->
 	       <!-- <div id="menuWraper" name="menuWraper"  class="content-wrapper" layout:fragment="contentWrapper">
 	       <iframe id="menuFrame" name="menuFrame" src="" style="overflow:visible;" scrolling="yes" frameborder="no" height="100%" width="100%"></iframe> -->
