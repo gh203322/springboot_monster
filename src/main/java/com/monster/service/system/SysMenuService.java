@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.monster.model.dto.system.SysMenuDto;
 
-public interface SysMenuService {
+public interface SysMenuService{
 
 	/**   
 	 * @Title: getMenuTree   

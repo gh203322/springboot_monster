@@ -1,5 +1,8 @@
 package com.monster.service.car;
 
-public interface CarService {
+import com.monster.model.entity.car.Car;
+import com.monster.service.base.baseService;
+
+public interface CarService extends baseService<Car>{
 
 }

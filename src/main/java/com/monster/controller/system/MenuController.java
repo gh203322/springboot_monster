@@ -15,7 +15,7 @@ import io.swagger.annotations.ApiOperation;
 
 @Api(tags = "菜单接口！")
 @Controller(value = "MenuController")
-@RequestMapping("/auth")
+@RequestMapping("/auth/menu")
 public class MenuController {
 
 	@Autowired
