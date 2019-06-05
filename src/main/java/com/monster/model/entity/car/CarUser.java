@@ -36,5 +36,15 @@ public class CarUser {
     		mappedBy = "carUser" 
     )
     private List<Car> cars;
+
+    /* 解决序列化循环引用问题,在这里截断关系 */
+	public List<Car> getCars() {
+		if(null != cars) {
+			cars.stream().forEach(car -> car.setCarUser(null));
+		}
+		return cars;
+	}
+    
+    
 	
 }

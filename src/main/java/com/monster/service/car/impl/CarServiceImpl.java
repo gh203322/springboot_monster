@@ -1,6 +1,7 @@
 package com.monster.service.car.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
@@ -81,6 +82,12 @@ public class CarServiceImpl implements CarService {
 	public List<Car> findAllByExampleAndSort(Example<Car> example, Sort sort) {
 
 		return repository.findAll(example,sort);
+	}
+
+	@Override
+	public List<Map<String, Object>> findAllToMap() {
+		
+		return repository.findAllToMap();
 	}
     
 }

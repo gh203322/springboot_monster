@@ -39,4 +39,13 @@ public class Car {
 		@ManyToOne(fetch = FetchType.LAZY, optional = true)//optional = true 可为空
 		@JoinColumn(name = "userId")
 		private CarUser carUser;
+
+	    /* 解决序列化循环引用问题,在这里截断关系 */
+		public CarUser getCarUser() {
+			if(null != carUser) {
+				carUser.setCars(null);
+			}
+			return carUser;
+		}
+
 }

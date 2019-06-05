@@ -1,5 +1,7 @@
 package com.monster.controller.car;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -37,7 +39,7 @@ public class CarController {
 	@ApiOperation(value = "获取车辆列表数据")
 	@PostMapping("/listData")
 	@ResponseBody
-	public String getMenuTreeByQuery() {
+	public String getMenuTreeByQuery(Map map) {
 	    
 		  return Result.ok(
 				  service.findAll()

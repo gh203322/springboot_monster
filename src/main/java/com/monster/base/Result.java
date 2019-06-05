@@ -3,6 +3,7 @@ package com.monster.base;
 import org.springframework.ui.Model;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.monster.utils.DataUtil;
 
 import lombok.Data;
