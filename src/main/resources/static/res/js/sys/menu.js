@@ -130,6 +130,7 @@
        * */
       function openContent(href){
     	  if(href){
+    		  $('.content').html("");
     		  $('.content').load("/auth/menu/openContent",{"href":href});
     	  }
       }

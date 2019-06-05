@@ -75,22 +75,23 @@ public class Result {
 	 * @param: @param o
 	 * @param: @return      
 	 * @return: String      
-	 * @throws   
+	 * @throws 
+	 * @SerializerFeature.DisableCircularReferenceDetect  关闭重复引用检测 禁止$def代替被重复引用的对象  
 	 */
 	public static String ok(Object o) {
-		  return JSON.toJSONString(new Result(o));
+		  return JSON.toJSONString(new Result(o),SerializerFeature.DisableCircularReferenceDetect);
 	  }
 	  
 	  public static String ok(boolean state, String msg) {
-		  return JSON.toJSONString(new Result(state, msg));
+		  return JSON.toJSONString(new Result(state, msg),SerializerFeature.DisableCircularReferenceDetect);
 	  }
 	  
 	  public static String ok(boolean state, Object o) {
-		  return JSON.toJSONString(new Result(state, o));
+		  return JSON.toJSONString(new Result(state, o),SerializerFeature.DisableCircularReferenceDetect);
 	  }
 	  
 	  public static String ok(boolean state, Object o, String msg) {
-		  return JSON.toJSONString(new Result(state, o, msg));
+		  return JSON.toJSONString(new Result(state, o, msg),SerializerFeature.DisableCircularReferenceDetect);
 	  }
 	  
 	  /**   
@@ -102,7 +103,7 @@ public class Result {
 	 * @throws   
 	 */
 	public static String error(Exception e) {
-		  return JSON.toJSONString(new Result(e));
+		  return JSON.toJSONString(new Result(e),SerializerFeature.DisableCircularReferenceDetect);
 	  }
 	
 	  /**   
@@ -114,7 +115,7 @@ public class Result {
 	 * @throws   
 	 */
 	public static String error(String error) {
-		  return JSON.toJSONString(new Result(error));
+		  return JSON.toJSONString(new Result(error),SerializerFeature.DisableCircularReferenceDetect);
 	  }
 	  
 

@@ -55,6 +55,19 @@ public class IndexController {
         return "404";
     }	
 	
+	  /**   
+     * @Title: initIndex   
+     * @Description: 打开400页面
+     * @param: @param map
+     * @param: @return      
+     * @return: String      
+     * @throws   
+     */
+	@RequestMapping("/page500")
+    public String page500(){
+        return "500";
+    }	
+	
     /**   
      * @Title: initIndex   
      * @Description: 初始化主页
