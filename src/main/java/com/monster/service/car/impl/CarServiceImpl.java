@@ -33,27 +33,50 @@ public class CarServiceImpl implements CarService {
 	}
 
 	@Override
-	public void saveAll(Iterable<Car> entities) {
+	public boolean saveAll(Iterable<Car> entities) {
 
-		repository.saveAll(entities);
-	}
-
-	@Override
-	public void delete(Car entity) {
-
-		repository.delete(entity);
-	}
-
-	@Override
-	public void deleteById(Integer id) {
-
-		repository.deleteById(Integer.parseInt(String.valueOf(id)));
-	}
-
-	@Override
-	public void deleteBatchByEntitys(Iterable<Car> entities) {
+		try {
+			repository.saveAll(entities);
+		} catch (Exception e) {
+			return false;
+		}
 		
-		repository.deleteInBatch(entities);
+		return true;
+	}
+
+	@Override
+	public boolean delete(Car entity) {
+        try {
+        	repository.delete(entity);
+		} catch (Exception e) {
+			return false;
+		}
+		
+        return true;
+	}
+
+	@Override
+	public boolean deleteById(Integer id) {
+
+		try {
+			repository.deleteById(Integer.parseInt(String.valueOf(id)));
+		} catch (Exception e) {
+			return false;
+		}
+		
+		return true;
+	}
+
+	@Override
+	public boolean deleteBatchByEntitys(Iterable<Car> entities) {
+		
+		try {
+			repository.deleteInBatch(entities);
+		} catch (Exception e) {
+			return false;
+		}
+		
+		return true;
 	}
 
 	@Override

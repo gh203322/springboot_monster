@@ -16,15 +16,15 @@ public interface baseService<T> {
     
     T saveOrUpdate(T entity);
     
-    void saveAll(Iterable<T> entities);
+    boolean saveAll(Iterable<T> entities);
     
-    void delete(T entity);
+    boolean delete(T entity);
     
-    void deleteById(Integer id);
+    boolean deleteById(Integer id);
     
     //void deleteBatchByIds(Integer[] ids);
     
-    void deleteBatchByEntitys(Iterable<T> entities);
+    boolean deleteBatchByEntitys(Iterable<T> entities);
     
     T update(T entity);
     

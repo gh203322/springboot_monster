@@ -28,7 +28,9 @@
 	    <!-- 全局js文件引入 -->
         <!-- jQuery 3 -->
 		<script src="/adminLte/bower_components/jquery/dist/jquery.min.js"></script>
-		<!-- Bootstrap 3.3.7 -->
+		<!-- Bootstrap 3 依赖 -->
+		<script src="/adminLte/bower_components/bootstrap/dist/js/popper.min.js"></script>		
+		<!-- Bootstrap 3 -->
 		<script src="/adminLte/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 		<!-- FastClick -->
 		<script src="/adminLte/bower_components/fastclick/lib/fastclick.js"></script>
@@ -48,12 +50,20 @@
 		<!-- AdminLTE for demo purposes -->
 		<script src="/adminLte/dist/js/demo.js"></script>
 		
-	    <!-- 表格css -->
+	    <!-- bootstrap-table  css -->
 	    <link rel="stylesheet" href="/bootstrap-table/dist/bootstrap-table.min.css">
-        <!--  表格js -->
+        <!--  bootstrap-table  js -->
         <script src="/bootstrap-table/dist/bootstrap-table.min.js"></script>		
         <script src="/bootstrap-table/dist/locale/bootstrap-table-zh-CN.min.js"></script>
-
+        <!-- bootstrap-table 导出相关文件 -->
+        <script src="/bootstrap-table/dist/extensions/export/bootstrap-table-export.js"></script>
+        <script src="/bootstrap-table/dist/extensions/export/FileSaver.min.js"></script>
+        <script src="/bootstrap-table/dist/extensions/export/xlsx.core.min.js"></script>
+        <script src="/bootstrap-table/dist/extensions/export/jspdf.min.js"></script>
+        <script src="/bootstrap-table/dist/extensions/export/jspdf.plugin.autotable.js"></script>
+        <script src="/bootstrap-table/dist/extensions/export/es6-promise.auto.min.js"></script>
+        <script src="/bootstrap-table/dist/extensions/export/html2canvas.min.js"></script>
+        <script src="/bootstrap-table/dist/extensions/export/tableExport.min.js"></script>
         
 </head>
 
@@ -408,7 +418,7 @@
     </section>
 
     <!-- 页面体 -->
-    <section class="content">
+    <section class="content" >
 		    <!-- <div th:include="404::html"></div> -->
 	       <!-- <div id="menuWraper" name="menuWraper"  class="content-wrapper" layout:fragment="contentWrapper">
 	       <iframe id="menuFrame" name="menuFrame" src="" style="overflow:visible;" scrolling="yes" frameborder="no" height="100%" width="100%"></iframe> -->
@@ -623,7 +633,11 @@
 </body>
 </html>
 
-<script src="/res/js/sys/menu.js"></script>
-<script type="text/javascript">
-      
-</script>
+<!-- 自定义js导入 -->
+<script src="/res/js/common/common.js"></script>
+<script src="/res/js/sys/my-menu.js"></script>
+<script src="/res/js/sys/my-bootstrap-table.js"></script>
+
+
+
+
