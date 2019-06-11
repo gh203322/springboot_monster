@@ -41,7 +41,7 @@ public class Car {
 		private Double latitude;
 		
 		@Column(columnDefinition = "date default sysdate() comment '车辆登记时间'")
-		@DateTimeFormat(style = "yyyy-MM-dd")
+		@DateTimeFormat(pattern  = "yyyy-MM-dd")
 		private Date signDate;
 		
 		@ManyToOne(fetch = FetchType.LAZY, optional = true)//optional = true 可为空

@@ -21,6 +21,9 @@
 				        <!-- bootstrap table 表格数据渲染 -->
                         <table id="table"  data-toggle="bootstrap-table" data-sortable="true" >
                         </table>
+                        
+                        <!-- 数据处理模态框 -->
+                        <div id="modal"></div>
             </div>
             <!-- /.box-body -->
           </div>
@@ -93,27 +96,36 @@
  });
 
 //初始化增删改按钮
+//新增
 $("#btn_add").on("click",function(){
 
+        $('#modal').html("");
+        $('#modal').load("/auth/car/add",function(responseTxt,statusTxt,xhr){
+            //加载完成后回调打开模态框
+            if(statusTxt=="success") $('#dataModal').modal("show");
+        });
 });
 
+//编辑
 $("#btn_edit").on("click",function(){
-
+          
+          
 });
 
+//删除
 $("#btn_delete").on("click",function(){
 	      $.ajax({
 	              url: '/auth/car/delete',
 	              type: 'post',
-	              data: {'ids':BtTable.getSelecttionIds()},
 	              dataType: 'json',
+	              contentType: 'application/json; charset=utf-8',
+	              data: JSON.stringify(BtTable.getSelecttions()),
 	              success: function(data){
 	                    if(data.state){
-	                         if(data.msg){
-	                              alert(data.msg);
-	                         }else{
-	                              alert("删除成功");
-	                         }
+	                         //刷新表格
+	                         BtTable.refresh();
+	                         
+	                         if(data.msg) alert(data.msg); else alert("删除成功");
 	                    }else{
 	                         alert("删除失败");
 	                    }

@@ -131,3 +131,11 @@
 			   }
 			   return ary[0].id;
 		}
+		
+		//刷新表格
+		BtTable.refresh = function(){
+			
+			     BtTable.table.bootstrapTable("refresh", {
+			        silent: true //静态刷新
+			      });
+		}

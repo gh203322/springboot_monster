@@ -1,10 +1,8 @@
 package com.monster.base;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
-import com.monster.model.entity.car.Car;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.Data;
 
@@ -13,18 +11,15 @@ import lombok.Data;
  *  通用请求类
  */
 @Data
+@JsonIgnoreProperties(ignoreUnknown = true)//忽略未知属性
 public class Request<T> {
-
-	  private List<T> idObjects = new ArrayList<T>();
-	  
 	  //前端通过json传值,批量传递主键 key 必须与之对应为 ids
-	  private List<Integer> ids = new ArrayList<Integer>();
+	  private List<T> ids;
+	  
+	  //private List<T> objecs;
 
 	/*
-	 * public List<T> getIdObjects() {
-	 * 
-	 * if(null != ids && !ids.isEmpty()) { ids.stream().forEach(id ->
-	 * idObjects.add(T)); return this.idObjects; } return null; }
+	 * public List<T> getObjecs() { if(null != ids && !ids.isEmpty()) { for(String
+	 * id: ids) { Class<? extends Object> tClass = } } return objecs; }
 	 */
-	  
 }

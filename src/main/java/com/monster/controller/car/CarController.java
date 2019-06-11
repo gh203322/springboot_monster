@@ -5,9 +5,13 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.monster.base.Request;
 import com.monster.base.Result;
@@ -52,15 +56,28 @@ public class CarController {
 	
 	/**   
 	 * @Title: list   
-	 * @Description: 数据新增或者修改页面
+	 * @Description: 数据新增页面
 	 * @param: @return      
 	 * @return: String      
 	 * @throws   
 	 */
-	@PostMapping("/data")
+	@GetMapping("/add")
     public String data(){
 		
-          return "car/data";
+          return "car/add";
+    }
+	
+	/**   
+	 * @Title: list   
+	 * @Description: 数据编辑页面
+	 * @param: @return      
+	 * @return: String      
+	 * @throws   
+	 */
+	@GetMapping("/edit")
+    public String edit(){
+		
+          return "car/edit";
     }
 	
 	/**   
@@ -71,10 +88,28 @@ public class CarController {
 	 * @throws   
 	 */
 	@PostMapping("/delete")
-    public String delete(Request request){
+	@ResponseBody
+    public String delete(@RequestBody List<Car> cars){
 		
           return Result.ok(
-        		  service.deleteBatchByEntitys(null) 
+        		  service.deleteBatchByEntitys(cars) 
+          );
+    }
+	
+	/**   
+	 * @Title: list   
+	 * @Description: 新增数据
+	 * @param: @return      
+	 * @return: String      
+	 * @throws   
+	 */
+	@PostMapping("/addData")
+	@ResponseBody
+    public String addData(@ModelAttribute  Car car, MultipartFile file){
+		
+		  
+          return Result.ok(
+        		  service.saveOrUpdate(car)
           );
     }
 
