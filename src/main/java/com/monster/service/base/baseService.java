@@ -39,4 +39,6 @@ public interface baseService<T> {
 	List<T> findAllByExampleAndSort(Example<T> example, Sort sort);
 	
 	//Map<String,Object> findByIdToMap(Long id);
+	
+	T saveOrUpdateIgnoreNull(T entity, String...params);
 }

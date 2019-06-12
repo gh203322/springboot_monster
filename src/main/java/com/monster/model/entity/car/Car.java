@@ -11,12 +11,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.Data;
 
 @Entity
 @Data
+@DynamicUpdate(true)  //开启空字段不更新
 @Table(name = "car")
 @org.hibernate.annotations.Table(appliesTo = "car", comment = "车辆表")
 public class Car {

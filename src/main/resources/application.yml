@@ -12,12 +12,12 @@ spring:
     hibernate:
       dialect: org.hibernate.dialect.MySQLInnoDBDialect
       new_generator_mappings: false
-      format_sql: true
       ddl_auto: update
-      show_sql: true
       naming:
         #设置hibernate 建表时驼峰不变成下划线（为了方便mybatis混用时转译字段）
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    format_sql: true
+    show_sql: true
   
   #资源配置
   mvc:

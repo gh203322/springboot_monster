@@ -3,47 +3,82 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">新增车辆数据</h4>
+                <h4 class="modal-title" id="myModalLabel">编辑</h4>
             </div>
             <div class="modal-body">
-                <form action="" class="form-horizontal">
+                <form id="dataForm" action="" class="form-horizontal">
                     <div class="form-group">
-                        <input type="hidden" class="form-control" disabled="disabled" id="id">
-                        <label for="" class="col-sm-2 control-label">报价单号</label>
+                        <label for="" class="col-sm-2 control-label">车辆编号</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" disabled="disabled" id="modal_bj_no">
+                            <input type="hidden" class="form-control" id="carId" name="id" th:value="${car.id}">
+                            <input type="text" class="form-control" id="carNo" name="carNo" th:value="${car.carNo}">
                         </div>
                     </div>
                      <div class="form-group">
-                        <label for="" class="col-sm-2 control-label">客户</label>
+                        <label for="" class="col-sm-2 control-label">省份</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="modal_cus_name">
+                            <input type="text" class="form-control" id="province" name="province" th:value="${car.province}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="" class="col-sm-2 control-label">城市</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="city" name="city" th:value="${car.city}">
                         </div>
                     </div>
                      <div class="form-group">
-                        <label for="" class="col-sm-2 control-label">报价产品</label>
+                        <label for="" class="col-sm-2 control-label">车主</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="modal_bj_prd">
+                            <input type="hidden" class="form-control" id="carUserId" name="carUser.id" th:value="${car.carUser.id}">
+                            <input type="text" class="form-control" id="carUserName" name="carUser.name" th:value="${car.carUser.name}">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="" class="col-sm-2 control-label" >单价</label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" id="modal_up">
-                        </div>
+                        <label for="" class="col-sm-2 control-label" >登记时间</label>
+                        <div class="date col-sm-9">
+		                  <input type="date" class="form-control" id="datepicker" name="signDate" th:value="${#dates.format(car.signDate, 'yyyy-MM-dd')}">
+		                </div>
                     </div>
                     <div class="form-group">
-                        <label for="" class="col-sm-2 control-label" >模具成本</label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" id="modal_mj_cst">
-                        </div>
+                        <label for="" class="col-sm-2 control-label" >车辆图片</label>
+                        <div class="date col-sm-9">
+                             <input id="f_upload" type="file" class="file"  name="file"/>
+		                </div>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn btn-primary" id="sava-edit-btn">保存</button>
+                <button type="button" class="btn btn-primary" id="btn_submit">保存</button>
             </div>
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+//提交按钮
+$("#btn_submit").on("click",function(){
+	    var dataForm = new FormData($("#dataForm")[0]);
+	    $.ajax({
+	        url: '/auth/car/editData' ,
+	        type: 'POST',
+	        dataType: 'json',
+	        contentType: false,
+	        processData: false,
+	        data: dataForm,
+	        success: function (data) {
+	                    if(data.state){
+	                         //刷新表格
+	                         BtTable.refresh();
+	                         $('#dataModal').modal("hide");
+	                         
+	                         if(data.msg) alert(data.msg); else alert("保存成功");
+	                    }else{
+	                         alert("保存失败");
+	                    }
+	        },
+	        error: function (returndata) {
+	        }
+	    }); 
+});
+</script>

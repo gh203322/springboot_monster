@@ -1,6 +1,5 @@
-package com.monster.model.dto.system;
+package com.monster.model.request.system;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import lombok.Data;
@@ -10,7 +9,7 @@ import lombok.Data;
  * 菜单实体数据处理
  */
 @Data
-public class SysMenuDto {
+public class SysMenuSearch {
    
 	  private Long id;
 	  private String name;
@@ -22,6 +21,6 @@ public class SysMenuDto {
 	  private Integer sort;
 	  private Integer childNum;
 	  private Integer isBoot;
-      private List<SysMenuDto> childs;
+      private List<SysMenuSearch> childs;
       
 }

@@ -3,7 +3,34 @@
         <div class="col-xs-12">
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title">Hover Data Table</h3>
+              <h3 class="box-title"></h3>
+                      <section class="col-lg-12">
+                              <form id="searchForm" action="" class="form-horizontal">
+					                  <div class="form-group col-lg-3">
+										  		<div class="col-lg-12 input-group">
+													<span class="input-group-addon">车辆编号</span> 
+													<input id="carNo"  name="carNo"  type="text"  class="form-control"/>
+												</div>
+									  </div>
+									   <div class="form-group col-lg-3">
+												<div class="col-lg-12  input-group">
+												    <span class="input-group-addon">车主姓名</span> 
+													<input id="carUser.name"  name="carUserName"  type="text"  class="form-control"/>
+												</div>
+									   </div>
+									    <div class="form-group col-lg-3">
+												<div class="col-lg-12  input-group">
+												    <span class="input-group-addon">登记时间</span> 
+													<input id="signDate"  name="signDate"  type="date"  class="form-control"/>
+												</div>
+									   </div>
+							    </form>
+							    <div class="col-lg-3">
+												<button type="button" class="btn btn-default toolbar-btn" id="btn_query">
+														<span class="glyphicon glyphicon-search" aria-hidden="true">&nbsp;</span>查询
+												</button>
+									   </div>
+						</section>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
@@ -109,7 +136,11 @@ $("#btn_add").on("click",function(){
 //编辑
 $("#btn_edit").on("click",function(){
           
-          
+        $('#modal').html("");
+        $('#modal').load("/auth/car/edit?id="+BtTable.getSingleSelecttionId(),function(responseTxt,statusTxt,xhr){
+            //加载完成后回调打开模态框
+            if(statusTxt=="success") $('#dataModal').modal("show");
+        });  
 });
 
 //删除
@@ -142,5 +173,13 @@ function myExport(){
 	                  ignoreColumn: [0, 7], 
 	       });
 }
+
+//查询
+$("#btn_query").on("click",function(){
+        BtTable.queryfresh({
+              url: '/auth/car/listSearch',	
+              query: $("#searchForm").serializeForm()
+        });
+});
 
 </script>

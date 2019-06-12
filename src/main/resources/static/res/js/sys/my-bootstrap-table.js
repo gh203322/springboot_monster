@@ -133,9 +133,17 @@
 		}
 		
 		//刷新表格
-		BtTable.refresh = function(){
-			
+		BtTable.refresh = function(params){
 			     BtTable.table.bootstrapTable("refresh", {
-			        silent: true //静态刷新
+			        silent: true 
 			      });
+		}
+		
+		//带查询条件刷新表格
+		BtTable.queryfresh = function(params){
+			     if(!params){
+			    	 params = {};
+			     }
+			     params.silent = true;  //静态刷新
+			     BtTable.table.bootstrapTable("refresh", params);
 		}

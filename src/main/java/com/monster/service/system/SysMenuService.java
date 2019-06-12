@@ -2,7 +2,7 @@ package com.monster.service.system;
 
 import java.util.List;
 
-import com.monster.model.dto.system.SysMenuDto;
+import com.monster.model.request.system.SysMenuSearch;
 
 public interface SysMenuService{
 
@@ -13,7 +13,7 @@ public interface SysMenuService{
 	 * @return: List<SysMenuDto>      
 	 * @throws   
 	 */
-	List<SysMenuDto> getMenuTree();
+	List<SysMenuSearch> getMenuTree();
 	
 	/**   
 	 * @Title: getMenuTreeByStream   
@@ -22,7 +22,7 @@ public interface SysMenuService{
 	 * @return: List<SysMenuDto>      
 	 * @throws   
 	 */
-	List<SysMenuDto> getMenuTreeByStream();
+	List<SysMenuSearch> getMenuTreeByStream();
 	
 	/**   
 	 * @Title: getMenuTreeByQuery   
@@ -31,5 +31,5 @@ public interface SysMenuService{
 	 * @return: List<SysMenuDto>      
 	 * @throws   
 	 */
-	List<SysMenuDto> getMenuTreeByQuery();
+	List<SysMenuSearch> getMenuTreeByQuery();
 }

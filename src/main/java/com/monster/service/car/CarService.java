@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import com.monster.model.entity.car.Car;
+import com.monster.model.request.car.CarSearch;
 import com.monster.service.base.baseService;
 
 public interface CarService extends baseService<Car>{
@@ -14,4 +15,6 @@ public interface CarService extends baseService<Car>{
 	 List<Map<String, Object>> findAllToMap();
 	 
 	 Page<Car> findAllToPage(Pageable pageable);
+	 
+	 Page<Car> findAllToPage(Pageable pageable, CarSearch carSearch) throws Exception;
 }

@@ -20,6 +20,7 @@ Date.prototype.format = function(format){
 	    return format; 
 };
 
+//把表单序列化为json数据
 jQuery.fn.serializeForm = function () {
     var formData = {};
     var formArray = this.serializeArray();

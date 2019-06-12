@@ -3,6 +3,7 @@ package com.monster.service.car.impl;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
@@ -11,6 +12,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.monster.model.entity.car.Car;
+import com.monster.model.request.car.CarSearch;
 import com.monster.repository.car.CarRepository;
 import com.monster.service.car.CarService;
 
@@ -119,6 +121,22 @@ public class CarServiceImpl implements CarService {
 	public Page<Car> findAllToPage(Pageable pageable) {
 		
 		return repository.findAll(pageable);
+	}
+
+	@Override
+	public Car saveOrUpdateIgnoreNull(Car entity, String...params) {
+
+		return repository.saveOrUpdateIgnoreNull(entity, params);
+	}
+
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@Override
+	public Page<Car> findAllToPage(Pageable pageable, CarSearch carSearch) throws Exception {
+		
+		Car search  = new Car();
+		BeanUtils.copyProperties(search, carSearch);
+		Example example = Example.of(search);
+		return repository.findAll(example, pageable);
 	}
 
 	

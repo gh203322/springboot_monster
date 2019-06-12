@@ -5,13 +5,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
 import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.monster.model.dto.system.SysMenuDto;
 import com.monster.model.entity.system.SysMenu;
-import com.monster.repository.base.impl.BaseRepositoryImpl;
+import com.monster.model.request.system.SysMenuSearch;
 import com.monster.repository.system.SysMenuRepository;
 import com.monster.service.system.SysMenuService;
 import com.monster.utils.DataUtil;
@@ -22,8 +24,8 @@ public class SysMenuServiceImpl implements SysMenuService {
 	
 	    @Autowired
 	    private SysMenuRepository repository;
-	    @Autowired
-	    private BaseRepositoryImpl baseRepository;
+	    @PersistenceContext
+	    private EntityManager em;
 	    
 		/**
 		 * @throws InvocationTargetException 
@@ -34,17 +36,17 @@ public class SysMenuServiceImpl implements SysMenuService {
 		 * @return: List<SysMenuDto>      
 		 * @throws   
 		 */
-	     public List<SysMenuDto> getMenuTree(){
+	     public List<SysMenuSearch> getMenuTree(){
 	    	 
 	    	    //查找根菜单
 	    	    StringBuffer sql = new StringBuffer();
 	    	    sql.append("select m.*,(select count(*) from sys_menu u where u.parentId = m.id) as childNum,'1' as isBoot from sys_menu m where m.isShow = 1 AND m.parentId is NULL order by m.sort asc");
-	    	    List<Map<String, Object>> list = baseRepository.nativeQueryListMap(sql.toString(), new Object[] {});
+	    	    List<Map<String, Object>> list = repository.nativeQueryListMap(em, sql.toString(), new Object[] {});
 	    	    
-	    	    List<SysMenuDto> res = new ArrayList<SysMenuDto>();
+	    	    List<SysMenuSearch> res = new ArrayList<SysMenuSearch>();
 			    if(DataUtil.isNotEmptyObj(list)) { 
 					 for(Map<String, Object> sysMenu: list) {
-				           SysMenuDto sysMenuDto = new SysMenuDto(); 
+				           SysMenuSearch sysMenuDto = new SysMenuSearch(); 
 				           try {
 							   BeanUtils.copyProperties(sysMenuDto,sysMenu);
 							   sysMenuDto.setChilds(getChilds(sysMenu));
@@ -65,22 +67,22 @@ public class SysMenuServiceImpl implements SysMenuService {
 	     * @return: List<SysMenuDto>      
 	     * @throws   
 	     */
-	    private List<SysMenuDto> getChilds(Map<String, Object> map){
+	    private List<SysMenuSearch> getChilds(Map<String, Object> map){
 	    	    if(DataUtil.isEmptyObj(map)) {
 	    	    	return null;
 	    	    }
 	    	    
 	    	    StringBuffer sql = new StringBuffer();
 	    	    sql.append("select m.*,(select count(*) from sys_menu u where u.parentId = m.id) as childNum,'0' as isBoot from sys_menu m where m.isShow = 1 AND m.parentId = ?1 order by m.sort asc");
-	    	    List<Map<String, Object>> list = baseRepository.nativeQueryListMap(sql.toString(), new Object[] {Long.parseLong(map.get("id")+"")});
+	    	    List<Map<String, Object>> list = repository.nativeQueryListMap(em, sql.toString(), new Object[] {Long.parseLong(map.get("id")+"")});
 	    	    
 			    if(DataUtil.isEmptyObj(list)) {
 			    	return null;
 			    }
 			    
-			    List<SysMenuDto> res = new ArrayList<SysMenuDto>();
+			    List<SysMenuSearch> res = new ArrayList<SysMenuSearch>();
 			    for(Map<String, Object> child: list) {
-			    	SysMenuDto sysMenuDto = new SysMenuDto();
+			    	SysMenuSearch sysMenuDto = new SysMenuSearch();
 			    	try {
 			    		BeanUtils.copyProperties(sysMenuDto,child);
 			    		sysMenuDto.setChilds(getChilds(child));
@@ -100,19 +102,19 @@ public class SysMenuServiceImpl implements SysMenuService {
 		 * @throws   
 		 */
 		@Override
-		public List<SysMenuDto> getMenuTreeByStream() {
+		public List<SysMenuSearch> getMenuTreeByStream() {
 			
 			List<SysMenu> list = repository.findBySysMenuIdIsNull();
-			List<SysMenuDto> res = new ArrayList<SysMenuDto>();
+			List<SysMenuSearch> res = new ArrayList<SysMenuSearch>();
 		    if(DataUtil.isNotEmptyObj(list)) { 
 				 for(SysMenu sysMenu: list) {
 			           try {
 			        	   if(new Integer("1").equals(sysMenu.getIsShow())) {
-			        		   SysMenuDto sysMenuDto = new SysMenuDto();
+			        		   SysMenuSearch sysMenuDto = new SysMenuSearch();
 							   BeanUtils.copyProperties(sysMenuDto,sysMenu);
 							   sysMenuDto.setIsBoot(1);
 							   if(DataUtil.isNotEmptyObj(sysMenu.getSysMenus())) {
-								   List<SysMenuDto> childsDtos = getChilds(sysMenu.getSysMenus());
+								   List<SysMenuSearch> childsDtos = getChilds(sysMenu.getSysMenus());
 								   sysMenuDto.setChildNum(childsDtos.size());
 								   sysMenuDto.setChilds(childsDtos);
 							   }else {
@@ -136,20 +138,20 @@ public class SysMenuServiceImpl implements SysMenuService {
 	     * @return: void      
 	     * @throws   
 	     */
-		public List<SysMenuDto> getChilds(List<SysMenu> list){
+		public List<SysMenuSearch> getChilds(List<SysMenu> list){
 			if(DataUtil.isEmptyObj(list)) {
     	    	return null;
     	    }
 	    	
-	    	List<SysMenuDto> res = new ArrayList<SysMenuDto>();
+	    	List<SysMenuSearch> res = new ArrayList<SysMenuSearch>();
 	    	for(SysMenu sysMenu: list) {
 				   try {
 					   if(new Integer("1").equals(sysMenu.getIsShow())) {
-		        		   SysMenuDto sysMenuDto = new SysMenuDto();
+		        		   SysMenuSearch sysMenuDto = new SysMenuSearch();
 					       BeanUtils.copyProperties(sysMenuDto,sysMenu);
 					       sysMenuDto.setIsBoot(0);
 						   if(DataUtil.isNotEmptyObj(sysMenu.getSysMenus())) {
-							   List<SysMenuDto> childsDtos = getChilds(sysMenu.getSysMenus());
+							   List<SysMenuSearch> childsDtos = getChilds(sysMenu.getSysMenus());
 							   sysMenuDto.setChildNum(childsDtos.size());
 							   sysMenuDto.setChilds(childsDtos);
 						   }else {
@@ -174,14 +176,14 @@ public class SysMenuServiceImpl implements SysMenuService {
 		 * @throws   
 		 */
 		@Override
-		public List<SysMenuDto> getMenuTreeByQuery() {
+		public List<SysMenuSearch> getMenuTreeByQuery() {
 			 //查找根菜单
     	    List<Map<String, Object>> list = repository.findBootNode();
     	    
-    	    List<SysMenuDto> res = new ArrayList<SysMenuDto>();
+    	    List<SysMenuSearch> res = new ArrayList<SysMenuSearch>();
 		    if(DataUtil.isNotEmptyObj(list)) { 
 				 for(Map<String, Object> sysMenu: list) {
-			           SysMenuDto sysMenuDto = new SysMenuDto(); 
+			           SysMenuSearch sysMenuDto = new SysMenuSearch(); 
 			           try {
 						   BeanUtils.copyProperties(sysMenuDto,sysMenu);
 						   sysMenuDto.setChilds(getChilds3(sysMenu));
@@ -202,7 +204,7 @@ public class SysMenuServiceImpl implements SysMenuService {
 	     * @return: List<SysMenuDto>      
 	     * @throws   
 	     */
-	    private List<SysMenuDto> getChilds3(Map<String, Object> map){
+	    private List<SysMenuSearch> getChilds3(Map<String, Object> map){
 	    	    if(DataUtil.isEmptyObj(map)) {
 	    	    	return null;
 	    	    }
@@ -213,9 +215,9 @@ public class SysMenuServiceImpl implements SysMenuService {
 			    	return null;
 			    }
 			    
-			    List<SysMenuDto> res = new ArrayList<SysMenuDto>();
+			    List<SysMenuSearch> res = new ArrayList<SysMenuSearch>();
 			    for(Map<String, Object> child: list) {
-			    	SysMenuDto sysMenuDto = new SysMenuDto();
+			    	SysMenuSearch sysMenuDto = new SysMenuSearch();
 			    	try {
 			    		BeanUtils.copyProperties(sysMenuDto,child);
 			    		sysMenuDto.setChilds(getChilds(child));

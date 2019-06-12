@@ -1,20 +1,15 @@
 package com.monster.repository.system;
 
-import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import com.monster.model.entity.system.SysMenu;
+import com.monster.repository.base.BaseRepository;
 
-public interface SysMenuRepository extends
-			Serializable,
-			JpaRepository<SysMenu, Integer>,
-			JpaSpecificationExecutor<SysMenu>{
+public interface SysMenuRepository extends BaseRepository<SysMenu> {
 	
 	  
 		  /**   
