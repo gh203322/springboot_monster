@@ -84,4 +84,17 @@ public class IndexController {
         map.addAttribute("number","9527");
         return "backup_index";
     }
+
+    /**
+     * @Title: initIndex
+     * @Description: 打开404页面
+     * @param: @param map
+     * @param: @return
+     * @return: String
+     * @throws
+     */
+    @RequestMapping("/video")
+    public String video(){
+        return "video";
+    }
 }
