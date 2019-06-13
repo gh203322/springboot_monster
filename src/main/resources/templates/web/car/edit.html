@@ -60,7 +60,7 @@
 $("#btn_submit").on("click",function(){
 	    var dataForm = new FormData($("#dataForm")[0]);
 	    $.ajax({
-	        url: '/auth/car/editData' ,
+	        url: '/auth/car/edit' ,
 	        type: 'POST',
 	        dataType: 'json',
 	        contentType: false,

@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.monster.base.Ipage;
 import com.monster.base.Result;
 import com.monster.model.entity.car.Car;
 import com.monster.model.request.car.CarSearch;
@@ -39,7 +40,7 @@ public class CarController {
  
 	@ApiOperation(value = "加载车辆主页面")
 	@PostMapping("/view")
-    public String list(){
+    public String view(){
 		
           return "car/view";
     }
@@ -47,7 +48,7 @@ public class CarController {
 	@ApiOperation(value = "获取车辆列表")
 	@PostMapping("/list")
 	@ResponseBody
-	public String getMenuTreeByQuery(Pageable pageable) {
+	public String list(Pageable pageable) {
 	    
 		  return Result.ok(
 				  service.findAllToPage(pageable)
@@ -55,15 +56,15 @@ public class CarController {
 	}
 	
 	@ApiOperation(value = "加载新增页面")
-	@GetMapping("/add")
-    public String data(){
+	@GetMapping("/addView")
+    public String addView(){
 		
           return "car/add";
     }
 	
 	@ApiOperation(value = "加载编辑页面")
-	@GetMapping("/edit")
-    public String edit(@NotNull(message = "id不能为空")@RequestParam(name = "id") Integer id, Model model){
+	@GetMapping("/editView")
+    public String editView(@NotNull(message = "id不能为空")@RequestParam(name = "id") Integer id, Model model){
 		
 		  model.addAttribute("car", service.findById(id));
 		  
@@ -81,9 +82,9 @@ public class CarController {
     }
 	
 	@ApiOperation(value = "新增车辆数据")
-	@PostMapping("/addData")
+	@PostMapping("/add")
 	@ResponseBody
-    public String addData(@ModelAttribute  Car car, MultipartFile file){
+    public String add(@ModelAttribute  Car car, MultipartFile file){
 		
 		  
           return Result.ok(
@@ -92,9 +93,9 @@ public class CarController {
     }
 	
 	@ApiOperation(value = "编辑车辆数据")
-	@PostMapping("/editData")
+	@PostMapping("/edit")
 	@ResponseBody
-    public String editData(@ModelAttribute  Car car, MultipartFile file){
+    public String edit(@ModelAttribute  Car car, MultipartFile file){
 		
 		  
           return Result.ok(
@@ -102,13 +103,13 @@ public class CarController {
           );
     }
 	
-	@ApiOperation(value = "通过条件获取车辆列表数据")
-	@PostMapping("/listSearch")
+	@ApiOperation(value = "通过条件查询车辆列表数据")
+	@PostMapping("/search")
 	@ResponseBody
-	public String listSearch(Pageable pageable, CarSearch carSearch) throws Exception{
+	public String search(Ipage ipage, CarSearch carSearch) throws Exception{
 	    
 		  return Result.ok(
-				  service.findAllToPage(pageable, carSearch)
+				  service.findAllToPage(ipage.of(carSearch))
 		  );
 	}
 

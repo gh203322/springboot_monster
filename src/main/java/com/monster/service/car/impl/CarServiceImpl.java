@@ -3,18 +3,21 @@ package com.monster.service.car.impl;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import com.github.wenhao.jpa.Specifications;
+import com.monster.base.Ipage;
 import com.monster.model.entity.car.Car;
 import com.monster.model.request.car.CarSearch;
 import com.monster.repository.car.CarRepository;
 import com.monster.service.car.CarService;
+import com.monster.utils.DataUtil;
 
 @Service
 public class CarServiceImpl implements CarService {
@@ -129,14 +132,23 @@ public class CarServiceImpl implements CarService {
 		return repository.saveOrUpdateIgnoreNull(entity, params);
 	}
 
-	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
-	public Page<Car> findAllToPage(Pageable pageable, CarSearch carSearch) throws Exception {
+	public Page<Car> findAllToPage(Ipage ipage) throws Exception {
 		
-		Car search  = new Car();
-		BeanUtils.copyProperties(search, carSearch);
-		Example example = Example.of(search);
-		return repository.findAll(example, pageable);
+			if(DataUtil.isNotEmptyObj(ipage)) {
+				 CarSearch carSearch = (CarSearch) ipage.getParams();
+				 if(DataUtil.isNotEmptyObj(carSearch)) {
+					 Specification<Car> specification = Specifications.<Car>and()
+					            .eq(DataUtil.isNotEmptyObj(carSearch.getSignDate()), "signDate", carSearch.getSignDate())
+					            .like(DataUtil.isNotEmptyObj(carSearch.getCarNo()), "carNo", "%"+carSearch.getCarNo()+"%")
+					            .like(DataUtil.isNotEmptyObj(carSearch.getCarUser().getName()), "carUser.name", "%"+carSearch.getCarUser().getName()+"%")
+					            .build();
+					 
+					 return repository.findAll(specification, ipage.of());
+				 }
+			}
+		
+        return null;		
 	}
 
 	

@@ -6,8 +6,8 @@ import java.util.Map;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import com.monster.base.Ipage;
 import com.monster.model.entity.car.Car;
-import com.monster.model.request.car.CarSearch;
 import com.monster.service.base.baseService;
 
 public interface CarService extends baseService<Car>{
@@ -16,5 +16,5 @@ public interface CarService extends baseService<Car>{
 	 
 	 Page<Car> findAllToPage(Pageable pageable);
 	 
-	 Page<Car> findAllToPage(Pageable pageable, CarSearch carSearch) throws Exception;
+	 Page<Car> findAllToPage(Ipage ipage) throws Exception;
 }

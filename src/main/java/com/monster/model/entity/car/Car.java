@@ -54,6 +54,8 @@ public class Car {
 		public CarUser getCarUser() {
 			if(null != carUser) {
 				carUser.setCars(null);
+			}else {
+				carUser = new CarUser(); //new 一个是为了在获取其属性值调用get的时候避免处理空指针异常
 			}
 			return carUser;
 		}

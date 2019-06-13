@@ -36,15 +36,17 @@
 									    queryParams: function (params) {                   // 请求服务器之前的回调函数，返回false则终止请求
 									        return {
 									            //在请求中添加分页参数
-									            size: params.limit,  // 每页要显示的数据条数
-									            page: (params.offset/params.limit)   // 当前页(对应数据库之后当前页应该少1)
+									            size: params.limit,                                   // 每页要显示的数据条数
+									            page: (params.offset/params.limit),          // 当前页(对应数据库之后当前页应该少1)
+									            sortOrder: params.order,                        //排序方式
+                                                sortName: params.sort                           //排序字段
 									        }
 									    },
-									    responseHandler:function(res){                       //得到服务器响应后的回调函数
+									    responseHandler:function(res){                        //得到服务器响应后的回调函数
 									        //这里对应数据返回格式中的data部分(使用Page分页之后，数据被封装了一层，data上层为content)
 									    	return {total:res.data.totalElements,rows:res.data.content};
 									    },
-									    onLoadError: function(){                                //加载失败时的回调函数
+									    onLoadError: function(){                                 //加载失败时的回调函数
 									          console.info("数据加载失败");
 									    }
 							}

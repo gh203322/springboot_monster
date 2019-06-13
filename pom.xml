@@ -149,6 +149,26 @@
 			    <artifactId>hibernate-validator</artifactId>
 			    <version>5.3.1.Final</version>
 			</dependency>
+			
+			<!-- JPA查询框架 jpa-spec -->
+			<!-- https://github.com/wenhao/jpa-spec/ -->
+			<dependency>
+			    <groupId>com.github.wenhao</groupId>
+			    <artifactId>jpa-spec</artifactId>
+			    <version>3.2.3</version>
+			</dependency>
+			
+			<!-- JPA查询框架 QueryDSL -->
+			<!-- https://github.com/wolgy/WolfgyDemos/tree/master/QueryDSLJPADemo -->
+			<!-- <dependency>
+	            <groupId>com.querydsl</groupId>
+	            <artifactId>querydsl-jpa</artifactId>
+	        </dependency>
+	                <dependency>
+	            <groupId>com.querydsl</groupId>
+	            <artifactId>querydsl-apt</artifactId>
+	            <scope>provided</scope>
+	        </dependency> -->
 
 		    
 	</dependencies>
