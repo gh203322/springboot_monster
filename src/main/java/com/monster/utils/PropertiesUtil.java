@@ -34,8 +34,8 @@ public class PropertiesUtil {
         String value = "";
         InputStream is = null;
         try {
-            //is = PropertiesUtil.class.getClassLoader().getResourceAsStream(properiesName);
-        	is = new FileInputStream(new File(properiespath));
+            is = PropertiesUtil.class.getClassLoader().getResourceAsStream(properiespath);
+        	//is = new FileInputStream(new File(properiespath));
             Properties p = new Properties();
             p.load(is);
             value = p.getProperty(key);

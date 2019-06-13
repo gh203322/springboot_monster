@@ -1,4 +1,4 @@
-package monster.code;
+package com.monster.creature;
 
 import com.monster.utils.*;
 import java.io.File;
@@ -29,7 +29,7 @@ public class Creature {
 		   
 			   String classPath = Creature.class.getResource("").getPath();
 			   String projectPath = classPath.substring(0, classPath.indexOf("target"));
-			   PropertiesUtil propertiesUtil = new PropertiesUtil(projectPath +"creature"+File.separator+"monster"+File.separator+"config.properties");
+		       PropertiesUtil propertiesUtil = new PropertiesUtil("creature.properties");
 			   String value = propertiesUtil.readProperty("entityPath");
 			   
 			   if(DataUtil.isNotEmptyObj(value)) {
@@ -80,9 +80,12 @@ public class Creature {
 						   continue;
 					   }
 					   if(file.isFile()) {
-						     List<File> list = new ArrayList<File>();
-					    	 list.add(unknownFile);
-					    	 String key = getFileDirectoryName(unknownFile);
+						     String key = getFileDirectoryName(unknownFile);
+						     List<File> list = res.get(key);
+						     if(DataUtil.isEmptyObj(list)){
+								 list = new ArrayList<File>();
+							 }
+					    	 list.add(file);
 					    	 res.put(key, list);
 					   }else {
 						   getPathFiles(file, res);
