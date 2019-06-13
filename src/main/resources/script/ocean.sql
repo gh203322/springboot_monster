@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50644
 File Encoding         : 65001
 
-Date: 2019-06-06 09:14:29
+Date: 2019-06-13 09:16:55
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -27,26 +27,18 @@ CREATE TABLE `car` (
   `longitude` double(9,6) DEFAULT NULL COMMENT '经度',
   `province` varchar(6) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '省编码',
   `userId` bigint(20) DEFAULT NULL,
+  `signDate` date DEFAULT NULL COMMENT '车辆登记时间',
   PRIMARY KEY (`id`),
   KEY `FK91iver85cam9nynoknr5r7fkb` (`userId`),
   CONSTRAINT `FK91iver85cam9nynoknr5r7fkb` FOREIGN KEY (`userId`) REFERENCES `car_user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='车辆表';
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='车辆表';
 
 -- ----------------------------
 -- Records of car
 -- ----------------------------
-INSERT INTO `car` VALUES ('1', '川A88888', '成都市', '30.610220', '104.066019', '四川省', '1');
-INSERT INTO `car` VALUES ('2', '川A66666', '成都市', '30.606801', '104.058940', '四川省', '1');
-INSERT INTO `car` VALUES ('3', '1', '成都市', '30.606801', '104.058940', '四川省', '1');
-INSERT INTO `car` VALUES ('4', '2', '成都市', '30.606801', '104.058940', '四川省', '1');
-INSERT INTO `car` VALUES ('5', '3', '成都市', '30.606801', '104.058940', '四川省', '1');
-INSERT INTO `car` VALUES ('6', '4', '成都市', '30.606801', '104.058940', '四川省', '1');
-INSERT INTO `car` VALUES ('7', '5', '成都市', '30.606801', '104.058940', '四川省', '1');
-INSERT INTO `car` VALUES ('8', '6', '成都市', '30.606801', '104.058940', '四川省', '1');
-INSERT INTO `car` VALUES ('9', '7', '成都市', '30.606801', '104.058940', '四川省', '1');
-INSERT INTO `car` VALUES ('10', '8', '成都市', '30.606801', '104.058940', '四川省', '1');
-INSERT INTO `car` VALUES ('11', '9', '成都市', '30.606801', '104.058940', '四川省', '1');
-INSERT INTO `car` VALUES ('12', '10', '成都市', '30.606801', '104.058940', '四川省', '1');
+INSERT INTO `car` VALUES ('11', '川A9999', '成都市', null, null, '四川省', '1', '2019-06-06');
+INSERT INTO `car` VALUES ('12', '川A6666', '成都市', '1.000000', '1.000000', '四川省', '1', '2019-06-01');
+INSERT INTO `car` VALUES ('16', '川A11111', '成都市', null, null, '四川省', '1', '2019-06-30');
 
 -- ----------------------------
 -- Table structure for `car_location`
@@ -94,12 +86,12 @@ CREATE TABLE `hibernate_sequence` (
 -- ----------------------------
 -- Records of hibernate_sequence
 -- ----------------------------
-INSERT INTO `hibernate_sequence` VALUES ('1');
-INSERT INTO `hibernate_sequence` VALUES ('1');
-INSERT INTO `hibernate_sequence` VALUES ('1');
-INSERT INTO `hibernate_sequence` VALUES ('1');
-INSERT INTO `hibernate_sequence` VALUES ('1');
-INSERT INTO `hibernate_sequence` VALUES ('1');
+INSERT INTO `hibernate_sequence` VALUES ('18');
+INSERT INTO `hibernate_sequence` VALUES ('18');
+INSERT INTO `hibernate_sequence` VALUES ('18');
+INSERT INTO `hibernate_sequence` VALUES ('18');
+INSERT INTO `hibernate_sequence` VALUES ('18');
+INSERT INTO `hibernate_sequence` VALUES ('18');
 
 -- ----------------------------
 -- Table structure for `mp_menu_role`
@@ -171,7 +163,7 @@ INSERT INTO `sys_menu` VALUES ('11', null, null, '1', '0', '1', '系统日志报
 INSERT INTO `sys_menu` VALUES ('12', null, null, '1', '0', '1', '系统运行报告', '11', '10');
 INSERT INTO `sys_menu` VALUES ('13', null, null, '1', '0', '1', '系统操作记录', '12', '10');
 INSERT INTO `sys_menu` VALUES ('14', null, null, '0', '1', '1', '车辆管理', '13', null);
-INSERT INTO `sys_menu` VALUES ('15', null, 'car/list', '1', '0', '1', '车辆信息', '14', '14');
+INSERT INTO `sys_menu` VALUES ('15', null, 'car/view', '1', '0', '1', '车辆信息', '14', '14');
 INSERT INTO `sys_menu` VALUES ('16', null, null, '1', '0', '1', '车辆用户', '15', '14');
 INSERT INTO `sys_menu` VALUES ('17', null, null, '1', '0', '1', '车辆轨迹', '16', '14');
 INSERT INTO `sys_menu` VALUES ('18', null, null, '1', '0', '1', '组织管理', '6', '1');
