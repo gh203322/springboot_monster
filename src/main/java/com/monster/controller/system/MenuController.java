@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.monster.base.Result;
+import com.monster.base.reqAndRsp.Result;
 import com.monster.service.system.SysMenuService;
 
 import io.swagger.annotations.Api;

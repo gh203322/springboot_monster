@@ -18,8 +18,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.monster.base.Ipage;
-import com.monster.base.Result;
+import com.monster.base.reqAndRsp.Ipage;
+import com.monster.base.reqAndRsp.Result;
 import com.monster.model.entity.car.Car;
 import com.monster.model.request.car.CarSearch;
 import com.monster.service.car.CarService;

@@ -1,4 +1,4 @@
-package com.monster.base;
+package com.monster.base.exception;
 
 import java.util.List;
 import java.util.Set;
@@ -13,6 +13,8 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.monster.base.reqAndRsp.Result;
 
 @Controller
 @ControllerAdvice

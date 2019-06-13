@@ -6,7 +6,7 @@ import java.util.Map;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import com.monster.base.Ipage;
+import com.monster.base.reqAndRsp.Ipage;
 import com.monster.model.entity.car.Car;
 import com.monster.service.base.baseService;
 

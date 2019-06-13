@@ -1,4 +1,4 @@
-package com.monster.base;
+package com.monster.base.reqAndRsp;
 
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;

@@ -12,7 +12,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import com.github.wenhao.jpa.Specifications;
-import com.monster.base.Ipage;
+import com.monster.base.reqAndRsp.Ipage;
 import com.monster.model.entity.car.Car;
 import com.monster.model.request.car.CarSearch;
 import com.monster.repository.car.CarRepository;

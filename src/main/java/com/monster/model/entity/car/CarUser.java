@@ -1,5 +1,6 @@
 package com.monster.model.entity.car;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -10,8 +11,11 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.monster.base.annotation.Creature;
+
 import lombok.Data;
 
+@Creature
 @Entity
 @Data
 @Table(name = "car_user")
@@ -41,6 +45,8 @@ public class CarUser {
 	public List<Car> getCars() {
 		if(null != cars) {
 			cars.stream().forEach(car -> car.setCarUser(null));
+		}else {
+			cars = new ArrayList<Car>();
 		}
 		return cars;
 	}
