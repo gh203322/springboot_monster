@@ -29,7 +29,7 @@
 $("#btn_submit").on("click",function(){
 	    var dataForm = new FormData($("#dataForm")[0]);
 	    $.ajax({
-	        url: '/auth/${[entityName]}/edit' ,
+	        url: '/auth/${[placeHolder]}/edit' ,
 	        type: 'POST',
 	        dataType: 'json',
 	        contentType: false,

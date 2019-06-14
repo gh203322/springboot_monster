@@ -11,11 +11,11 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.monster.base.annotation.Creature;
+import com.monster.base.annotation.CreatureAno;
 
 import lombok.Data;
 
-@Creature
+@CreatureAno
 @Entity
 @Data
 @Table(name = "car_user")

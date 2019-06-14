@@ -27,7 +27,7 @@
 //提交按钮
 $("#btn_submit").on("click",function(){
 	    $.ajax({
-	        url: '/auth/${[entityName]}/add' ,
+	        url: '/auth/${[placeHolder]}/add' ,
 	        type: 'POST',
 	        dataType: 'json',
 	        contentType: false,

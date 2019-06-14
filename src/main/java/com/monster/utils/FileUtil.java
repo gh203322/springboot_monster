@@ -1,25 +1,10 @@
 package com.monster.utils;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
- 
+import java.io.*;
+import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
  * @author Administrator
  *  文件读写工具类
@@ -482,10 +467,11 @@ public class FileUtil {
          }
      }
  }
- 
+
  /**
   * 读取文本文件，并判断文本文件中是否包含指定字符串
-  * @param filePath
+  * @param file
+  *@param findStr
   * @return
   */
  public static boolean strExistsOfContent(File file, String findStr) {
@@ -518,6 +504,50 @@ public class FileUtil {
 	   }
 	   return false;
  }
- 
+
+    /**
+     * 读取文本文件，并判断文本文件中是否包含指定字符串
+     * @param file
+     *@param findStr
+     * @return
+     */
+    public static boolean copyFileAndReplaceContent(File src,  File target, String srcString, String...targetStrings) {
+
+        BufferedReader reader = null;
+        BufferedWriter writer = null;
+        List<String> listContent = new ArrayList<>();
+        try {
+            reader = new BufferedReader(new FileReader(src));
+            writer = new BufferedWriter(new FileWriter(target));
+            String tempString = null;
+            int line = 1;
+            // 一次读入一行，直到读入null为文件结束
+            while ((tempString = reader.readLine()) != null) {
+                //替换掉占位符
+                for(int i=0; i<targetStrings.length; i++){
+                    Pattern p = Pattern.compile(targetStrings[i]);
+                    Matcher m = p.matcher(tempString);
+                    tempString = m.replaceAll(srcString);
+                }
+                writer.write(tempString+"\t\n");
+                line++;
+            }
+            reader.close();
+            writer.close();
+            return true;
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (reader != null) {
+                try {
+                    listContent.clear();
+                    reader.close();
+                    writer.close();
+                } catch (IOException e1) {
+                }
+            }
+        }
+        return false;
+    }
    
 }
