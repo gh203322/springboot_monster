@@ -1,4 +1,4 @@
-package com.monster.model.entityVo;
+package com.monster.model.entityVo.system;
 
 import com.monster.model.entity.car.CarUser;
 
@@ -8,7 +8,7 @@ import com.monster.model.entity.car.CarUser;
  * mybatis返回的映射对象
  * 自定义字段写在这里
  */
-public class UserVo extends CarUser{
+public class SysUserVo extends CarUser{
   
 	
 }

@@ -13,17 +13,72 @@ import java.util.*;
 public class Creature {
 
 		public static void main(String[] args) {
-			System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-
-			createContent();
-
-			System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+			System.out.println(">>>>>>>>>>>>>>>>>>>>>>>创建前端代码文件开始>>>>>>>>>>>>>>>>>>>>>>>");
+			 createWebContent();
+			System.out.println(">>>>>>>>>>>>>>>>>>>>>>>创建前端代码文件结束>>>>>>>>>>>>>>>>>>>>>>>");
+			System.out.println(">>>>>>>>>>>>>>>>>>>>>>>创建后端代码文件开始>>>>>>>>>>>>>>>>>>>>>>>");
+			 createServicContent();
+			System.out.println(">>>>>>>>>>>>>>>>>>>>>>>创建后端代码文件结束>>>>>>>>>>>>>>>>>>>>>>>");
 		}
 
 	/**
-	 * 生成html
+	 * 生成后端文件
 	 */
-	public static void createContent() {
+	public static void createServicContent() {
+
+		try {
+			PropertiesUtil propertiesUtil = new PropertiesUtil("creature.properties");
+			Map<String, List<File>> target = findCreateEntity();
+			Iterator<Map.Entry<String, List<File>>> iteratorMap = target.entrySet().iterator();
+			while(iteratorMap.hasNext()){
+				Map.Entry<String, List<File>> entry = iteratorMap.next();
+				List<File> list = entry.getValue();
+				Iterator<File> iteratorList = list.listIterator();
+				while (iteratorList.hasNext()){
+					File file = iteratorList.next();
+
+					//controller
+					String controllerPathIn = propertiesUtil.readProperty("controllerPathIn");
+					String controllerPathOut = propertiesUtil.readProperty("controllerPathOut");
+					createCore(controllerPathIn,controllerPathOut, entry.getKey(),file,"Controller");
+
+					//service
+					String servicePathIn = propertiesUtil.readProperty("servicePathIn");
+					String servicePathOut = propertiesUtil.readProperty("servicePathOut");
+					createCore(servicePathIn,servicePathOut, entry.getKey(),file,"Service");
+
+					//serviceImpl
+					String serviceImplPathIn = propertiesUtil.readProperty("serviceImplPathIn");
+					String serviceImplPathOut = propertiesUtil.readProperty("serviceImplPathOut");
+					createCore(serviceImplPathIn,serviceImplPathOut, entry.getKey(),file,"ServiceImpl");
+
+					//repository
+					String repositoryPathIn = propertiesUtil.readProperty("repositoryPathIn");
+					String repositoryPathOut = propertiesUtil.readProperty("repositoryPathOut");
+					createCore(repositoryPathIn,repositoryPathOut, entry.getKey(),file,"Repository");
+
+					//search
+					String searchPathIn = propertiesUtil.readProperty("searchPathIn");
+					String searchPathOut = propertiesUtil.readProperty("searchPathOut");
+					createCore(searchPathIn,searchPathOut, entry.getKey(),file,"Search");
+
+					//vo
+					String voPathIn = propertiesUtil.readProperty("voPathIn");
+					String voPathOut = propertiesUtil.readProperty("voPathOut");
+					createCore(voPathIn,voPathOut, entry.getKey(),file,"Vo");
+
+					com.monster.model.entity.car.CarUser carUser = new com.monster.model.entity.car.CarUser();
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * 生成前端文件
+	 */
+	public static void createWebContent() {
 
 		try {
 			Map<String, List<File>> target = findCreateEntity();
@@ -42,7 +97,7 @@ public class Creature {
 					File[] leafs = new File(getProjectPath() + leafPathIn).listFiles();
 					File folder = null;
 					if(DataUtil.isNotEmptyObj(entry.getKey())){
-						folder = new File(getProjectPath() + leafPathOut + File.separator+getLowCaseFileNam(file)+File.separator);
+						folder = new File(getProjectPath() + leafPathOut + File.separator+FileUtil.getLowCaseFileName(file)+File.separator);
 						if(!folder.exists()){
 							folder.mkdirs();
 						}
@@ -50,14 +105,14 @@ public class Creature {
 					final File pointFolder = folder;
 					if(DataUtil.isNotEmptyObj(folder)){
 						Arrays.stream(leafs).forEach(f->{
-									System.out.println(f.getName());
+									//System.out.println(f.getName());
 									File leafNew = new File(pointFolder.getPath()+File.separator+f.getName().replaceAll("mdl", "html"));
 									if(leafNew.exists()){
 										 return;
 									}else{
 										try {
 											leafNew.createNewFile();
-											FileUtil.copyFileAndReplaceContent(f,leafNew,getLowCaseFileNam(file),"\\$\\{(.*?)\\}");
+											FileUtil.createHtmlContent(f,leafNew,FileUtil.getLowCaseFileName(file),"\\$\\{(.*?)\\}");
 										}catch (Exception e){}
 									}
 								}
@@ -175,17 +230,28 @@ public class Creature {
 	 }
 
 	/**
-	 *
-	 * @return
+	 * 根据配置文件创建文件
 	 */
-	public static String getLowCaseFileNam(File file){
-			  if(file.exists()){
-				   String wholeName = file.getName();
-				   wholeName = wholeName.substring(0, wholeName.lastIndexOf("."));
-				   wholeName = wholeName.replaceFirst(String.valueOf(wholeName.charAt(0)),String.valueOf(wholeName.charAt(0)).toLowerCase());
-				   return wholeName;
-			  }
-		  return null;
-	 }
-	 
+	public static void createCore(String pathIn, String patOut, String folderName, File file, String floor){
+		File fileIn = new File(pathIn);
+		File fileOut = null;
+		//如果键为空或者特殊标记，不用创建上层文件夹
+		File folder = null;
+		if(DataUtil.isNotEmptyObj(folderName)){
+			folder = new File(getProjectPath() + patOut + File.separator+FileUtil.getLowCaseFileName(folderName)+File.separator);
+			if(!folder.exists()){
+				folder.mkdirs();
+			}
+		}
+		fileOut = new File(folder.getPath()+File.separator+FileUtil.getUperCaseFileName(file)+floor+".java");
+		if(fileOut.exists()){
+			return;
+		}else{
+			try {
+				fileOut.createNewFile();
+				FileUtil.createServiceContent(fileIn,fileOut,FileUtil.getLowCaseFileName(folderName),FileUtil.getUperCaseFileName(file));
+			}catch (Exception e){}
+		}
+	}
+
 }

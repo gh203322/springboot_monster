@@ -1,0 +1,106 @@
+package com.monster.controller.${[folderName]};
+
+import com.monster.base.reqAndRsp.Ipage;
+import com.monster.base.reqAndRsp.Result;
+import com.monster.model.entity.${[folderName]}.${[entityName]};
+import com.monster.model.request.${[folderName]}.${[entitySearch]};
+import com.monster.service.${[folderName]}.${[entityService]};
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import java.util.List;
+import javax.validation.constraints.NotNull;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+
+@Api(tags = "${[entityName]}")
+@Controller(value = "${[entityName]}Controller")
+@RequestMapping("/auth/${[lowerEntityName]}")
+@Validated
+public class ${[entityController]} {
+
+	@Autowired
+	private ${[entityService]} service;
+	
+ 
+	@ApiOperation(value = "加载${[entityName]}主页面")
+	@PostMapping("/view")
+    public String view(){
+		
+          return "${[lowerEntityName]}/view";
+    }
+	
+	@ApiOperation(value = "获取${[entityName]}列表")
+	@PostMapping("/list")
+	@ResponseBody
+	public String list(Pageable pageable) {
+	    
+		  return Result.ok(
+				  service.findAllToPage(pageable)
+		  );
+	}
+	
+	@ApiOperation(value = "加载新增页面")
+	@GetMapping("/addView")
+    public String addView(){
+		
+          return "${[lowerEntityName]}/add";
+    }
+	
+	@ApiOperation(value = "加载编辑页面")
+	@GetMapping("/editView")
+    public String editView(@NotNull(message = "id不能为空")@RequestParam(name = "id") Integer id, Model model){
+		
+		  model.addAttribute("${[lowerEntityName]}", service.findById(id));
+		  
+          return "${[lowerEntityName]}/edit";
+    }
+	
+	@ApiOperation(value = "删除${[entityName]}数据")
+	@PostMapping("/delete")
+	@ResponseBody
+    public String delete(@RequestBody List<${[entityName]}> entitys){
+		
+          return Result.ok(
+        		  service.deleteBatchByEntitys(entitys)
+          );
+    }
+	
+	@ApiOperation(value = "新增${[entityName]}数据")
+	@PostMapping("/add")
+	@ResponseBody
+    public String add(@ModelAttribute  ${[entityName]} ${[lowerEntityName]}, MultipartFile file){
+		
+		  
+          return Result.ok(
+        		  service.saveOrUpdate(${[lowerEntityName]})
+          );
+    }
+	
+	@ApiOperation(value = "编辑${[entityName]}数据")
+	@PostMapping("/edit")
+	@ResponseBody
+    public String edit(@ModelAttribute  ${[entityName]} ${[lowerEntityName]}, MultipartFile file){
+		
+		  
+          return Result.ok(
+        		  service.saveOrUpdateIgnoreNull(${[lowerEntityName]})
+          );
+    }
+	
+	@ApiOperation(value = "通过条件查询${[entityName]}列表数据")
+	@PostMapping("/search")
+	@ResponseBody
+	public String search(Ipage ipage, ${[entitySearch]} search) throws Exception{
+	    
+		  return Result.ok(
+				  service.findAllToPage(ipage.of(search))
+		  );
+	}
+
+}

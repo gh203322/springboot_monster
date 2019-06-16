@@ -1,0 +1,7 @@
+package com.monster.model.entityVo.${[folderName]};
+
+import com.monster.model.entity.${[folderName]}.${[entityName]};
+
+public class ${[entityVo]} extends ${[entityName]} {
+
+}

@@ -53,7 +53,7 @@
 <script>
 //初始化表格
  BtTable.init($("#table") , {
-	            "url" : "/auth/${[placeHolder]}}/search",
+	            "url" : "/auth/${[placeHolder]}/search",
 	            "columns":[
 			            {  
 				            checkbox: true   //单选框 
@@ -85,25 +85,15 @@
 				            valign: 'middle',
 				            sortable: true,
 				            formatter:function(value, row, index){
-				                 return new Date(value).format("yyyy-MM-dd");
+				                 return new Date().format("yyyy-MM-dd");
 				            }
 				    	},{
-				            field: 'longitude',
-				            title: '示例字段6',
-				            align: 'center',
-				            valign: 'middle',
-				    	},{
-				            field: '',
-				            title: '示例字段7',
-				            align: 'center',
-				            valign: 'middle',
-				         } ,{
 				            field: '',
 				            title: '操作',
 				            align: 'center',
 				            valign: 'middle',
 				            formatter: function(value, row, index){    //格式化(返回html片段)
-							    return "<a href='#'>车辆照片</a>";
+							    return "<a href='#'>其他操作</a>";
 							}
 					     }
 				]

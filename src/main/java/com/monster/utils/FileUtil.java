@@ -475,7 +475,7 @@ public class FileUtil {
   * @return
   */
  public static boolean strExistsOfContent(File file, String findStr) {
-	   
+
 	   BufferedReader reader = null;
 	   List<String> listContent = new ArrayList<>();
 	   try {
@@ -506,12 +506,12 @@ public class FileUtil {
  }
 
     /**
-     * 读取文本文件，并判断文本文件中是否包含指定字符串
-     * @param file
-     *@param findStr
+     * 创建前端文件
+     * @param src
+     *@param target
      * @return
      */
-    public static boolean copyFileAndReplaceContent(File src,  File target, String srcString, String...targetStrings) {
+    public static boolean createHtmlContent(File src,  File target, String srcString, String...targetStrings) {
 
         BufferedReader reader = null;
         BufferedWriter writer = null;
@@ -548,6 +548,118 @@ public class FileUtil {
             }
         }
         return false;
+    }
+
+    /**
+     * 创建后端文件
+     * @param src
+     * @param target
+     * @param entityName
+     * @return
+     */
+    public static boolean createServiceContent(File src,  File target, String folderName, String entityName) {
+
+        BufferedReader reader = null;
+        BufferedWriter writer = null;
+        try {
+            reader = new BufferedReader(new FileReader(src));
+            writer = new BufferedWriter(new FileWriter(target));
+            String tempString = null;
+            int line = 1;
+            // 一次读入一行，直到读入null为文件结束
+            while ((tempString = reader.readLine()) != null) {
+                //替换掉占位符
+                tempString = replaceAllKeyWord(folderName, entityName, tempString);
+                writer.write(tempString+"\t\n");
+                line++;
+            }
+            reader.close();
+            writer.close();
+            return true;
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (reader != null) {
+                try {
+                    reader.close();
+                    writer.close();
+                } catch (IOException e1) {
+                }
+            }
+        }
+        return false;
+    }
+
+    /**
+     * 根据实体名称生成相关关键词并替换模板中对应占位符
+     */
+    private static String replaceAllKeyWord(String folderName, String entityName, String targetStr){
+
+        if(DataUtil.isEmptyObj(targetStr)){
+            return targetStr;
+        }
+        //替换文件包名称占位符
+        targetStr = targetStr.replace("${[folderName]}", folderName);
+        //替换类名占位符
+        targetStr = targetStr.replace("${[entityController]}", entityName+"Controller");
+        //替换实体名称占位符
+        targetStr = targetStr.replace("${[entityName]}", entityName);
+        //替换首字母小写实体名称占位符
+        targetStr = targetStr.replace("${[lowerEntityName]}", getLowCaseFileName(entityName));
+        //替换search类名占位符
+        targetStr = targetStr.replace("${[entitySearch]}", entityName+"Search");
+        //替换service类名占位符
+        targetStr = targetStr.replace("${[entityService]}", entityName+"Service");
+        //替换serviceImpl类名占位符
+        targetStr = targetStr.replace("${[entityServiceImpl]}", entityName+"ServiceImpl");
+        //替换repository类名占位符
+        targetStr = targetStr.replace("${[entityRepository]}", entityName+"Repository");
+        //替换repository类名占位符
+        targetStr = targetStr.replace("${[entityVo]}", entityName+"Vo");
+
+        return targetStr;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public static String getLowCaseFileName(File file){
+        if(file.exists()){
+            String wholeName = file.getName();
+            wholeName = wholeName.substring(0, wholeName.lastIndexOf("."));
+            wholeName = wholeName.replaceFirst(String.valueOf(wholeName.charAt(0)),String.valueOf(wholeName.charAt(0)).toLowerCase());
+            return wholeName;
+        }
+        return null;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public static String getUperCaseFileName(File file){
+        if(file.exists()){
+            String wholeName = file.getName();
+            return wholeName.substring(0, wholeName.lastIndexOf("."));
+        }
+        return null;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public static String getLowCaseFileName(String wholeName){
+        if(DataUtil.isEmptyObj(wholeName)){
+            return null;
+        }
+        if(wholeName.indexOf(".")>-1){
+            wholeName = wholeName.substring(0, wholeName.lastIndexOf("."));
+        }
+        wholeName = wholeName.replaceFirst(String.valueOf(wholeName.charAt(0)),String.valueOf(wholeName.charAt(0)).toLowerCase());
+
+        return wholeName;
     }
    
 }
