@@ -56,10 +56,10 @@ public class ${[entityServiceImpl]} implements ${[entityService]} {
 	}
 
 	@Override
-	public boolean deleteById(Integer id) {
+	public boolean deleteById(Long id) {
 
 		try {
-			repository.deleteById(Integer.parseInt(String.valueOf(id)));
+			repository.deleteById(Long.parseLong(String.valueOf(id)));
 		} catch (Exception e) {
 			return false;
 		}
@@ -92,7 +92,7 @@ public class ${[entityServiceImpl]} implements ${[entityService]} {
 	}
 
 	@Override
-	public ${[entityName]} findById(Integer id) {
+	public ${[entityName]} findById(Long id) {
 
 		return repository.findById(id).get();
 	}

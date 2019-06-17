@@ -64,7 +64,7 @@ public class CarController {
 	
 	@ApiOperation(value = "加载编辑页面")
 	@GetMapping("/editView")
-    public String editView(@NotNull(message = "id不能为空")@RequestParam(name = "id") Integer id, Model model){
+    public String editView(@NotNull(message = "id不能为空")@RequestParam(name = "id") Long id, Model model){
 		
 		  model.addAttribute("car", service.findById(id));
 		  

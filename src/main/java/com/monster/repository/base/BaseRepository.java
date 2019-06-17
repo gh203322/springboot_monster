@@ -21,7 +21,7 @@ import com.monster.utils.UpdateUtil;
 @NoRepositoryBean
 public interface BaseRepository<T> extends
 								Serializable,
-								JpaRepository<T, Integer>,
+								JpaRepository<T, Long>,
 								JpaSpecificationExecutor<T> {
 
 	
@@ -40,7 +40,7 @@ public interface BaseRepository<T> extends
     	try {
 			PropertyDescriptor pd = new PropertyDescriptor("id", entity.getClass());  
 			Method rM = pd.getReadMethod();//获得读方法  
-		    Integer id = Integer.parseInt(String.valueOf(rM.invoke(entity)));
+			Long id = Long.parseLong(String.valueOf(rM.invoke(entity)));
 		    if(DataUtil.isNotEmptyObj(id)) {
 		    	S oldEntity = (S) findById(id).get();
 		    	UpdateUtil.copyNullProperties(entity, oldEntity, params);

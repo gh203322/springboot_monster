@@ -20,7 +20,7 @@ public interface baseService<T> {
     
     boolean delete(T entity);
     
-    boolean deleteById(Integer id);
+    boolean deleteById(Long id);
     
     //void deleteBatchByIds(Integer[] ids);
     
@@ -32,7 +32,7 @@ public interface baseService<T> {
 
 	//List<T> findByIds(Integer[] ids);
 	
-	T findById(Integer id);
+	T findById(Long id);
 
 	List<T> findAllByExample(Example<T> example);
 

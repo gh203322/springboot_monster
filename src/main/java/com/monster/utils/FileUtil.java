@@ -1,5 +1,6 @@
 package com.monster.utils;
 
+import com.monster.creature.CreatureEnum;
 import java.io.*;
 import java.util.*;
 import java.util.regex.Matcher;
@@ -601,21 +602,21 @@ public class FileUtil {
         //替换文件包名称占位符
         targetStr = targetStr.replace("${[folderName]}", folderName);
         //替换类名占位符
-        targetStr = targetStr.replace("${[entityController]}", entityName+"Controller");
+        targetStr = targetStr.replace("${[entityController]}", entityName+ CreatureEnum.Controller.name());
         //替换实体名称占位符
         targetStr = targetStr.replace("${[entityName]}", entityName);
         //替换首字母小写实体名称占位符
         targetStr = targetStr.replace("${[lowerEntityName]}", getLowCaseFileName(entityName));
         //替换search类名占位符
-        targetStr = targetStr.replace("${[entitySearch]}", entityName+"Search");
+        targetStr = targetStr.replace("${[entitySearch]}", entityName+CreatureEnum.Search.name());
         //替换service类名占位符
-        targetStr = targetStr.replace("${[entityService]}", entityName+"Service");
+        targetStr = targetStr.replace("${[entityService]}", entityName+CreatureEnum.Service.name());
         //替换serviceImpl类名占位符
-        targetStr = targetStr.replace("${[entityServiceImpl]}", entityName+"ServiceImpl");
+        targetStr = targetStr.replace("${[entityServiceImpl]}", entityName+CreatureEnum.ServiceImpl.name());
         //替换repository类名占位符
-        targetStr = targetStr.replace("${[entityRepository]}", entityName+"Repository");
+        targetStr = targetStr.replace("${[entityRepository]}", entityName+CreatureEnum.Repository.name());
         //替换repository类名占位符
-        targetStr = targetStr.replace("${[entityVo]}", entityName+"Vo");
+        targetStr = targetStr.replace("${[entityVo]}", entityName+CreatureEnum.Vo.name());
 
         return targetStr;
     }

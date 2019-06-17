@@ -7,18 +7,22 @@ import java.util.*;
 /**
  * @author Administrator
  *  简单的CRUD 模板创造器
- *  使用方式，在本项目固定的路径下，先在model内添加一个实体，并添加临时注解，只有添加了临时注解的实体才会生成相关的crud类和页面
- *  运行本类的main方法，完成后刷新工程，结束后删除掉临时注解
+ *  使用方式，在本项目固定的路径下，先在model内添加一个实体，并添加扫描注解@CreatureAno，不添加注解不生成，已经存在的文件不会覆盖
+ *  运行本类的main方法，会生成对应的JPA CRUD代码和页面，页面字段需要手动添加，完成后刷新工程，结束后删除掉临时注解
  */
 public class Creature {
 
 		public static void main(String[] args) {
-			System.out.println(">>>>>>>>>>>>>>>>>>>>>>>创建前端代码文件开始>>>>>>>>>>>>>>>>>>>>>>>");
-			 createWebContent();
-			System.out.println(">>>>>>>>>>>>>>>>>>>>>>>创建前端代码文件结束>>>>>>>>>>>>>>>>>>>>>>>");
-			System.out.println(">>>>>>>>>>>>>>>>>>>>>>>创建后端代码文件开始>>>>>>>>>>>>>>>>>>>>>>>");
-			 createServicContent();
-			System.out.println(">>>>>>>>>>>>>>>>>>>>>>>创建后端代码文件结束>>>>>>>>>>>>>>>>>>>>>>>");
+			try {
+					System.out.println(">>>>>>>>>>>>>>>>>>>>>>>创建前端代码文件开始>>>>>>>>>>>>>>>>>>>>>>>");
+					createWebContent();
+					System.out.println(">>>>>>>>>>>>>>>>>>>>>>>创建前端代码文件结束>>>>>>>>>>>>>>>>>>>>>>>");
+					System.out.println(">>>>>>>>>>>>>>>>>>>>>>>创建后端代码文件开始>>>>>>>>>>>>>>>>>>>>>>>");
+					createServicContent();
+					System.out.println(">>>>>>>>>>>>>>>>>>>>>>>创建后端代码文件结束>>>>>>>>>>>>>>>>>>>>>>>");
+			}catch (Exception e){
+				System.out.println(">>>>>>>>>>>>>>>>>>>>>>>创建失败>>>>>>>>>>>>>>>>>>>>>>>");
+			}
 		}
 
 	/**
@@ -27,7 +31,7 @@ public class Creature {
 	public static void createServicContent() {
 
 		try {
-			PropertiesUtil propertiesUtil = new PropertiesUtil("creature.properties");
+			PropertiesUtil propertiesUtil = new PropertiesUtil(CreatureEnum.Propertie.getValue());
 			Map<String, List<File>> target = findCreateEntity();
 			Iterator<Map.Entry<String, List<File>>> iteratorMap = target.entrySet().iterator();
 			while(iteratorMap.hasNext()){
@@ -38,34 +42,34 @@ public class Creature {
 					File file = iteratorList.next();
 
 					//controller
-					String controllerPathIn = propertiesUtil.readProperty("controllerPathIn");
-					String controllerPathOut = propertiesUtil.readProperty("controllerPathOut");
-					createCore(controllerPathIn,controllerPathOut, entry.getKey(),file,"Controller");
+					String controllerPathIn = propertiesUtil.readProperty(CreatureEnum.Controller.getName());
+					String controllerPathOut = propertiesUtil.readProperty(CreatureEnum.Controller.getValue());
+					createCore(controllerPathIn,controllerPathOut, entry.getKey(),file,CreatureEnum.Controller.name());
 
 					//service
-					String servicePathIn = propertiesUtil.readProperty("servicePathIn");
-					String servicePathOut = propertiesUtil.readProperty("servicePathOut");
-					createCore(servicePathIn,servicePathOut, entry.getKey(),file,"Service");
+					String servicePathIn = propertiesUtil.readProperty(CreatureEnum.Service.getName());
+					String servicePathOut = propertiesUtil.readProperty(CreatureEnum.Service.getValue());
+					createCore(servicePathIn,servicePathOut, entry.getKey(),file,CreatureEnum.Service.name());
 
 					//serviceImpl
-					String serviceImplPathIn = propertiesUtil.readProperty("serviceImplPathIn");
-					String serviceImplPathOut = propertiesUtil.readProperty("serviceImplPathOut");
-					createCore(serviceImplPathIn,serviceImplPathOut, entry.getKey(),file,"ServiceImpl");
+					String serviceImplPathIn = propertiesUtil.readProperty(CreatureEnum.ServiceImpl.getName());
+					String serviceImplPathOut = propertiesUtil.readProperty(CreatureEnum.ServiceImpl.getValue());
+					createCore(serviceImplPathIn,serviceImplPathOut, entry.getKey(),file,CreatureEnum.ServiceImpl.name());
 
 					//repository
-					String repositoryPathIn = propertiesUtil.readProperty("repositoryPathIn");
-					String repositoryPathOut = propertiesUtil.readProperty("repositoryPathOut");
-					createCore(repositoryPathIn,repositoryPathOut, entry.getKey(),file,"Repository");
+					String repositoryPathIn = propertiesUtil.readProperty(CreatureEnum.Repository.getName());
+					String repositoryPathOut = propertiesUtil.readProperty(CreatureEnum.Repository.getValue());
+					createCore(repositoryPathIn,repositoryPathOut, entry.getKey(),file,CreatureEnum.Repository.name());
 
 					//search
-					String searchPathIn = propertiesUtil.readProperty("searchPathIn");
-					String searchPathOut = propertiesUtil.readProperty("searchPathOut");
-					createCore(searchPathIn,searchPathOut, entry.getKey(),file,"Search");
+					String searchPathIn = propertiesUtil.readProperty(CreatureEnum.Search.getName());
+					String searchPathOut = propertiesUtil.readProperty(CreatureEnum.Search.getValue());
+					createCore(searchPathIn,searchPathOut, entry.getKey(),file,CreatureEnum.Search.name());
 
 					//vo
-					String voPathIn = propertiesUtil.readProperty("voPathIn");
-					String voPathOut = propertiesUtil.readProperty("voPathOut");
-					createCore(voPathIn,voPathOut, entry.getKey(),file,"Vo");
+					String voPathIn = propertiesUtil.readProperty(CreatureEnum.Vo.getName());
+					String voPathOut = propertiesUtil.readProperty(CreatureEnum.Vo.getValue());
+					createCore(voPathIn,voPathOut, entry.getKey(),file,CreatureEnum.Vo.name());
 
 					com.monster.model.entity.car.CarUser carUser = new com.monster.model.entity.car.CarUser();
 				}
@@ -90,9 +94,9 @@ public class Creature {
 				while (iteratorList.hasNext()){
 					File file = iteratorList.next();
 					//获取模板html模板集合
-					PropertiesUtil propertiesUtil = new PropertiesUtil("creature.properties");
-					String leafPathIn = propertiesUtil.readProperty("leafPathIn");
-					String leafPathOut = propertiesUtil.readProperty("leafPathOut");
+					PropertiesUtil propertiesUtil = new PropertiesUtil(CreatureEnum.Propertie.getValue());
+					String leafPathIn = propertiesUtil.readProperty(CreatureEnum.Leaf.getName());
+					String leafPathOut = propertiesUtil.readProperty(CreatureEnum.Leaf.getValue());
 					//如果键为空或者特殊标记，不用创建上层文件夹
 					File[] leafs = new File(getProjectPath() + leafPathIn).listFiles();
 					File folder = null;
@@ -106,13 +110,13 @@ public class Creature {
 					if(DataUtil.isNotEmptyObj(folder)){
 						Arrays.stream(leafs).forEach(f->{
 									//System.out.println(f.getName());
-									File leafNew = new File(pointFolder.getPath()+File.separator+f.getName().replaceAll("mdl", "html"));
+									File leafNew = new File(pointFolder.getPath()+File.separator+FileUtil.getUperCaseFileName(f)+CreatureEnum.Html.getValue());
 									if(leafNew.exists()){
 										 return;
 									}else{
 										try {
 											leafNew.createNewFile();
-											FileUtil.createHtmlContent(f,leafNew,FileUtil.getLowCaseFileName(file),"\\$\\{(.*?)\\}");
+											FileUtil.createHtmlContent(f,leafNew,FileUtil.getLowCaseFileName(file),"\\$\\{\\[(.*?)\\]\\}");
 										}catch (Exception e){}
 									}
 								}
@@ -134,8 +138,8 @@ public class Creature {
 	 */
 	public static Map<String, List<File>> findCreateEntity() {
 		   
-		       PropertiesUtil propertiesUtil = new PropertiesUtil("creature.properties");
-			   String value = propertiesUtil.readProperty("entityPath");
+		       PropertiesUtil propertiesUtil = new PropertiesUtil(CreatureEnum.Propertie.getValue());
+			   String value = propertiesUtil.readProperty(CreatureEnum.EntityPath.getValue());
 			   
 			   if(DataUtil.isNotEmptyObj(value)) {
 				   File entityPath = new File(getProjectPath()+value);
@@ -151,7 +155,7 @@ public class Creature {
 					   Iterator<File> iteratorList = list.listIterator();
 					   while (iteratorList.hasNext()){
 						   File file = iteratorList.next();
-						   if(!FileUtil.strExistsOfContent(file, "@CreatureAno")){
+						   if(!FileUtil.strExistsOfContent(file, CreatureEnum.CreatureAno.getValue())){
 							   iteratorList.remove();
 						   }
 					   }
@@ -224,7 +228,7 @@ public class Creature {
 	 */
 	public static String getProjectPath(){
 		 String classPath = Creature.class.getResource("").getPath();;
-		 String projectPath =  classPath.substring(0, classPath.indexOf("target"));
+		 String projectPath =  classPath.substring(0, classPath.indexOf(CreatureEnum.PathSplitFag.getValue()));
 
 		 return projectPath;
 	 }
@@ -243,7 +247,7 @@ public class Creature {
 				folder.mkdirs();
 			}
 		}
-		fileOut = new File(folder.getPath()+File.separator+FileUtil.getUperCaseFileName(file)+floor+".java");
+		fileOut = new File(folder.getPath()+File.separator+FileUtil.getUperCaseFileName(file)+floor+CreatureEnum.Java.getValue());
 		if(fileOut.exists()){
 			return;
 		}else{

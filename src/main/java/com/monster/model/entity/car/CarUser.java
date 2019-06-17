@@ -50,7 +50,12 @@ public class CarUser {
 		}
 		return cars;
 	}
-    
-    
+
+	/*
+	* 拥有车辆数
+	* */
+    public Integer getCarNums() {
+        return getCars().size();
+    }
 	
 }

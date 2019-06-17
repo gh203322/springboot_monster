@@ -25,7 +25,7 @@ public class Car {
 
 		@Id
 		@GeneratedValue
-	    private Integer id;
+	    private Long id;
 
 		@Column(columnDefinition = "varchar(10) comment '车牌号'")
 		private String carNo;

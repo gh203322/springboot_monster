@@ -1,0 +1,18 @@
+package com.monster.service.${[folderName]};
+
+import com.monster.base.reqAndRsp.Ipage;
+import com.monster.model.entity.car.${[entityName]};
+import com.monster.service.base.baseService;
+import java.util.List;
+import java.util.Map;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
+public interface ${[entityService]} extends baseService<${[entityName]}>{
+
+	 List<Map<String, Object>> findAllToMap();
+	 
+	 Page<${[entityName]}> findAllToPage(Pageable pageable);
+	 
+	 Page<${[entityName]}> findAllToPage(Ipage ipage) throws Exception;
+}

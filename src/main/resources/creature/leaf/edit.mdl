@@ -10,8 +10,8 @@
                     <div class="form-group">
                         <label for="" class="col-sm-2 control-label">示例字段</label>
                         <div class="col-sm-9">
-                            <input type="hidden" class="form-control" id="Id" name="id" th:value="${}">
-                            <input type="text" class="form-control" id="" name="" th:value="${}">
+                            <input type="hidden" class="form-control" id="Id" name="id" th:value="${${[placeHolder]}.id}">
+                            <input type="text" class="form-control" id="xxx" name="xxx" th:value="${${[placeHolder]}}">
                         </div>
                     </div>
                 </form>

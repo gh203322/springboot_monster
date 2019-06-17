@@ -61,10 +61,10 @@ public class CarServiceImpl implements CarService {
 	}
 
 	@Override
-	public boolean deleteById(Integer id) {
+	public boolean deleteById(Long id) {
 
 		try {
-			repository.deleteById(Integer.parseInt(String.valueOf(id)));
+			repository.deleteById(Long.parseLong(String.valueOf(id)));
 		} catch (Exception e) {
 			return false;
 		}
@@ -97,7 +97,7 @@ public class CarServiceImpl implements CarService {
 	}
 
 	@Override
-	public Car findById(Integer id) {
+	public Car findById(Long id) {
 
 		return repository.findById(id).get();
 	}
