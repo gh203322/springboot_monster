@@ -1,25 +1,16 @@
 package com.monster.model.entity.car;
 
+import com.monster.model.entity.base.BaseEntity;
 import java.util.Date;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
+import javax.persistence.*;
 import lombok.Data;
 
 @Data
 @Entity
 @Table(name = "car_location")
 @org.hibernate.annotations.Table(appliesTo = "car_location", comment = "车辆轨迹表")
-public class CarLocation {
+public class CarLocation  extends BaseEntity {
 
-	   @Id
-	   @GeneratedValue
-	   private Long id;
-	   
 	   @Column(columnDefinition = "datetime NOT NULL default CURRENT_TIMESTAMP comment '创建时间'")
 	   private Date createTime;
 	   

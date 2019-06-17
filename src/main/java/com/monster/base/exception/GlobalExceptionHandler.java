@@ -1,24 +1,26 @@
 package com.monster.base.exception;
 
+import com.monster.base.reqAndRsp.Result;
+import com.monster.model.entity.system.SysError;
+import com.monster.service.system.SysErrorService;
 import java.util.List;
 import java.util.Set;
-
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.CollectionUtils;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.annotation.ControllerAdvice;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseBody;
-
-import com.monster.base.reqAndRsp.Result;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @ControllerAdvice
 public class GlobalExceptionHandler {
+
+    @Autowired
+    private SysErrorService sysErrorService;
 
     /**
      * 用来处理bean validation异常
@@ -27,7 +29,10 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(ConstraintViolationException.class)
     @ResponseBody
-    public String resolveConstraintViolationException(ConstraintViolationException ex){
+    public String resolveConstraintViolationException(ConstraintViolationException ex, HttpServletRequest request){
+        ex.printStackTrace();;
+        sysErrorService.save(createSysError(ex,request));
+
         Set<ConstraintViolation<?>> constraintViolations = ex.getConstraintViolations();
         if(!CollectionUtils.isEmpty(constraintViolations)){
             StringBuilder msgBuilder = new StringBuilder();
@@ -44,9 +49,17 @@ public class GlobalExceptionHandler {
         return Result.error(ex.getMessage());
     }
 
+    /**
+     * 用来处理方法 validation异常
+     * @param ex
+     * @return
+     */
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseBody
-    public String resolveMethodArgumentNotValidException(MethodArgumentNotValidException ex){
+    public String resolveMethodArgumentNotValidException(MethodArgumentNotValidException ex, HttpServletRequest request){
+        ex.printStackTrace();;
+        sysErrorService.save(createSysError(ex,request));
+
         List<ObjectError>  objectErrors = ex.getBindingResult().getAllErrors();
         if(!CollectionUtils.isEmpty(objectErrors)) {
             StringBuilder msgBuilder = new StringBuilder();
@@ -62,4 +75,34 @@ public class GlobalExceptionHandler {
         
         return Result.error(ex.getMessage());
     }
+
+    /**
+     * 用来系统其它异常
+     * @param ex
+     * @return
+     */
+   @ExceptionHandler(Exception.class)
+   @ResponseBody
+    public String exceptionHandler(Exception ex, HttpServletRequest request){
+        ex.printStackTrace();
+        sysErrorService.save(createSysError(ex,request));
+
+        return Result.error(ex.getMessage());
+    }
+
+    /**
+     * 组装异常信息
+     * @param ex
+     * @return
+     */
+    private SysError createSysError(Exception ex, HttpServletRequest request){
+
+              SysError sysError = new SysError();
+                sysError.setName("admin");
+                sysError.setUrl(request.getRequestURI());
+                sysError.setMsg(ex.getMessage());
+
+        return sysError;
+    }
+
 }

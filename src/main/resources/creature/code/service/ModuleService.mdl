@@ -1,7 +1,7 @@
 package com.monster.service.${[folderName]};
 
 import com.monster.base.reqAndRsp.Ipage;
-import com.monster.model.entity.car.${[entityName]};
+import com.monster.model.entity.${[folderName]}.${[entityName]};
 import com.monster.service.base.baseService;
 import java.util.List;
 import java.util.Map;

@@ -1,31 +1,16 @@
 package com.monster.model.entity.car;
 
+import com.monster.model.entity.base.BaseEntity;
 import java.util.Date;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-
-import org.hibernate.annotations.DynamicUpdate;
+import javax.persistence.*;
+import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import lombok.Data;
-
-@Entity
 @Data
-@DynamicUpdate(true)  //开启空字段不更新
+@Entity
 @Table(name = "car")
 @org.hibernate.annotations.Table(appliesTo = "car", comment = "车辆表")
-public class Car {
-
-		@Id
-		@GeneratedValue
-	    private Long id;
+public class Car  extends BaseEntity {
 
 		@Column(columnDefinition = "varchar(10) comment '车牌号'")
 		private String carNo;
@@ -42,10 +27,10 @@ public class Car {
 		@Column(columnDefinition = "double(9,6) comment '纬度'")
 		private Double latitude;
 		
-		@Column(columnDefinition = "date default sysdate() comment '车辆登记时间'")
+		@Column(columnDefinition = "date comment '车辆登记时间'")
 		@DateTimeFormat(pattern  = "yyyy-MM-dd")
 		private Date signDate;
-		
+
 		@ManyToOne(fetch = FetchType.LAZY, optional = true)//optional = true 可为空
 		@JoinColumn(name = "userId")
 		private CarUser carUser;

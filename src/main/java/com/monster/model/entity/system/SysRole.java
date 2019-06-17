@@ -1,18 +1,8 @@
 package com.monster.model.entity.system;
 
+import com.monster.model.entity.base.BaseEntity;
 import java.util.List;
-
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
-
+import javax.persistence.*;
 import lombok.Data;
 
 /**
@@ -23,12 +13,8 @@ import lombok.Data;
 @Data
 @Table(name = "sys_role")
 @org.hibernate.annotations.Table(appliesTo = "sys_role", comment = "系统角色表")
-public class SysRole {
+public class SysRole  extends BaseEntity {
 
-	  @GeneratedValue
-	  @Id
-	  private Long id;
-	  
 	  @Column(nullable = false, columnDefinition = "varchar(15) comment '角色名称'" )
 	  private String name;
 	  

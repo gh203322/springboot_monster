@@ -1,18 +1,10 @@
 package com.monster.model.entity.car;
 
+import com.monster.base.annotation.CreatureAno;
+import com.monster.model.entity.base.BaseEntity;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-
-import com.monster.base.annotation.CreatureAno;
-
+import javax.persistence.*;
 import lombok.Data;
 
 @CreatureAno
@@ -20,12 +12,8 @@ import lombok.Data;
 @Data
 @Table(name = "car_user")
 @org.hibernate.annotations.Table(appliesTo = "car_user", comment = "车辆用户表")
-public class CarUser {
+public class CarUser  extends BaseEntity {
 
-	@GeneratedValue
-    @Id
-    private Long id;
-    
     @Column(columnDefinition = "varchar(10) comment '用户名'")
     private String name;
     

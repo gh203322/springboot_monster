@@ -1,31 +1,21 @@
 package com.monster.controller.car;
 
+import com.monster.base.reqAndRsp.Ipage;
+import static com.monster.base.reqAndRsp.Result.ok;
+import com.monster.model.entity.car.Car;
+import com.monster.model.request.car.CarSearch;
+import com.monster.service.car.CarService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import java.util.List;
-
 import javax.validation.constraints.NotNull;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
-import com.monster.base.reqAndRsp.Ipage;
-import com.monster.base.reqAndRsp.Result;
-import com.monster.model.entity.car.Car;
-import com.monster.model.request.car.CarSearch;
-import com.monster.service.car.CarService;
-
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
 
 
 @Api(tags = "车辆管理接口！")
@@ -50,7 +40,7 @@ public class CarController {
 	@ResponseBody
 	public String list(Pageable pageable) {
 	    
-		  return Result.ok(
+		  return ok(
 				  service.findAllToPage(pageable)
 		  );
 	}
@@ -58,7 +48,7 @@ public class CarController {
 	@ApiOperation(value = "加载新增页面")
 	@GetMapping("/addView")
     public String addView(){
-		
+
           return "car/add";
     }
 	
@@ -76,7 +66,7 @@ public class CarController {
 	@ResponseBody
     public String delete(@RequestBody List<Car> cars){
 		
-          return Result.ok(
+          return ok(
         		  service.deleteBatchByEntitys(cars) 
           );
     }
@@ -87,7 +77,7 @@ public class CarController {
     public String add(@ModelAttribute  Car car, MultipartFile file){
 		
 		  
-          return Result.ok(
+          return ok(
         		  service.saveOrUpdate(car)
           );
     }
@@ -96,9 +86,9 @@ public class CarController {
 	@PostMapping("/edit")
 	@ResponseBody
     public String edit(@ModelAttribute  Car car, MultipartFile file){
-		
-		  
-          return Result.ok(
+
+
+          return ok(
         		  service.saveOrUpdateIgnoreNull(car)
           );
     }
@@ -108,7 +98,7 @@ public class CarController {
 	@ResponseBody
 	public String search(Ipage ipage, CarSearch carSearch) throws Exception{
 	    
-		  return Result.ok(
+		  return ok(
 				  service.findAllToPage(ipage.of(carSearch))
 		  );
 	}

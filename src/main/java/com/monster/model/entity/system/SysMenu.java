@@ -1,19 +1,8 @@
 package com.monster.model.entity.system;
 
+import com.monster.model.entity.base.BaseEntity;
 import java.util.List;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-
+import javax.persistence.*;
 import lombok.Data;
 
 /**
@@ -24,12 +13,8 @@ import lombok.Data;
 @Data
 @Table(name = "sys_menu")
 @org.hibernate.annotations.Table(appliesTo = "sys_menu", comment = "系统菜单表")
-public class SysMenu {
+public class SysMenu  extends BaseEntity {
 
-	  @GeneratedValue
-	  @Id
-	  private Long id;
-	  
 	  @Column(nullable = false, columnDefinition = "varchar(15) comment '菜单名称'" )
 	  private String name;
 	  

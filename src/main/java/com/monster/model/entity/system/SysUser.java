@@ -1,29 +1,16 @@
 package com.monster.model.entity.system;
 
+import com.monster.model.entity.base.BaseEntity;
 import java.util.List;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
-
+import javax.persistence.*;
 import lombok.Data;
 
 @Entity
 @Data
 @Table(name = "sys_user")
 @org.hibernate.annotations.Table(appliesTo = "sys_user", comment = "系统用户表")
-public class SysUser {
+public class SysUser  extends BaseEntity {
 
-	    @GeneratedValue
-	    @Id
-	    private Long id;
-	    
 	    @Column(columnDefinition = "varchar(10) comment '用户名'")
 	    private String name;
 	    
