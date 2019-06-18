@@ -1,0 +1,65 @@
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="dataModal">	
+    <div class="modal-dialog modal-lg" role="document">	
+        <div class="modal-content">	
+            <div class="modal-header">	
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>	
+                <h4 class="modal-title" id="myModalLabel">编辑</h4>	
+            </div>	
+            <div class="modal-body">	
+                <form id="dataForm" action="" class="form-horizontal">	
+                    <div class="form-group">	
+                        <label for="" class="col-sm-2 control-label">用户名</label>
+                        <div class="col-sm-9">	
+                            <input type="hidden" class="form-control" id="Id" name="id" th:value="${carUser.id}">	
+                            <input type="text" class="form-control" id="name" name="name" th:value="${carUser.name}">
+                        </div>	
+                    </div>
+                    <div class="form-group">
+                        <label for="" class="col-sm-2 control-label">密码</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="pass" name="pass" th:value="${carUser.pass}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="" class="col-sm-2 control-label">手机号</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="phone" name="phone" th:value="${carUser.phone}">
+                        </div>
+                    </div>
+                </form>	
+            </div>	
+            <div class="modal-footer">	
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>	
+                <button type="button" class="btn btn-primary" id="btn_submit">保存</button>	
+            </div>	
+        </div>	
+    </div>	
+</div>	
+	
+<script type="text/javascript">	
+//提交按钮	
+$("#btn_submit").on("click",function(){	
+	    var dataForm = new FormData($("#dataForm")[0]);	
+	    $.ajax({	
+	        url: '/auth/carUser/edit' ,	
+	        type: 'POST',	
+	        dataType: 'json',	
+	        contentType: false,	
+	        processData: false,	
+	        data: dataForm,	
+	        success: function (data) {	
+	                    if(data.state){	
+	                         //刷新表格	
+	                         BtTable.refresh();	
+	                         $('#dataModal').modal("hide");	
+	                         	
+	                         if(data.msg) alert(data.msg); else alert("保存成功");	
+	                    }else{	
+	                         alert("保存失败");	
+	                    }	
+	        },	
+	        error: function (returndata) {	
+	        }	
+	    }); 	
+});	
+</script>	
