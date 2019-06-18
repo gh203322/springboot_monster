@@ -1,7 +1,8 @@
 package com.monster.controller.car;
 
 import com.monster.base.reqAndRsp.Ipage;
-import static com.monster.base.reqAndRsp.Result.ok;
+import com.monster.base.reqAndRsp.Result;
+import com.monster.controller.base.BaseController;
 import com.monster.model.entity.car.Car;
 import com.monster.model.request.car.CarSearch;
 import com.monster.service.car.CarService;
@@ -22,7 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 @Controller(value = "CarController")
 @RequestMapping("/auth/car")
 @Validated
-public class CarController {
+public class CarController extends BaseController {
 
 	@Autowired
 	private CarService service;
@@ -40,7 +41,7 @@ public class CarController {
 	@ResponseBody
 	public String list(Pageable pageable) {
 	    
-		  return ok(
+		  return Result.ok(
 				  service.findAllToPage(pageable)
 		  );
 	}
@@ -66,7 +67,7 @@ public class CarController {
 	@ResponseBody
     public String delete(@RequestBody List<Car> cars){
 		
-          return ok(
+          return Result.ok(
         		  service.deleteBatchByEntitys(cars) 
           );
     }
@@ -77,7 +78,7 @@ public class CarController {
     public String add(@ModelAttribute  Car car, MultipartFile file){
 		
 		  
-          return ok(
+          return Result.ok(
         		  service.saveOrUpdate(car)
           );
     }
@@ -88,7 +89,7 @@ public class CarController {
     public String edit(@ModelAttribute  Car car, MultipartFile file){
 
 
-          return ok(
+          return Result.ok(
         		  service.saveOrUpdateIgnoreNull(car)
           );
     }
@@ -98,9 +99,8 @@ public class CarController {
 	@ResponseBody
 	public String search(Ipage ipage, CarSearch carSearch) throws Exception{
 	    
-		  return ok(
+		  return Result.ok(
 				  service.findAllToPage(ipage.of(carSearch))
 		  );
 	}
-
 }

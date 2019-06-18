@@ -8,7 +8,7 @@ import java.util.*;
  * @author Administrator
  *  简单的CRUD 模板创造器
  *  使用方式，在本项目固定的路径下，先在model内添加一个实体，并添加扫描注解@CreatureAno，不添加注解不生成，已经存在的文件不会覆盖
- *  运行本类的main方法，会生成对应的JPA CRUD代码和页面，页面字段需要手动添加，完成后刷新工程，结束后删除掉临时注解
+ *  运行本类的main方法，会生成对应的JPA CRUD代码和前端页面，页面字段需要手动添加，完成后刷新工程，结束后删除掉注解@CreatureAno
  */
 public class Creature {
 
@@ -223,7 +223,7 @@ public class Creature {
 	 }
 
 	/**
-	 *
+	 *获取项目路径
 	 * @return
 	 */
 	public static String getProjectPath(){

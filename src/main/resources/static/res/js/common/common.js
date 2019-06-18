@@ -1,4 +1,6 @@
-//扩展时间格式化方法
+/*
+* 扩展时间格式化方法
+* */
 Date.prototype.format = function(format){ 
 	    var o =  { 
 			    "M+" : this.getMonth()+1, //month 
@@ -20,7 +22,9 @@ Date.prototype.format = function(format){
 	    return format; 
 };
 
-//把表单序列化为json数据
+/*
+* 把表单序列化为json数据
+* */
 jQuery.fn.serializeForm = function () {
     var formData = {};
     var formArray = this.serializeArray();
@@ -29,3 +33,66 @@ jQuery.fn.serializeForm = function () {
     }
     return formData;
 };
+
+/*
+* 封装localStorae set get 方法
+* */
+//从localstorage保存键值
+function lget(key){
+       return window.localStorage.getItem(key);
+};
+//从localstorage获取键值
+function lset(key, value) {
+       window.localStorage.setItem(key, value);
+};
+//从localstorage保存json
+function getJson(flag, key){
+       var disk = lget(flag);
+       if (disk){
+       	     disk = JSON.parse(disk);
+       	     if (disk){
+       	     	     return disk[key];
+						 }
+			 }
+};
+//从localstorage获取json
+function setJson(flag, key, value) {
+				var disk = lget(flag);
+				if (disk){
+					  disk = JSON.parse(disk);
+				}else{
+					  disk = {};
+				}
+				if (disk){
+						disk[key] = value;
+						lset(flag,  JSON.stringify(disk));
+				}
+};
+
+/*
+* 封装常用的 layer 提示方法
+* */
+//成功提示
+function lyrok(content){
+				layer.alert(content, {
+					  title:'提示',
+						icon: 6,
+						skin: 'layer-ext-moon'
+				})
+}
+//失败提示
+function lyrfail(content){
+				layer.alert(content, {
+					title:'提示',
+					icon: 5,
+					skin: 'layer-ext-moon'
+				})
+}
+//警告提示
+function lyrwarn(content){
+				layer.alert(content, {
+					title:'提示',
+					icon: 7,
+					skin: 'layer-ext-moon'
+				})
+}

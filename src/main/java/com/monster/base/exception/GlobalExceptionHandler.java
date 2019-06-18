@@ -1,23 +1,24 @@
 package com.monster.base.exception;
 
 import com.monster.base.reqAndRsp.Result;
+import com.monster.constant.StaticConstant;
+import com.monster.controller.base.BaseController;
 import com.monster.model.entity.system.SysError;
 import com.monster.service.system.SysErrorService;
+import com.monster.utils.DataUtil;
 import java.util.List;
 import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.util.CollectionUtils;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
-@Controller
 @ControllerAdvice
-public class GlobalExceptionHandler {
+public class GlobalExceptionHandler extends BaseController {
 
     @Autowired
     private SysErrorService sysErrorService;
@@ -98,7 +99,7 @@ public class GlobalExceptionHandler {
     private SysError createSysError(Exception ex, HttpServletRequest request){
 
               SysError sysError = new SysError();
-                sysError.setName("admin");
+                sysError.setName(DataUtil.isNotEmptyObj(getLoginUser()) == true ? getLoginUser().getName() : StaticConstant.UNKNOWN_USER);
                 sysError.setUrl(request.getRequestURI());
                 sysError.setMsg(ex.getMessage());
 

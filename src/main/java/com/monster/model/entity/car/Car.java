@@ -1,5 +1,6 @@
 package com.monster.model.entity.car;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.monster.model.entity.base.BaseEntity;
 import java.util.Date;
 import javax.persistence.*;
@@ -29,6 +30,7 @@ public class Car  extends BaseEntity {
 		
 		@Column(columnDefinition = "date comment '车辆登记时间'")
 		@DateTimeFormat(pattern  = "yyyy-MM-dd")
+		@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd")
 		private Date signDate;
 
 		@ManyToOne(fetch = FetchType.LAZY, optional = true)//optional = true 可为空

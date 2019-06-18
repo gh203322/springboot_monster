@@ -1,18 +1,8 @@
-package com.monster.creature;/**
- * @author Administrator
- * @Date 2019/6/17
- * @see
- */
+package com.monster.creature;
 
 /**
- *<p>Title:CreatureEnum</p>
- *<p>Description:</p>
- *<p>Company:wegoo</p>
- *
- *@author hujian
- *@version 1.0
- *@date 2019/6/17 9:54
- *
+ * @author Administrator
+ *  creature 枚举类
  */
 public enum CreatureEnum {
        Propertie("base","creature.properties"),

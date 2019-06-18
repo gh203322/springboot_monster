@@ -135,7 +135,9 @@ public class CarUserServiceImpl implements CarUserService {
 				CarUserSearch search = (CarUserSearch) ipage.getParams();	
 				 if(DataUtil.isNotEmptyObj(search)) {	
 					 Specification<CarUser> specification = Specifications.<CarUser>and()	
-					            .eq(DataUtil.isNotEmptyObj(search.getId()), "id", search.getId())	
+					            .eq(DataUtil.isNotEmptyObj(search.getId()), "id", search.getId())
+							    .like(DataUtil.isNotEmptyObj(search.getName()), "name", "%"+search.getName()+"%")
+							    .like(DataUtil.isNotEmptyObj(search.getPhone()), "phone", "%"+search.getPhone()+"%")
 					            .build();	
 					 	
 					 return repository.findAll(specification, ipage.of());	

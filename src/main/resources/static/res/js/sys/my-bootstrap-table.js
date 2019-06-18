@@ -69,7 +69,7 @@
 	    		type:'xls',                          //导出文件格式 XLS XLSX DOC PDF CSV XML JSON PNG SQL TSV TXT
                 fileName:'页面导出文件',    //导出文件名称
                 ignoreColumn: []              //忽略导出的列,可以用字段名称，也可以用数组下标
-		}
+		  }
 	    
 		//自定义导出，详细参考github https://github.com/hhurz/tableExport.jquery.plugin
 		BtTable.exportFile = function(obj, param){
@@ -85,7 +85,12 @@
 	    //获取所有选中行
 		BtTable.getSelecttions = function(){
 			
-			   return BtTable.table.bootstrapTable('getAllSelections');
+			   var ary = BtTable.table.bootstrapTable('getAllSelections');
+				if(!ary ||  ary.length < 1){
+					layer.msg('请至少选择一行');
+					return;
+				}
+			   return ary;
 		}
 		
 		//获取所有选中行id
@@ -93,7 +98,7 @@
 			
 			   var ary = BtTable.table.bootstrapTable('getAllSelections');
 			   if(!ary ||  ary.length < 1){
-				   alert("请至少选择一行");
+					 layer.msg('请至少选择一行');
 				   return;
 			   }
 			   var idsAry = [];
@@ -109,11 +114,11 @@
 			
 			   var ary = BtTable.table.bootstrapTable('getAllSelections');
 			   if(!ary || ary.length < 1){
-				   alert("请至少选择一行");
+					 layer.msg('请至少选择一行');
 				   return;
 			   }
 			   if(ary&&ary.length>1){
-				   alert("只能选择一行");
+					 layer.msg('只能选择一行');
 				   return;
 			   }
 			   return ary[0];
@@ -124,11 +129,11 @@
 			
 			   var ary = BtTable.table.bootstrapTable('getAllSelections');
 			   if(!ary || ary.length < 1){
-				   alert("请至少选择一行");
+					 layer.msg('请至少选择一行');
 				   return;
 			   }
 			   if(ary&&ary.length>1){
-				   alert("只能选择一行");
+					 layer.msg('只能选择一行');
 				   return;
 			   }
 			   return ary[0].id;
