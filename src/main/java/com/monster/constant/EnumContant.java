@@ -48,5 +48,34 @@ public interface EnumContant {
             return this.name;
         }
     }
+
+    //系统操作类型(对应 contralloer 层基本的CRUD操作 需要规范命名以匹配关键字)
+    enum SysOperate implements EnumContant {
+        VIEW("view", "打开主页面"),
+        List("list", "刷新列表"),
+        ADDVIEW("addView", "打开新增页面"),
+        EDITVIEW("editView", "打开修改页面"),
+        DELETE("delete", "删除数据"),
+        ADD("add", "新增数据"),
+        EDIT("edit", "修改数据"),
+        SEARCH("search", "查询数据"),
+        OTHER("other", "其他操作");
+
+        SysOperate(String value, String name) {
+            this.value = value;
+            this.name = name;
+        }
+
+        private String value;
+        private String name;
+
+        public String getValue() {
+            return this.value;
+        }
+
+        public String getName() {
+            return this.name;
+        }
+    }
 	   
 }

@@ -1,13 +1,11 @@
 package com.monster.model.entity.car;
 
-import com.monster.base.annotation.CreatureAno;
 import com.monster.model.entity.base.BaseEntity;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
 import lombok.Data;
 
-@CreatureAno
 @Entity
 @Data
 @Table(name = "car_user")

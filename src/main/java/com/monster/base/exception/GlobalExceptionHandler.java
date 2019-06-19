@@ -24,7 +24,7 @@ public class GlobalExceptionHandler extends BaseController {
     private SysErrorService sysErrorService;
 
     /**
-     * 用来处理bean validation异常
+     * 全局异常处理
      * @param ex
      * @return
      */

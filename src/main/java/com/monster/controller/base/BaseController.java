@@ -3,6 +3,8 @@ package com.monster.controller.base;
 import com.monster.constant.StaticConstant;
 import com.monster.model.entity.system.SysUser;
 import com.monster.utils.DataUtil;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.*;
 
@@ -18,17 +20,21 @@ public class BaseController {
 
         private ServletRequestAttributes servletRequestAttributes;
 
+        private HttpServletRequest request;
+
+        private HttpServletResponse response;
+
       /**
        * 获取 ServletRequestAttributes
        */
-      public Boolean getAttributes(){
+      public ServletRequestAttributes getServletRequestAttributes(){
                if(DataUtil.isEmptyObj(servletRequestAttributes)){
                    servletRequestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
                }
                if(DataUtil.isNotEmptyObj(servletRequestAttributes)){
-                   return true;
+                   return servletRequestAttributes;
                }
-             return false;
+             return null;
         }
 
         /**
@@ -36,7 +42,8 @@ public class BaseController {
          */
         public Object getSessionValue(String key){
 
-                if(getAttributes()){
+                getServletRequestAttributes();
+                if(DataUtil.isNotEmptyObj(servletRequestAttributes)){
                     return servletRequestAttributes.getAttribute(key, RequestAttributes.SCOPE_SESSION);
                 }
                return null;
@@ -47,7 +54,8 @@ public class BaseController {
          */
         public Boolean setSessionValue(String key, Object value){
 
-            if(getAttributes()){
+            getServletRequestAttributes();
+            if(DataUtil.isNotEmptyObj(servletRequestAttributes)){
                 servletRequestAttributes.setAttribute(key, value, RequestAttributes.SCOPE_SESSION);
                 return true;
             }
@@ -67,5 +75,35 @@ public class BaseController {
                 }
                 return null;
         }
+
+    /**
+     * 获取 HttpServletRequest
+     */
+    public HttpServletRequest getRequest(){
+
+            getServletRequestAttributes();
+            if(DataUtil.isNotEmptyObj(servletRequestAttributes)){
+                if(DataUtil.isEmptyObj(request)){
+                     request = servletRequestAttributes.getRequest();
+                }
+                return request;
+            }
+            return null;
+    }
+
+    /**
+     * 获取 HttpServletRequest
+     */
+    public HttpServletResponse getResponse(){
+
+        getServletRequestAttributes();
+        if(DataUtil.isNotEmptyObj(servletRequestAttributes)){
+            if(DataUtil.isEmptyObj(response)){
+                response = servletRequestAttributes.getResponse();
+            }
+            return response;
+        }
+        return null;
+    }
 
 }
