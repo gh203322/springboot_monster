@@ -1,7 +1,7 @@
 package com.monster.model.request.system;	
 	
-import com.monster.model.entity.system.SysOperate;	
-import lombok.Data;	
+import com.monster.model.entity.system.SysOperate;
+import lombok.Data;
 	
 /**	
  * @author Administrator	
@@ -9,6 +9,8 @@ import lombok.Data;
  */	
 @Data	
 public class SysOperateSearch extends SysOperate {	
-   	
-      	
-}	
+
+    //接收创建时间的字符串
+    private String createTimeStr;
+
+}

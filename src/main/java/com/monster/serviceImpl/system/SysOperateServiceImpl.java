@@ -2,6 +2,7 @@ package com.monster.serviceImpl.system;
 	
 import com.github.wenhao.jpa.Specifications;
 import com.monster.base.reqAndRsp.Ipage;
+import com.monster.model.entity.base.BaseDate;
 import com.monster.model.entity.system.SysOperate;
 import com.monster.model.request.system.SysOperateSearch;
 import com.monster.repository.system.SysOperateRepository;
@@ -132,11 +133,13 @@ public class SysOperateServiceImpl implements SysOperateService {
 	public Page<SysOperate> findAllToPage(Ipage ipage) throws Exception {	
 			
 			if(DataUtil.isNotEmptyObj(ipage)) {	
-				SysOperateSearch search = (SysOperateSearch) ipage.getParams();	
+				SysOperateSearch search = (SysOperateSearch) ipage.getParams();
+				BaseDate baseDate = BaseDate.of(search.getCreateTimeStr());
 				 if(DataUtil.isNotEmptyObj(search)) {	
 					 Specification<SysOperate> specification = Specifications.<SysOperate>and()	
 					            .eq(DataUtil.isNotEmptyObj(search.getId()), "id", search.getId())
-							    .eq(DataUtil.isNotEmptyObj(search.getCreateTime()), "createTime", search.getCreateTime())
+							    .ge(DataUtil.isNotEmptyObj(baseDate.getLastYmd()),"createTime",baseDate.getLastYmd())
+							    .lt(DataUtil.isNotEmptyObj(baseDate.getNextYmd()), "createTime", baseDate.getNextYmd())
 							    .like(DataUtil.isNotEmptyObj(search.getName()), "name", "%"+search.getName()+"%")
 							    .like(DataUtil.isNotEmptyObj(search.getMethod()), "method", "%"+search.getMethod()+"%")
 					            .build();
