@@ -22,14 +22,14 @@ public class BaseEntity {
 		private Boolean valid = true;
 
 		@CreatedDate  //自动创建时间
-		@Column(columnDefinition = "date comment '创建时间'", updatable = true, insertable = true)
-		@DateTimeFormat(pattern  = "yyyy-MM-dd")  //传入格式化
-		@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd")
+		@Column(columnDefinition = "datetime comment '创建时间'", updatable = true, insertable = true)
+		@DateTimeFormat(pattern  = "yyyy-MM-dd HH:mm:ss")  //传入格式化
+		@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
 		private Date createTime;
 
 	    @LastModifiedDate  //自动更新记录时间
-		@Column(columnDefinition = "date comment '更新时间'", updatable = true, insertable = true)
-		@DateTimeFormat(pattern  = "yyyy-MM-dd")  //传出格式化
-		@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd")
+		@Column(columnDefinition = "datetime comment '更新时间'", updatable = true, insertable = true)
+		@DateTimeFormat(pattern  = "yyyy-MM-dd HH:mm:ss")  //传出格式化
+		@JsonFormat(timezone = "GMT+8", pattern = " yyyy-MM-dd HH:mm:ss")
 	    private Date modifyTime;
 }

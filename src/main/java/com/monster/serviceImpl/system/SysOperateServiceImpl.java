@@ -1,17 +1,17 @@
 package com.monster.serviceImpl.system;	
 	
-import com.github.wenhao.jpa.Specifications;	
-import com.monster.base.reqAndRsp.Ipage;	
-import com.monster.model.entity.system.SysOperate;	
-import com.monster.model.request.system.SysOperateSearch;	
-import com.monster.repository.system.SysOperateRepository;	
-import com.monster.service.system.SysOperateService;	
-import com.monster.utils.DataUtil;	
-import java.util.List;	
-import java.util.Map;	
-import org.springframework.beans.factory.annotation.Autowired;	
-import org.springframework.data.domain.*;	
-import org.springframework.data.jpa.domain.Specification;	
+import com.github.wenhao.jpa.Specifications;
+import com.monster.base.reqAndRsp.Ipage;
+import com.monster.model.entity.system.SysOperate;
+import com.monster.model.request.system.SysOperateSearch;
+import com.monster.repository.system.SysOperateRepository;
+import com.monster.service.system.SysOperateService;
+import com.monster.utils.DataUtil;
+import java.util.List;
+import java.util.Map;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.*;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;	
 	
 @Service	
@@ -135,8 +135,11 @@ public class SysOperateServiceImpl implements SysOperateService {
 				SysOperateSearch search = (SysOperateSearch) ipage.getParams();	
 				 if(DataUtil.isNotEmptyObj(search)) {	
 					 Specification<SysOperate> specification = Specifications.<SysOperate>and()	
-					            .eq(DataUtil.isNotEmptyObj(search.getId()), "id", search.getId())	
-					            .build();	
+					            .eq(DataUtil.isNotEmptyObj(search.getId()), "id", search.getId())
+							    .eq(DataUtil.isNotEmptyObj(search.getCreateTime()), "createTime", search.getCreateTime())
+							    .like(DataUtil.isNotEmptyObj(search.getName()), "name", "%"+search.getName()+"%")
+							    .like(DataUtil.isNotEmptyObj(search.getMethod()), "method", "%"+search.getMethod()+"%")
+					            .build();
 					 	
 					 return repository.findAll(specification, ipage.of());	
 				 }	

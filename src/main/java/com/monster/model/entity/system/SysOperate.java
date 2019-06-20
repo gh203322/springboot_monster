@@ -19,10 +19,10 @@ public class SysOperate extends BaseEntity {
 		@Column(columnDefinition = "varchar(10) comment '操作人员'")
 		private String name;
 
-		@Column(columnDefinition = "varchar(64) comment '请求路径'")
+		@Column(columnDefinition = "varchar(128) comment '请求路径'")
 		private String url;
 
-	    @Column(columnDefinition = "varchar(64) comment '层或方法名称'")
+	    @Column(columnDefinition = "varchar(128) comment '层或方法名称'")
 		private String method;
 
 		@Column(columnDefinition = "varchar(10) comment '操作类型'")

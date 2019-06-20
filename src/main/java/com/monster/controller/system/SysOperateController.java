@@ -1,6 +1,5 @@
 package com.monster.controller.system;
 
-import com.monster.base.annotation.OperateLogAno;
 import com.monster.base.reqAndRsp.Ipage;
 import com.monster.base.reqAndRsp.Result;
 import com.monster.model.entity.system.SysOperate;
@@ -16,21 +15,19 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;	
-	
-	
-@Api(tags = "SysOperate")	
+import org.springframework.web.multipart.MultipartFile;
+
+@Api(tags = "SysOperate")
 @Controller(value = "SysOperateController")	
 @RequestMapping("/auth/sysOperate")	
-@Validated	
-public class SysOperateController {	
+@Validated
+public class SysOperateController {
 	
 	@Autowired	
 	private SysOperateService service;
 
 
-	@OperateLogAno("测试测试")
-	@ApiOperation(value = "加载SysOperate主页面")	
+	@ApiOperation(value = "加载SysOperate主页面")
 	@PostMapping("/view")	
     public String view(){	
 			
@@ -95,8 +92,7 @@ public class SysOperateController {
           );	
     }
 
-	@OperateLogAno("测试测试")
-	@ApiOperation(value = "通过条件查询SysOperate列表数据")	
+	@ApiOperation(value = "通过条件查询SysOperate列表数据")
 	@PostMapping("/search")	
 	@ResponseBody	
 	public String search(Ipage ipage, SysOperateSearch search) throws Exception{	
