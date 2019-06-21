@@ -138,10 +138,10 @@ public class SysOperateServiceImpl implements SysOperateService {
 				 if(DataUtil.isNotEmptyObj(search)) {	
 					 Specification<SysOperate> specification = Specifications.<SysOperate>and()	
 					            .eq(DataUtil.isNotEmptyObj(search.getId()), "id", search.getId())
-							    .ge(DataUtil.isNotEmptyObj(baseDate.getLastYmd()),"createTime",baseDate.getLastYmd())
-							    .lt(DataUtil.isNotEmptyObj(baseDate.getNextYmd()), "createTime", baseDate.getNextYmd())
 							    .like(DataUtil.isNotEmptyObj(search.getName()), "name", "%"+search.getName()+"%")
 							    .like(DataUtil.isNotEmptyObj(search.getMethod()), "method", "%"+search.getMethod()+"%")
+							    .ge(DataUtil.isNotEmptyObj(baseDate.getLastYmdH()),"createTime",baseDate.getLastYmdH())   /*大于等于*/
+							    .lt(DataUtil.isNotEmptyObj(baseDate.getNextYmdH()), "createTime", baseDate.getNextYmdH())  /*小于*/
 					            .build();
 					 	
 					 return repository.findAll(specification, ipage.of());	

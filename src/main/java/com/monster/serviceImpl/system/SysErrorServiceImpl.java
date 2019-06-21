@@ -1,8 +1,9 @@
 package com.monster.serviceImpl.system;	
 	
 import com.github.wenhao.jpa.Specifications;	
-import com.monster.base.reqAndRsp.Ipage;	
-import com.monster.model.entity.system.SysError;	
+import com.monster.base.reqAndRsp.Ipage;
+import com.monster.model.entity.base.BaseDate;
+import com.monster.model.entity.system.SysError;
 import com.monster.model.request.system.SysErrorSearch;	
 import com.monster.repository.system.SysErrorRepository;	
 import com.monster.service.system.SysErrorService;	
@@ -132,13 +133,15 @@ public class SysErrorServiceImpl implements SysErrorService {
 	public Page<SysError> findAllToPage(Ipage ipage) throws Exception {	
 			
 			if(DataUtil.isNotEmptyObj(ipage)) {	
-				SysErrorSearch search = (SysErrorSearch) ipage.getParams();	
+				SysErrorSearch search = (SysErrorSearch) ipage.getParams();
+				BaseDate baseDate = BaseDate.of(search.getCreateTimeStr());
 				 if(DataUtil.isNotEmptyObj(search)) {	
 					 Specification<SysError> specification = Specifications.<SysError>and()	
 					            .eq(DataUtil.isNotEmptyObj(search.getId()), "id", search.getId())
 							    .like(DataUtil.isNotEmptyObj(search.getName()), "name", "%"+search.getName()+"%")
-							     .like(DataUtil.isNotEmptyObj(search.getUrl()), "url", "%"+search.getUrl()+"%")
-							    .eq(DataUtil.isNotEmptyObj(search.getCreateTime()), "createTime", search.getCreateTime())
+							    .like(DataUtil.isNotEmptyObj(search.getUrl()), "url", "%"+search.getUrl()+"%")
+							    .ge(DataUtil.isNotEmptyObj(baseDate.getLastYmdH()),"createTime",baseDate.getLastYmdH())   /*大于等于*/
+							    .lt(DataUtil.isNotEmptyObj(baseDate.getNextYmdH()), "createTime", baseDate.getNextYmdH())  /*小于*/
 					            .build();	
 					 	
 					 return repository.findAll(specification, ipage.of());	

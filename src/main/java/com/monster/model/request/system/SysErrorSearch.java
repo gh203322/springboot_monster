@@ -1,7 +1,7 @@
 package com.monster.model.request.system;	
 	
-import com.monster.model.entity.system.SysError;	
-import lombok.Data;	
+import com.monster.model.entity.system.SysError;
+import lombok.Data;
 	
 /**	
  * @author Administrator	
@@ -9,6 +9,7 @@ import lombok.Data;
  */	
 @Data	
 public class SysErrorSearch extends SysError {	
-   	
-      	
+
+        //创建时间的字符串形式接收(配合BaseDate 可变长和格式)
+      	private String createTimeStr;
 }	

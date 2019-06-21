@@ -13,6 +13,12 @@ import lombok.Data;
 @Data
 public class BaseDate {
 
+    private Date lastY;
+    private Date nextY;
+
+    private Date lastYm;
+    private Date nextYm;
+
     private Date lastYmd;
     private Date nextYmd;
 
@@ -35,16 +41,28 @@ public class BaseDate {
         SimpleDateFormat sdf = null;
         try {
             if(dateStr.contains("/")){
-                if(dateStr.length() == 10){
+                if(dateStr.length() == 4){
+                    sdf = new SimpleDateFormat("yyyy");
+                }else if(dateStr.length() == 7){
+                    sdf = new SimpleDateFormat("yyyy/MM");
+                }else if(dateStr.length() == 10){
                     sdf = new SimpleDateFormat("yyyy/MM/dd");
+                }else if(dateStr.length() == 13){
+                    sdf = new SimpleDateFormat("yyyy/MM/dd HH");
                 }else if(dateStr.length() == 16){
                     sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm");
                 }else{
                     sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
                 }
             }else if(dateStr.contains("-")){
-                if(dateStr.length() == 10){
+                if(dateStr.length() == 4){
+                    sdf = new SimpleDateFormat("yyyy");
+                }if(dateStr.length() == 7){
+                    sdf = new SimpleDateFormat("yyyy-MM");
+                }if(dateStr.length() == 10){
                     sdf = new SimpleDateFormat("yyyy-MM-dd");
+                }else if(dateStr.length() == 13){
+                    sdf = new SimpleDateFormat("yyyy-MM-dd HH");
                 }else if(dateStr.length() == 16){
                     sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
                 }else{
@@ -71,6 +89,16 @@ public class BaseDate {
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
         int minute = calendar.get(Calendar.MINUTE);
         int millisecond = calendar.get(Calendar.SECOND);
+
+        calendar.setTime(sdf.parse(year+"-01-01 00:00:00"));
+        baseDate.setLastY(calendar.getTime());
+        calendar.add(Calendar.YEAR,1);
+        baseDate.setNextY(calendar.getTime());
+
+        calendar.setTime(sdf.parse(year+"-"+month+ "-01 00:00:00"));
+        baseDate.setLastYm(calendar.getTime());
+        calendar.add(Calendar.MONTH,1);
+        baseDate.setNextYm(calendar.getTime());
 
         calendar.setTime(sdf.parse(year+"-"+month+"-"+day+" 00:00:00"));
         baseDate.setLastYmd(calendar.getTime());
