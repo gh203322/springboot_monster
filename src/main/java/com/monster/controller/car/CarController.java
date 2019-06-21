@@ -6,6 +6,7 @@ import com.monster.controller.base.BaseController;
 import com.monster.model.entity.car.Car;
 import com.monster.model.request.car.CarSearch;
 import com.monster.service.car.CarService;
+import com.monster.service.car.CarUserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import java.util.List;
@@ -27,12 +28,14 @@ public class CarController extends BaseController {
 
 	@Autowired
 	private CarService service;
+	@Autowired
+	private CarUserService carUserService;
 	
  
 	@ApiOperation(value = "加载车辆主页面")
 	@PostMapping("/view")
     public String view(){
-		
+
           return "car/view";
     }
 	
@@ -97,10 +100,20 @@ public class CarController extends BaseController {
 	@ApiOperation(value = "通过条件查询车辆列表数据")
 	@PostMapping("/search")
 	@ResponseBody
-	public String search(Ipage ipage, CarSearch carSearch) throws Exception{
-	    
+	public String search(Ipage ipage, CarSearch carSearch, Model model) throws Exception{
+
 		  return Result.ok(
 				  service.findAllToPage(ipage.of(carSearch))
 		  );
+	}
+
+	@ApiOperation(value = "查询车辆用户数据")
+	@PostMapping("/getUsers")
+	@ResponseBody
+	public String getUsers(){
+
+		return Result.ok(
+				carUserService.findAll()
+		);
 	}
 }
