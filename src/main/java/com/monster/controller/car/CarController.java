@@ -80,7 +80,6 @@ public class CarController extends BaseController {
 	@ResponseBody
     public String add(@ModelAttribute  Car car, MultipartFile file){
 		
-		  
           return Result.ok(
         		  service.saveOrUpdate(car)
           );

@@ -27,14 +27,15 @@
                     </div>
                      <div class="form-group">
                         <label for="" class="col-sm-2 control-label">车主</label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" id="carUser" name="carUser.id">
-                        </div>
+                         <div class="col-sm-9">
+                             <select id="add_carUser" name="carUser.id" class="selectpicker form-control">
+                             </select>
+                         </div>
                     </div>
                     <div class="form-group">
                         <label for="" class="col-sm-2 control-label" >登记时间</label>
                         <div class="date col-sm-9">
-		                  <input type="date" class="form-control" id="datepicker" name="signDate">
+                            <input id="add_signDate"  name="signDate"  type="text"  class="form-control"/>
 		                </div>
                     </div>
                     <div class="form-group">
@@ -62,7 +63,7 @@ $("#btn_submit").on("click",function(){
 	        dataType: 'json',
 	        contentType: false,
 	        processData: false,
-	        data: new FormData($("#dataForm")[0]),
+	        data: new FormData($("#dataForm")[0]).ignoreEmptyField(["carUser.id"]),
 	        success: function (data) {
 	                    if(data.state){
 	                         //刷新表格
@@ -77,5 +78,20 @@ $("#btn_submit").on("click",function(){
 	        error: function (returndata) {
 	        }
 	    }); 
+});
+
+//初始化laydate
+laydate.render({
+    elem: '#add_signDate',
+    type: 'date',
+    format: 'yyyy-MM-dd'
+});
+
+//初始化下拉框
+BtSelect.init($("#add_carUser"),{
+    url: "/auth/car/getUsers",
+    sltkey: "id",
+    sltvalue: "name",
+    showNoChoice: true  //增加空行
 });
 </script>

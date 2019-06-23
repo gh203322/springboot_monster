@@ -29,14 +29,15 @@
                      <div class="form-group">
                         <label for="" class="col-sm-2 control-label">车主</label>
                         <div class="col-sm-9">
-                            <input type="hidden" class="form-control" id="carUserId" name="carUser.id" th:value="${car.carUser.id}">
-                            <input type="text" class="form-control" id="carUserName" name="carUser.name" th:value="${car.carUser.name}">
+                            <select id="edit_carUser" name="carUser.id" class="selectpicker form-control" th:doomed="${car.carUser.id}">
+
+                            </select>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="" class="col-sm-2 control-label" >登记时间</label>
                         <div class="date col-sm-9">
-		                  <input type="date" class="form-control" id="datepicker" name="signDate" th:value="${#dates.format(car.signDate, 'yyyy-MM-dd')}">
+		                  <input type="text" class="form-control" id="edit_signDate" name="signDate" th:value="${#dates.format(car.signDate, 'yyyy-MM-dd')}">
 		                </div>
                     </div>
                     <div class="form-group">
@@ -58,7 +59,7 @@
 <script type="text/javascript">
 //提交按钮
 $("#btn_submit").on("click",function(){
-	    var dataForm = new FormData($("#dataForm")[0]);
+	    var dataForm = new FormData($("#dataForm")[0]).ignoreEmptyField(["carUser.id"]);
 	    $.ajax({
 	        url: '/auth/car/edit' ,
 	        type: 'POST',
@@ -80,5 +81,21 @@ $("#btn_submit").on("click",function(){
 	        error: function (returndata) {
 	        }
 	    }); 
+});
+
+//初始化laydate
+laydate.render({
+    elem: '#edit_signDate',
+    type: 'date',
+    format: 'yyyy-MM-dd'
+});
+
+//初始化下拉框
+BtSelect.init($("#edit_carUser"),{
+    url: "/auth/car/getUsers",
+    sltkey: "id",
+    sltvalue: "name",
+    showNoChoice: true,  //增加空行
+    doomedChoice: true   //通过自定义属性doomed的值将select选中
 });
 </script>

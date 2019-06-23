@@ -1,9 +1,6 @@
 package com.monster.utils;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * @author Administrator
@@ -24,38 +21,72 @@ public class DataUtil {
 		 
 		   if(null == o) {
 			   return false;
-		   }else if(o.getClass().toString().contains("String")) {
+		   }
+		   String classType = o.getClass().toString();
+		   if(classType.contains("java.lang.String")) {
 			    if("".equals(String.valueOf(o).trim())
 			    		|| "null".equals(String.valueOf(o).trim())
 			    		     || "undefined".equals(String.valueOf(o).trim())
 			    		    	   || "NaN".equals(String.valueOf(o).trim())) {
 			    	return false;
 			    }
-		   }else if(o.getClass().toString().contains("HashMap")
-				          || o.getClass().toString().contains("TreeMap")) {
-			        if(((Map)o).isEmpty()) {
-			        	return false;
-			        }
-		   }else if(o.getClass().toString().contains("ArrayList")
-			          || o.getClass().toString().contains("LinkedList")) {
-		        if(((List)o).isEmpty()) {
-		        	return false;
-		        }
-	       }else if(o.getClass().toString().contains("HashSet")
-			          || o.getClass().toString().contains("TreeSet")) {
-		        if(((Set)o).isEmpty()) {
-		        	return false;
-		        }
-	       }else if(o.getClass().toString().contains("collection")) {
+		   }else if(classType.contains("java.util.")){
+			   if(classType.contains("HashMap")
+					   || classType.contains("TreeMap")) {
+				   if(((Map)o).isEmpty()) {
+					   return false;
+				   }
+			   }else if(classType.contains("ArrayList")
+					   || classType.contains("LinkedList")) {
+				   if(((List)o).isEmpty()) {
+					   return false;
+				   }
+			   }else if(classType.contains("HashSet")
+					   || classType.contains("TreeSet")) {
+				   if(((Set)o).isEmpty()) {
+					   return false;
+				   }
+			   }
+		   }else if(classType.contains("collection")) {
 	    	   if(isEmptyCollection((Collection)o)) {
 	    		   return false;
 	    	   }
-	       }else if(o.getClass().toString().contains("Long")
-		    		|| o.getClass().toString().contains("Float")
-	    		     || o.getClass().toString().contains("Double")
-	    		    	   || o.getClass().toString().contains("Integer")
-	    		    	        || o.getClass().toString().contains("Byte")
-	    		    	              || o.getClass().toString().contains("Short")) {
+	       }else if(classType.contains("Ljava.lang.")){
+		   	   if(classType.contains("String")){
+				   if(((String[])o).length<1){
+				   	  return false;
+				   }
+			   }else if(classType.contains("Long")){
+				   if(((Long[])o).length<1){
+					   return false;
+				   }
+			   }else if(classType.contains("Float")){
+				   if(((String[])o).length<1){
+					   return false;
+				   }
+			   }else if(classType.contains("Double")){
+				   if(((Double[])o).length<1){
+					   return false;
+				   }
+			   }else if(classType.contains("Integer")){
+				   if(((Integer[])o).length<1){
+					   return false;
+				   }
+			   }else if(classType.contains("Byte")){
+				   if(((Byte[])o).length<1){
+					   return false;
+				   }
+			   }else if(classType.contains("Short")){
+				   if(((Short[])o).length<1){
+					   return false;
+				   }
+			   }
+		   }else if(classType.contains("java.lang.Long")
+		    		|| classType.contains("java.lang.Float")
+	    		     || classType.contains("java.lang.Double")
+	    		    	   || classType.contains("java.lang.Integer")
+	    		    	        || classType.contains("java.lang.Byte")
+	    		    	              || classType.contains("java.lang.Short")) {
 		        if(new Double(0).equals(Double.parseDouble(o.toString()))) {
 		        	return false;
 		        }

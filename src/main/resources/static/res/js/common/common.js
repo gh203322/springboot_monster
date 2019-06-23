@@ -29,8 +29,32 @@ jQuery.fn.serializeForm = function () {
     var formData = {};
     var formArray = this.serializeArray();
     for (var i = 0, n = formArray.length; i < n; ++i) {
-        formData[formArray[i].name] = formArray[i].value;
+    	  if(formData[formArray[i].name]){
+    	  	 var ary = formData[formArray[i].name];
+    	  	 if(!(ary instanceof Array)){
+    	  	 	  ary = [];
+						  ary.push(formData[formArray[i].name]);
+					 }
+    	  	 ary.push(formArray[i].value);
+					formData[formArray[i].name] = ary;
+				}else{
+					formData[formArray[i].name] = formArray[i].value;
+				}
     }
+	  //把数组对象转化为json字符串
+	  for(var key in formData){
+			if(formData[key] instanceof Array){
+				var str = "";
+				for(var i=0; i<formData[key].length; i++) {
+					 if(i<formData[key].length-1){
+						 str += formData[key][i] + ",";
+					 }else{
+						 str += formData[key][i];
+					 }
+				}
+				formData[key] = str;
+			}
+		}
     return formData;
 };
 
@@ -96,3 +120,18 @@ function lyrwarn(content){
 					skin: 'layer-ext-moon'
 				})
 }
+
+/*
+ * FormData 方法
+ * field 为字段名称数组
+ * */
+FormData.prototype.ignoreEmptyField = function(field){
+	 if(field) {
+	 	   if(field instanceof Array){
+	 	   	  for(var index in field){
+	 	   	  	 this.delete(field[index]);
+					}
+			 }
+	 }
+	 return this;
+};

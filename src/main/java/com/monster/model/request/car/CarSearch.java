@@ -1,7 +1,6 @@
 package com.monster.model.request.car;
 
 import com.monster.model.entity.car.Car;
-
 import lombok.Data;
 
 /**
@@ -11,5 +10,6 @@ import lombok.Data;
 @Data
 public class CarSearch extends Car {
    
-      
+    //多个车主接收参数
+    private Long[] carUsers;
 }

@@ -141,9 +141,10 @@ public class CarServiceImpl implements CarService {
 					 Specification<Car> specification = Specifications.<Car>and()
 					            .eq(DataUtil.isNotEmptyObj(carSearch.getSignDate()), "signDate", carSearch.getSignDate())
 					            .like(DataUtil.isNotEmptyObj(carSearch.getCarNo()), "carNo", "%"+carSearch.getCarNo()+"%")
-					            .like(DataUtil.isNotEmptyObj(carSearch.getCarUser().getName()), "carUser.name", "%"+carSearch.getCarUser().getName()+"%")
+					            .eq(DataUtil.isNotEmptyObj(carSearch.getCarUser().getId()), "carUser.id", carSearch.getCarUser().getId()
+								).in(DataUtil.isNotEmptyObj(carSearch.getCarUsers()),"carUser.id", carSearch.getCarUsers())
 					            .build();
-					 
+
 					 return repository.findAll(specification, ipage.of());
 				 }
 			}

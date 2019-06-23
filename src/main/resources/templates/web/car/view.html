@@ -5,18 +5,6 @@
             <div class="box-header">
               <h3 class="box-title"></h3>
                       <section class="col-lg-12">
-                          <select class="selectpicker test form-control">
-                              <optgroup label="Picnic" disabled>
-                                  <option>Mustard</option>
-                                  <option>Ketchup</option>
-                                  <option>Relish</option>
-                              </optgroup>
-                              <optgroup label="Camping">
-                                  <option>Tent</option>
-                                  <option>Flashlight</option>
-                                  <option>Toilet Paper</option>
-                              </optgroup>
-                          </select>
                               <form id="searchForm" action="" class="form-horizontal">
 					                  <div class="form-group col-lg-3">
 										  		<div class="col-lg-12 input-group">
@@ -27,25 +15,14 @@
 									   <div class="form-group col-lg-3">
 												<div class="col-lg-12  input-group">
 												    <span class="input-group-addon">车主姓名</span>
-													<!--<input id="carUser.name"  name="carUser.name"  type="text"  class="form-control"/>-->
-                                                    <select class="selectpicker test form-control">
-                                                        <optgroup label="Picnic" disabled>
-                                                            <option>Mustard</option>
-                                                            <option>Ketchup</option>
-                                                            <option>Relish</option>
-                                                        </optgroup>
-                                                        <optgroup label="Camping">
-                                                            <option>Tent</option>
-                                                            <option>Flashlight</option>
-                                                            <option>Toilet Paper</option>
-                                                        </optgroup>
+                                                    <select id="carUsers" name="carUsers" class="selectpicker form-control" multiple data-live-search="true" data-actions-box="true">
                                                     </select>
 												</div>
 									   </div>
 									    <div class="form-group col-lg-3">
 												<div class="col-lg-12  input-group">
 												    <span class="input-group-addon">登记时间</span> 
-													<input id="signDate"  name="signDate"  type="date"  class="form-control"/>
+													<input id="signDate"  name="signDate"  type="text"  class="form-control"/>
 												</div>
 									   </div>
 							    </form>
@@ -205,13 +182,18 @@ $("#btn_query").on("click",function(){
         });
 });
 
-//下拉框初始化
-/*$('#carUser.id').bootstrapSelect({
-        url:'/auth/car/getUsers',
-        data: {},
-        valueField: 'id',
-        textField: 'name',
-});*/
-$('.my-select').selectpicker();
+//初始化laydate
+laydate.render({
+    elem: '#signDate',
+    type: 'date',
+    format: 'yyyy-MM-dd'
+});
+
+//初始化下拉框
+BtSelect.init($("#carUsers"),{
+    url: "/auth/car/getUsers",
+    sltkey: "id",
+    sltvalue: "name"
+});
 
 </script>

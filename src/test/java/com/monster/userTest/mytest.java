@@ -1,21 +1,16 @@
 package com.monster.userTest;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class mytest {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-           String s = "";
-           Long l = 9L;
+           String[] s = new String[2];
+           Long[] l = new Long[4];
            Float f = 0F;
            Integer i = 3;
-           List list = new ArrayList();
+           Map list = new HashMap();
            Map map = new HashMap();
            
            System.out.println(list.getClass().toString());
