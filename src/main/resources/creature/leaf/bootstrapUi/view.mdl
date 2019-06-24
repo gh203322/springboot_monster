@@ -133,9 +133,9 @@ $("#btn_delete").on("click",function(){
 	                         //刷新表格
 	                         BtTable.refresh();
 	                         
-	                         if(data.msg) alert(data.msg); else alert("删除成功");
+	                         if(data.msg) lyrok(data.msg); else lyrfail("删除成功");
 	                    }else{
-	                         alert("删除失败");
+	                         lyrfail("删除失败");
 	                    }
 	              }
 	      });

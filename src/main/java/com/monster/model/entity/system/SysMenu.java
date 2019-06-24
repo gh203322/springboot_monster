@@ -1,6 +1,7 @@
 package com.monster.model.entity.system;
 
 import com.monster.model.entity.base.BaseEntity;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
 import lombok.Data;
@@ -52,4 +53,34 @@ public class SysMenu  extends BaseEntity {
 			  mappedBy = "sysMenu" 
 	   )
 	  private List<SysMenu> sysMenus;
+
+	/* 解决序列化循环引用问题,在这里截断关系 */
+	public List<SysRole> getSysRoles() {
+		if(null != sysRoles) {
+			sysRoles.stream().forEach(role -> role.setSysMenus(null));
+		}else{
+			sysRoles = new ArrayList<SysRole>();
+		}
+		return sysRoles;
+	}
+
+	/* 解决序列化循环引用问题,在这里截断关系 */
+	public SysMenu getSysMenu() {
+		if(null != sysMenu) {
+			sysMenu.setSysMenus(null);
+		}else {
+			sysMenu = new SysMenu();
+		}
+		return sysMenu;
+	}
+
+	/* 解决序列化循环引用问题,在这里截断关系 */
+	public List<SysMenu> getSysMenus() {
+		if(null != sysMenus) {
+			sysMenus.stream().forEach(menu -> menu.setSysMenu(null));
+		}else{
+			sysMenus = new ArrayList<SysMenu>();
+		}
+		return sysMenus;
+	}
 }

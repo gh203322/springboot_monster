@@ -41,9 +41,9 @@ $("#btn_submit").on("click",function(){
 	                         BtTable.refresh();	
 	                         $('#dataModal').modal("hide");	
 	                         	
-	                         if(data.msg) alert(data.msg); else alert("保存成功");	
-	                    }else{	
-	                         alert("保存失败");	
+	                         if(data.msg) lyrok(data.msg); else lyrfail("保存成功");
+	                    }else{
+                            lyrfail("保存失败");
 	                    }	
 	        },	
 	        error: function (returndata) {	

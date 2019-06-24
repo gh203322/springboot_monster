@@ -1,6 +1,5 @@
 package com.monster.model.entity.system;
 
-import com.monster.base.annotation.CreatureAno;
 import com.monster.model.entity.base.BaseEntity;
 import javax.persistence.*;
 import lombok.Data;
@@ -9,7 +8,7 @@ import lombok.Data;
  * @author Administrator
  *  系统操作记录
  */
-@CreatureAno
+
 @Entity
 @Data
 @Table(name = "sys_operate")

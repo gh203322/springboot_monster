@@ -1,6 +1,7 @@
 package com.monster.model.entity.system;
 
 import com.monster.model.entity.base.BaseEntity;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
 import lombok.Data;
@@ -27,4 +28,14 @@ public class SysUser  extends BaseEntity {
 	          inverseJoinColumns = @JoinColumn(name = "roleId", referencedColumnName = "id")
 	    )
 	    private List<SysRole> sysRoles;
+
+	/* 解决序列化循环引用问题,在这里截断关系 */
+	public List<SysRole> getSysRoles() {
+		if(null != sysRoles) {
+			sysRoles.stream().forEach(role -> role.setSysUsers(null));
+		}else{
+			sysRoles = new ArrayList<SysRole>();
+		}
+		return sysRoles;
+	}
 }

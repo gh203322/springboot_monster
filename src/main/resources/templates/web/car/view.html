@@ -155,10 +155,10 @@ $("#btn_delete").on("click",function(){
 	                    if(data.state){
 	                         //刷新表格
 	                         BtTable.refresh();
-	                         
-	                         if(data.msg) alert(data.msg); else alert("删除成功");
+
+							if(data.msg) lyrok(data.msg); else lyrfail("删除失败");
 	                    }else{
-	                         alert("删除失败");
+							lyrfail("删除失败")
 	                    }
 	              }
 	      });
