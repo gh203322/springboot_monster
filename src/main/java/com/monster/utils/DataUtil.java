@@ -19,7 +19,7 @@ public class DataUtil {
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public static boolean isNotEmptyObj(Object o) {
 		 
-		   if(null == o) {
+		   if(Objects.isNull(o)) {
 			   return false;
 		   }
 		   String classType = o.getClass().toString();
