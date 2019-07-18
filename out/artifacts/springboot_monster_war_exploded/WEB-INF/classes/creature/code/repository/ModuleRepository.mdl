@@ -1,0 +1,16 @@
+package com.monster.repository.${[folderName]};
+
+import com.monster.model.entity.${[folderName]}.${[entityName]};
+import com.monster.repository.base.BaseRepository;
+import java.util.List;
+import java.util.Map;
+import org.springframework.data.jpa.repository.Query;
+
+public interface ${[entityRepository]} extends BaseRepository<${[entityName]}>{
+	
+	@Query(
+			nativeQuery = true,
+			value = "select * from ${[lowerEntityName]}"
+	)
+	List<Map<String, Object>> findAllToMap();
+}

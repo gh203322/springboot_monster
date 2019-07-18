@@ -1,0 +1,53 @@
+spring:
+  #数据库配置
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://localhost:3306/ocean?useUnicode=true&characterEncoding=utf8&characterSetResults=utf8
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: toor
+  
+  #jpa配置  
+  jpa:
+    hibernate:
+      dialect: org.hibernate.dialect.MySQLInnoDBDialect
+      new_generator_mappings: false
+      ddl_auto: update
+      naming:
+        #设置hibernate 建表时驼峰不变成下划线（为了方便mybatis混用时转译字段）
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    format_sql: true
+    show_sql: true
+  
+  #资源配置
+  mvc:
+    static-path-pattern: /**
+  resources:
+    static-locations: classpath:/static/
+  thymeleaf:
+    mode: LEGACYHTML5 #此属性是避免thymeleaf对html的强校验
+    model: HTML5
+    encoding: UTF-8
+    prefix: classpath:/templates/web/
+    suffix: .html
+    content-tytpe: text/html
+    cache: false #关闭缓存
+    
+#mybatis配置(不在sprinng层级下面)      
+mybatis:
+  type-aliases-package: com.monster.model.entityVo
+  mapper-locations: classpath:mapper/*.xml
+  callSettersOnNulls:  false #当查询的返回一行都是null的结果时，MyBatis会帮忙填充一个所有属性都是null的对象
+
+#服务器配置
+server:
+  port: 8080
+  context-path: /
+  compression:
+    enabled: true
+    mime-types: application/json,application/xml,text/html,text/xml,text/plain
+  tomcat:
+    remote-ip-header: x-forwarded-for
+    protocol-header: x-forwarded-proto
+    port-header: X-Forwarded-Port
+  use-forward-headers: true

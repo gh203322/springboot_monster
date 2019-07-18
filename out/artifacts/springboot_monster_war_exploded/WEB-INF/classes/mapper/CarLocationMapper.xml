@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.monster.repository.mapper.car.CarLocationMapper">
+  
+  <sql id="Base_Column_List">
+      id,
+      createTime,
+      createTimeStamp,
+      carNo,
+      longitude,
+      latitude
+  </sql>
+  
+  <select id="selectByPrimaryKeyToMap" parameterType="java.lang.Integer" resultType="java.util.Map">
+    select
+    <include refid="Base_Column_List" />
+    from user
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectAllToMap" resultType="java.util.Map">
+    select
+    <include refid="Base_Column_List" />
+    from car_location
+  </select>
+  
+    <select id="selectAll"  resultType="com.monster.model.entityVo.car.CarLocationVo">
+    select
+    <include refid="Base_Column_List" />
+    from car_location
+  </select>
+  
+</mapper>

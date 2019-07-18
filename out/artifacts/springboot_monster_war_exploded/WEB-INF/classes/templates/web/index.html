@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+    layout:decorate="404">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>MonsterModule</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  
+         <!-- 全局css文件引入 -->
+         <!-- Bootstrap 3.3.7 -->
+		  <link rel="stylesheet" href="/adminLte/bower_components/bootstrap/dist/css/bootstrap.min.css">
+		  <!-- Font Awesome -->
+		  <link rel="stylesheet" href="/adminLte/bower_components/font-awesome/css/font-awesome.min.css">
+		  <!-- Ionicons -->
+		  <link rel="stylesheet" href="/adminLte/bower_components/Ionicons/css/ionicons.min.css">
+		  <!-- jvectormap -->
+		  <link rel="stylesheet" href="/adminLte/bower_components/jvectormap/jquery-jvectormap.css">
+		  <!-- Theme style -->
+		  <link rel="stylesheet" href="/adminLte/dist/css/AdminLTE.min.css">
+		  <!-- AdminLTE Skins. Choose a skin from the css/skins
+		       folder instead of downloading all of them to reduce the load. -->
+		  <link rel="stylesheet" href="/adminLte/dist/css/skins/_all-skins.min.css">
+		  <!-- Google Font -->
+		  <link rel="stylesheet" href="/res/css/sys/fonts.googleapis.css">
+	    <!-- 全局js文件引入 -->
+        <!-- jQuery 3 -->
+		<script src="/adminLte/bower_components/jquery/dist/jquery.min.js"></script>
+		<!-- Bootstrap 3 依赖 -->
+		<script src="/adminLte/bower_components/bootstrap/dist/js/popper.min.js"></script>
+		<!-- Bootstrap 3 -->
+		<script src="/adminLte/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+		<!-- FastClick -->
+		<script src="/adminLte/bower_components/fastclick/lib/fastclick.js"></script>
+		<!-- AdminLTE App -->
+		<script src="/adminLte/dist/js/adminlte.min.js"></script>
+		<!-- Sparkline -->
+		<script src="/adminLte/bower_components/jquery-sparkline/dist/jquery.sparkline.min.js"></script>
+		<!-- jvectormap  -->
+		<script src="/adminLte/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
+		<script src="/adminLte/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
+		<!-- SlimScroll -->
+		<script src="/adminLte/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+		<!-- ChartJS -->
+		<script src="/adminLte/bower_components/chart.js/Chart.js"></script>
+		<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+		<!-- <script src="/adminLte/dist/js/pages/dashboard2.js"></script> -->
+		<!-- AdminLTE for demo purposes -->
+		<script src="/adminLte/dist/js/demo.js"></script>
+		
+	    <!-- bootstrap-table  css -->
+	    <link rel="stylesheet" href="/bootstrap-table/dist/bootstrap-table.min.css">
+        <!--  bootstrap-table  js -->
+        <script src="/bootstrap-table/dist/bootstrap-table.min.js"></script>		
+        <script src="/bootstrap-table/dist/locale/bootstrap-table-zh-CN.min.js"></script>
+        
+        <!-- bootstrap-table 导出相关文件 -->
+        <script src="/bootstrap-table/dist/extensions/export/bootstrap-table-export.js"></script>
+        <script src="/bootstrap-table/dist/extensions/export/FileSaver.min.js"></script>
+        <script src="/bootstrap-table/dist/extensions/export/xlsx.core.min.js"></script>
+        <script src="/bootstrap-table/dist/extensions/export/jspdf.min.js"></script>
+        <script src="/bootstrap-table/dist/extensions/export/jspdf.plugin.autotable.js"></script>
+        <script src="/bootstrap-table/dist/extensions/export/es6-promise.auto.min.js"></script>
+        <script src="/bootstrap-table/dist/extensions/export/html2canvas.min.js"></script>
+        <script src="/bootstrap-table/dist/extensions/export/tableExport.min.js"></script>
+        
+        <!-- bootstrap-时间插件  css -->
+	    <link rel="stylesheet" href="/adminLte/bower_components/jquery-ui/themes/base/datepicker.css">
+        <!--  bootstrap-时间插件  js -->
+        <script src="/adminLte/bower_components/jquery-ui/ui/datepicker.js"></script>
+        <script src="/adminLte/bower_components/jquery-ui/ui/i18n/datepicker-zh-CN.js"></script>
+
+        <!--layer 弹出层依赖-->
+        <script src="/lib/layer/layer.js"></script>
+
+         <!--layuidate 时间插件-->
+        <script src="/layui/laydate.js"></script>
+
+        <!-- bootstrap-下拉复选框插件  css -->
+        <link rel="stylesheet" href="/lib/bootstrap-select/css/bootstrap-select.css">
+        <!--  bootstrap-下拉复选框插件  js -->
+        <script src="/lib/bootstrap-select/js/bootstrap-select.min.js"></script>
+        <script src="/lib/bootstrap-select/js/i18n/defaults-zh_CN.min.js"></script>
+</head>
+
+<body class="hold-transition sidebar-mini skin-red-light">
+<div class="wrapper">
+
+  <header class="main-header">
+
+    <!-- Logo -->
+    <a href="index2.html" class="logo">
+      <!-- mini logo for sidebar mini 50x50 pixels -->
+      <span class="logo-mini"><b>T</b>CC</span>
+      <!-- logo for regular state and mobile devices -->
+      <span class="logo-lg"><b>Monster</b>Module</span>
+    </a>
+
+    <!-- Header Navbar: style can be found in header.less -->
+    <nav class="navbar navbar-static-top">
+      <!-- Sidebar toggle button-->
+      <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+        <span class="sr-only">Toggle navigation</span>
+      </a>
+      <!-- Navbar Right Menu -->
+      <div class="navbar-custom-menu">
+        <ul class="nav navbar-nav">
+          <!-- Messages: style can be found in dropdown.less-->
+          <li class="dropdown messages-menu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <i class="fa fa-envelope-o"></i>
+              <span class="label label-success">4</span>
+            </a>
+            <ul class="dropdown-menu">
+              <li class="header">邮件信息通知区域</li>
+              <li>
+                <!-- inner menu: contains the actual data -->
+                <ul class="menu">
+                  <li><!-- start message -->
+                    <a href="#">
+                      <div class="pull-left">
+                        <img src="/res/images/sys/system_logo.jpg" class="img-circle" alt="User Image">
+                      </div>
+                      <h4>
+                        Support Team
+                        <small><i class="fa fa-clock-o"></i> 5 mins</small>
+                      </h4>
+                      <p>Why not buy a new awesome theme?</p>
+                    </a>
+                  </li>
+                  <!-- end message -->
+                  <li>
+                    <a href="#">
+                      <div class="pull-left">
+                        <img src="/adminLte/dist/img/user3-128x128.jpg" class="img-circle" alt="User Image">
+                      </div>
+                      <h4>
+                        AdminLTE Design Team
+                        <small><i class="fa fa-clock-o"></i> 2 hours</small>
+                      </h4>
+                      <p>Why not buy a new awesome theme?</p>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#">
+                      <div class="pull-left">
+                        <img src="/adminLte/dist/img/user4-128x128.jpg" class="img-circle" alt="User Image">
+                      </div>
+                      <h4>
+                        Developers
+                        <small><i class="fa fa-clock-o"></i> Today</small>
+                      </h4>
+                      <p>Why not buy a new awesome theme?</p>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#">
+                      <div class="pull-left">
+                        <img src="/adminLte/dist/img/user3-128x128.jpg" class="img-circle" alt="User Image">
+                      </div>
+                      <h4>
+                        Sales Department
+                        <small><i class="fa fa-clock-o"></i> Yesterday</small>
+                      </h4>
+                      <p>Why not buy a new awesome theme?</p>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#">
+                      <div class="pull-left">
+                        <img src="/adminLte/dist/img/user4-128x128.jpg" class="img-circle" alt="User Image">
+                      </div>
+                      <h4>
+                        Reviewers
+                        <small><i class="fa fa-clock-o"></i> 2 days</small>
+                      </h4>
+                      <p>Why not buy a new awesome theme?</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li class="footer"><a href="#">显示全部</a></li>
+            </ul>
+          </li>
+          <!-- Notifications: style can be found in dropdown.less -->
+          <li class="dropdown notifications-menu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <i class="fa fa-bell-o"></i>
+              <span class="label label-warning">10</span>
+            </a>
+            <ul class="dropdown-menu">
+              <li class="header">通知消息显示区域</li>
+              <li>
+                <!-- inner menu: contains the actual data -->
+                <ul class="menu">
+                  <li>
+                    <a href="#">
+                      <i class="fa fa-users text-aqua"></i> 5 new members joined today
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#">
+                      <i class="fa fa-warning text-yellow"></i> Very long description here that may not fit into the
+                      page and may cause design problems
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#">
+                      <i class="fa fa-users text-red"></i> 5 new members joined
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#">
+                      <i class="fa fa-shopping-cart text-green"></i> 25 sales made
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#">
+                      <i class="fa fa-user text-red"></i> You changed your username
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li class="footer"><a href="#">显示全部</a></li>
+            </ul>
+          </li>
+          <!-- Tasks: style can be found in dropdown.less -->
+          <li class="dropdown tasks-menu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <i class="fa fa-flag-o"></i>
+              <span class="label label-danger">9</span>
+            </a>
+            <ul class="dropdown-menu">
+              <li class="header">任务流程显示区域</li>
+              <li>
+                <!-- inner menu: contains the actual data -->
+                <ul class="menu">
+                  <li><!-- Task item -->
+                    <a href="#">
+                      <h3>
+                        Design some buttons
+                        <small class="pull-right">20%</small>
+                      </h3>
+                      <div class="progress xs">
+                        <div class="progress-bar progress-bar-aqua" style="width: 20%" role="progressbar"
+                             aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
+                          <span class="sr-only">20% Complete</span>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                  <!-- end task item -->
+                  <li><!-- Task item -->
+                    <a href="#">
+                      <h3>
+                        Create a nice theme
+                        <small class="pull-right">40%</small>
+                      </h3>
+                      <div class="progress xs">
+                        <div class="progress-bar progress-bar-green" style="width: 40%" role="progressbar"
+                             aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
+                          <span class="sr-only">40% Complete</span>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                  <!-- end task item -->
+                  <li><!-- Task item -->
+                    <a href="#">
+                      <h3>
+                        Some task I need to do
+                        <small class="pull-right">60%</small>
+                      </h3>
+                      <div class="progress xs">
+                        <div class="progress-bar progress-bar-red" style="width: 60%" role="progressbar"
+                             aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
+                          <span class="sr-only">60% Complete</span>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                  <!-- end task item -->
+                  <li><!-- Task item -->
+                    <a href="#">
+                      <h3>
+                        Make beautiful transitions
+                        <small class="pull-right">80%</small>
+                      </h3>
+                      <div class="progress xs">
+                        <div class="progress-bar progress-bar-yellow" style="width: 80%" role="progressbar"
+                             aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
+                          <span class="sr-only">80% Complete</span>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                  <!-- end task item -->
+                </ul>
+              </li>
+              <li class="footer">
+                <a href="#">显示全部</a>
+              </li>
+            </ul>
+          </li>
+          <!-- 用户信息 -->
+          <li class="dropdown user user-menu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <img src="/res/images/sys/system_logo.jpg" class="user-image" alt="User Image">
+              <span class="hidden-xs">隔壁怪蜀黍</span>
+            </a>
+            <ul class="dropdown-menu">
+              <!-- User image -->
+              <li class="user-header">
+                <img src="/res/images/sys/system_logo.jpg" class="img-circle" alt="User Image">
+
+                <p>
+                  来一段流弊的介绍吧!
+                  <small>纵有疾风起，人生不言弃</small>
+                </p>
+              </li>
+              <!-- Menu Footer-->
+              <li class="user-footer">
+                <div class="pull-left">
+                  <a href="#" class="btn btn-default btn-flat">个人信息</a>
+                </div>
+                <div class="pull-right">
+                  <a href="#" class="btn btn-default btn-flat">退  出</a>
+                </div>
+              </li>
+            </ul>
+          </li>
+          <!-- Control Sidebar Toggle Button -->
+          <li>
+            <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
+          </li>
+        </ul>
+      </div>
+
+    </nav>
+  </header>
+  <!-- Left side column. contains the logo and sidebar -->
+  <aside class="main-sidebar">
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar">
+      <!-- Sidebar user panel -->
+      <div class="user-panel">
+        <div class="pull-left image">
+          <img src="/res/images/sys/system_logo.jpg" class="img-circle" alt="User Image">
+        </div>
+        <div class="pull-left info">
+          <a href="#"><p>Boa Constrictor</p></a>
+        </div>
+      </div>
+      <!-- 系统菜单栏 -->
+      <!-- sidebar menu: : style can be found in sidebar.less -->
+      <ul class="sidebar-menu" data-widget="tree">
+      
+        <!-- class加上active menu-open默认展开菜单 -->
+        <!-- <li class="active treeview menu-open">
+          <a href="#">
+            <i class="fa fa-laptop"></i>
+            <span>系统管理</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+              <small class="label pull-right bg-red">5</small>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>基础设置</span></a></li>
+	        <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>菜单管理</span></a></li>
+	        <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>角色管理</span></a></li>
+	        <li><a href="#"><i class="fa fa-circle-o text-red"></i> 权限管理<span></span></a></li>
+	        <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>用户管理</span></a></li>
+	        <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>个性化设置</span></a></li>
+	        <li class="treeview"><a href="#"><i class="fa fa-circle-o text-aqua"></i> 
+			        <span>二级盒子示例</span>
+		            <span class="pull-right-container">
+		              <i class="fa fa-angle-left pull-right"></i>
+		              <small class="label pull-right bg-red">3</small>
+		            </span>
+	              </a>
+	              <ul class="treeview-menu">
+		            <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>示例菜单</span></a></li>
+		          </ul>
+	        </li>
+          </ul>
+        </li>
+        
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-th"></i>
+            <span>车辆管理</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+              <small class="label pull-right bg-red">5</small>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>车辆信息</span></a></li>
+	        <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>车辆用户</span></a></li>
+	        <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>车辆轨迹</span></a></li>
+          </ul>
+        </li>
+        
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-pie-chart"></i>
+            <span>图表报表</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+              <small class="label pull-right bg-red">5</small>	
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>系统日志报表</span></a></li>
+	        <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>系统运行报告</span></a></li>
+	        <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>系统操作记录</span></a></li>
+          </ul>
+        </li> -->
+        
+      </ul>
+    </section>
+    <!-- /.sidebar -->
+  </aside>
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- 页面头 -->
+    <section class="content-header">
+      <h1>
+        
+      </h1>
+
+    </section>
+
+    <!-- 页面体 -->
+    <section class="content" >
+		    <!-- <div th:include="404::html"></div> -->
+	       <!-- <div id="menuWraper" name="menuWraper"  class="content-wrapper" layout:fragment="contentWrapper">
+	       <iframe id="menuFrame" name="menuFrame" src="" style="overflow:visible;" scrolling="yes" frameborder="no" height="100%" width="100%"></iframe> -->
+	      <!-- /.row -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+    <!-- 页面尾 -->
+  <footer class="main-footer">
+    <div class="pull-right hidden-xs">
+      <b>Version</b> 1.0
+    </div>
+    <strong>未经隔壁怪蜀黍同意不得用于商业用途<a href="https://adminlte.io">call me!</a>.</strong>
+  </footer>
+
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Create the tabs -->
+    <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
+      <!-- <li><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li> -->
+      <!-- <li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li> -->
+    </ul>
+    <!-- Tab panes -->
+    <div class="tab-content">
+      <!-- Home tab content -->
+      <div class="tab-pane" id="control-sidebar-home-tab">
+        <h3 class="control-sidebar-heading">Recent Activity</h3>
+         <ul class="control-sidebar-menu">
+          <li>
+            <a href="javascript:void(0)">
+              <i class="menu-icon fa fa-birthday-cake bg-red"></i>
+
+              <div class="menu-info">
+                <h4 class="control-sidebar-subheading">Langdon's Birthday</h4>
+
+                <p>Will be 23 on April 24th</p>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a href="javascript:void(0)">
+              <i class="menu-icon fa fa-user bg-yellow"></i>
+
+              <div class="menu-info">
+                <h4 class="control-sidebar-subheading">Frodo Updated His Profile</h4>
+
+                <p>New phone +1(800)555-1234</p>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a href="javascript:void(0)">
+              <i class="menu-icon fa fa-envelope-o bg-light-blue"></i>
+
+              <div class="menu-info">
+                <h4 class="control-sidebar-subheading">Nora Joined Mailing List</h4>
+
+                <p>nora@example.com</p>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a href="javascript:void(0)">
+              <i class="menu-icon fa fa-file-code-o bg-green"></i>
+
+              <div class="menu-info">
+                <h4 class="control-sidebar-subheading">Cron Job 254 Executed</h4>
+
+                <p>Execution time 5 seconds</p>
+              </div>
+            </a>
+          </li>
+        </ul>
+        <!-- /.control-sidebar-menu -->
+
+        <h3 class="control-sidebar-heading">Tasks Progress</h3>
+        <ul class="control-sidebar-menu">
+          <li>
+            <a href="javascript:void(0)">
+              <h4 class="control-sidebar-subheading">
+                Custom Template Design
+                <span class="label label-danger pull-right">70%</span>
+              </h4>
+
+              <div class="progress progress-xxs">
+                <div class="progress-bar progress-bar-danger" style="width: 70%"></div>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a href="javascript:void(0)">
+              <h4 class="control-sidebar-subheading">
+                Update Resume
+                <span class="label label-success pull-right">95%</span>
+              </h4>
+
+              <div class="progress progress-xxs">
+                <div class="progress-bar progress-bar-success" style="width: 95%"></div>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a href="javascript:void(0)">
+              <h4 class="control-sidebar-subheading">
+                Laravel Integration
+                <span class="label label-warning pull-right">50%</span>
+              </h4>
+
+              <div class="progress progress-xxs">
+                <div class="progress-bar progress-bar-warning" style="width: 50%"></div>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a href="javascript:void(0)">
+              <h4 class="control-sidebar-subheading">
+                Back End Framework
+                <span class="label label-primary pull-right">68%</span>
+              </h4>
+
+              <div class="progress progress-xxs">
+                <div class="progress-bar progress-bar-primary" style="width: 68%"></div>
+              </div>
+            </a>
+          </li>
+        </ul>
+        <!-- /.control-sidebar-menu -->
+
+      </div>
+      <!-- /.tab-pane -->
+
+      <!-- Settings tab content -->
+      <div class="tab-pane" id="control-sidebar-settings-tab">
+        <form method="post">
+          <h3 class="control-sidebar-heading">General Settings</h3>
+
+          <div class="form-group">
+            <label class="control-sidebar-subheading">
+              Report panel usage
+              <input type="checkbox" class="pull-right" checked>
+            </label>
+
+            <p>
+              Some information about this general settings option
+            </p>
+          </div>
+          <!-- /.form-group -->
+
+          <div class="form-group">
+            <label class="control-sidebar-subheading">
+              Allow mail redirect
+              <input type="checkbox" class="pull-right" checked>
+            </label>
+
+            <p>
+              Other sets of options are available
+            </p>
+          </div>
+          <!-- /.form-group -->
+
+          <div class="form-group">
+            <label class="control-sidebar-subheading">
+              Expose author name in posts
+              <input type="checkbox" class="pull-right" checked>
+            </label>
+
+            <p>
+              Allow the user to show his name in blog posts
+            </p>
+          </div>
+          <!-- /.form-group -->
+
+          <h3 class="control-sidebar-heading">Chat Settings</h3>
+
+          <div class="form-group">
+            <label class="control-sidebar-subheading">
+              Show me as online
+              <input type="checkbox" class="pull-right" checked>
+            </label>
+          </div>
+          <!-- /.form-group -->
+
+          <div class="form-group">
+            <label class="control-sidebar-subheading">
+              Turn off notifications
+              <input type="checkbox" class="pull-right">
+            </label>
+          </div>
+          <!-- /.form-group -->
+
+          <div class="form-group">
+            <label class="control-sidebar-subheading">
+              Delete chat history
+              <a href="javascript:void(0)" class="text-red pull-right"><i class="fa fa-trash-o"></i></a>
+            </label>
+          </div>
+          <!-- /.form-group -->
+        </form>
+      </div>
+      <!-- /.tab-pane -->
+    </div>
+  </aside>
+  <!-- /.control-sidebar -->
+  <!-- Add the sidebar's background. This div must be placed
+       immediately after the control sidebar -->
+  <div class="control-sidebar-bg"></div>
+
+</div>
+<!-- ./wrapper -->
+</body>
+</html>
+
+<!-- 自定义js导入 -->
+<script src="/res/js/common/common.js"></script>
+<script src="/res/js/sys/my-menu.js"></script>
+<script src="/res/js/sys/my-bootstrap-table.js"></script>
+<script src="/res/js/sys/my-bootstrap-select.js"></script>
+
+
+
+

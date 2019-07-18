@@ -1,0 +1,63 @@
+Manifest-Version: 1.0
+Implementation-Title: springboot_monster
+Implementation-Version: 1.0
+Built-By: Administrator
+Implementation-Vendor-Id: com.monster
+Class-Path: lib/spring-boot-starter-2.0.6.RELEASE.jar lib/spring-boot-
+ 2.0.6.RELEASE.jar lib/spring-core-5.0.10.RELEASE.jar lib/spring-jcl-5
+ .0.10.RELEASE.jar lib/spring-context-5.0.10.RELEASE.jar lib/spring-ao
+ p-5.0.10.RELEASE.jar lib/spring-beans-5.0.10.RELEASE.jar lib/spring-e
+ xpression-5.0.10.RELEASE.jar lib/spring-boot-autoconfigure-2.0.6.RELE
+ ASE.jar lib/spring-boot-starter-logging-2.0.6.RELEASE.jar lib/logback
+ -classic-1.2.3.jar lib/logback-core-1.2.3.jar lib/slf4j-api-1.7.25.ja
+ r lib/log4j-to-slf4j-2.10.0.jar lib/log4j-api-2.10.0.jar lib/jul-to-s
+ lf4j-1.7.25.jar lib/javax.annotation-api-1.3.2.jar lib/snakeyaml-1.19
+ .jar lib/spring-boot-starter-web-2.0.6.RELEASE.jar lib/spring-boot-st
+ arter-json-2.0.6.RELEASE.jar lib/spring-web-5.0.10.RELEASE.jar lib/ja
+ ckson-databind-2.9.7.jar lib/jackson-annotations-2.9.0.jar lib/jackso
+ n-core-2.9.7.jar lib/jackson-datatype-jdk8-2.9.7.jar lib/jackson-data
+ type-jsr310-2.9.7.jar lib/jackson-module-parameter-names-2.9.7.jar li
+ b/spring-boot-starter-tomcat-2.0.6.RELEASE.jar lib/tomcat-embed-core-
+ 8.5.34.jar lib/tomcat-embed-el-8.5.34.jar lib/tomcat-embed-websocket-
+ 8.5.34.jar lib/hibernate-validator-6.0.13.Final.jar lib/validation-ap
+ i-2.0.1.Final.jar lib/jboss-logging-3.3.2.Final.jar lib/classmate-1.3
+ .4.jar lib/spring-webmvc-5.0.10.RELEASE.jar lib/spring-boot-starter-t
+ hymeleaf-2.0.6.RELEASE.jar lib/thymeleaf-spring5-3.0.10.RELEASE.jar l
+ ib/thymeleaf-3.0.10.RELEASE.jar lib/attoparser-2.0.5.RELEASE.jar lib/
+ unbescape-1.1.6.RELEASE.jar lib/thymeleaf-extras-java8time-3.0.1.RELE
+ ASE.jar lib/byte-buddy-1.7.11.jar lib/nekohtml-1.9.21.jar lib/xercesI
+ mpl-2.10.0.jar lib/xml-apis-1.4.01.jar lib/spring-boot-starter-data-j
+ pa-2.0.6.RELEASE.jar lib/spring-boot-starter-aop-2.0.6.RELEASE.jar li
+ b/aspectjweaver-1.8.13.jar lib/spring-boot-starter-jdbc-2.0.6.RELEASE
+ .jar lib/HikariCP-2.7.9.jar lib/spring-jdbc-5.0.10.RELEASE.jar lib/sp
+ ring-tx-5.0.10.RELEASE.jar lib/javax.transaction-api-1.2.jar lib/hibe
+ rnate-core-5.2.17.Final.jar lib/hibernate-jpa-2.1-api-1.0.2.Final.jar
+  lib/javassist-3.22.0-GA.jar lib/antlr-2.7.7.jar lib/jandex-2.0.3.Fin
+ al.jar lib/dom4j-1.6.1.jar lib/hibernate-commons-annotations-5.0.1.Fi
+ nal.jar lib/spring-data-jpa-2.0.11.RELEASE.jar lib/spring-data-common
+ s-2.0.11.RELEASE.jar lib/spring-orm-5.0.10.RELEASE.jar lib/spring-asp
+ ects-5.0.10.RELEASE.jar lib/mysql-connector-java-5.1.47.jar lib/lombo
+ k-1.18.8.jar lib/druid-1.1.5.jar lib/pagehelper-spring-boot-starter-1
+ .2.5.jar lib/mybatis-spring-boot-starter-1.3.1.jar lib/mybatis-spring
+ -boot-autoconfigure-1.3.1.jar lib/mybatis-3.4.5.jar lib/mybatis-sprin
+ g-1.3.1.jar lib/pagehelper-spring-boot-autoconfigure-1.2.5.jar lib/pa
+ gehelper-5.1.4.jar lib/jsqlparser-1.0.jar lib/fastjson-1.2.58.jar lib
+ /springfox-swagger2-2.7.0.jar lib/swagger-annotations-1.5.13.jar lib/
+ swagger-models-1.5.13.jar lib/springfox-spi-2.7.0.jar lib/springfox-c
+ ore-2.7.0.jar lib/guava-18.0.jar lib/spring-plugin-core-1.2.0.RELEASE
+ .jar lib/spring-plugin-metadata-1.2.0.RELEASE.jar lib/springfox-schem
+ a-2.7.0.jar lib/springfox-swagger-common-2.7.0.jar lib/springfox-spri
+ ng-web-2.7.0.jar lib/reflections-0.9.11.jar lib/mapstruct-1.1.0.Final
+ .jar lib/springfox-swagger-ui-2.7.0.jar lib/spring-websocket-5.0.10.R
+ ELEASE.jar lib/spring-messaging-5.0.10.RELEASE.jar lib/spring-integra
+ tion-stream-5.0.9.RELEASE.jar lib/spring-integration-core-5.0.9.RELEA
+ SE.jar lib/spring-retry-1.2.2.RELEASE.jar lib/reactor-core-3.1.10.REL
+ EASE.jar lib/reactive-streams-1.0.2.jar lib/spring-integration-mqtt-5
+ .0.9.RELEASE.jar lib/org.eclipse.paho.client.mqttv3-1.2.0.jar lib/com
+ mons-beanutils-1.9.3.jar lib/commons-logging-1.2.jar lib/commons-coll
+ ections-3.2.2.jar lib/hibernate-validator-5.3.1.Final.jar lib/jpa-spe
+ c-3.2.3.jar
+Created-By: IntelliJ IDEA
+Build-Jdk: 1.8.0_131
+Main-Class: com.monster.ApplicationStarter
+
