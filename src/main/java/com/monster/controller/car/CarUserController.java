@@ -86,8 +86,7 @@ public class CarUserController {
 	@PostMapping("/edit")	
 	@ResponseBody	
     public String edit(@ModelAttribute  CarUser carUser, MultipartFile file){	
-			
-		  	
+
           return Result.ok(	
         		  service.saveOrUpdateIgnoreNull(carUser)	
           );	
@@ -96,11 +95,11 @@ public class CarUserController {
 	@ApiOperation(value = "通过条件查询CarUser列表数据")	
 	@PostMapping("/search")	
 	@ResponseBody	
-	public String search(Ipage ipage, CarUserSearch search) throws Exception{	
-	    	
-		  return Result.ok(	
-				  service.findAllToPage(ipage.of(search))	
-		  );	
+	public String search(Ipage ipage, CarUserSearch search) throws Exception{
+
+		  return Result.ok(
+				  service.findAllToPage(ipage.of(search))
+		  );
 	}	
 	
 }	
